@@ -12,19 +12,23 @@ app.get("/search/", controller.search);
 
 //LOG IN 
 app.get("/logIn", controller.getLogIn);
-app.post("/login", controller.logIn);
+app.post("/loginForm", controller.logInStudent);
+app.get("/validateLog", controller.validateLogIn);
 
 //LOG OUT
-app.post("/logout", controller.logout);
+app.post("/logout/", controller.logout);
 
 //USER VERIF
-app.get("/userVerif", controller.getUserVerif);
+app.get("/userVerif/", controller.getUserVerif);
 
 //STUDENT SIGN UP
-app.get("/studentSignUp", controller.getStudentSignUp);
+app.get("/studentSignUp/", controller.getStudentSignUp);
+
+//STUDENT FEED
+app.get("/feed/", controller.getFeed);
 
 //ORG SIGN UP
-app.get("/orgSignUp", controller.getOrgSignUp);
+app.get("/orgSignUp/", controller.getOrgSignUp);
 
 // STUDENT USERS
 app.get("/studentUsers/", controller.getStudents);

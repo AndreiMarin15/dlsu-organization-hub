@@ -27,6 +27,20 @@ const controller = {
     },
 
     // general
+    validateLogIn: function (req, res) {
+        StudentUser.findOne({ email: req.query.email })
+        .then((result) => {
+           
+            if (result) {
+                bcrypt.compare(req.query.password, result.password, function (error, isVerify) {
+                    res.send(isVerify);
+                });
+            } else {
+                res.send(false);
+            }
+        })
+        .catch(err => res.json(err));
+    },
 
     getIndex: (req, res) => {
         res.render("index");
@@ -46,6 +60,10 @@ const controller = {
 
     getOrgSignUp: (req, res) => {
         res.render("org_sign_up");
+    },
+
+    getFeed: (req, res) => {
+        res.render("student_feed");
     },
 
     logout: (req, res) => {
@@ -74,57 +92,25 @@ const controller = {
         });
     },
 
-    logIn: (req, res) => {
-        if (req.body.email) {
-            OrgUser.findOne({ email: req.body.email })
-                .then((orguser) => {
-                    if (orguser) {
-                        if (req.body.password) {
-                            if (bcrypt.compare(orguser.password, req.body.password)) {
-                                res.json(`Login successful. Welcome, ${orguser.name}`);
-                                // assign to session database yung password, email, and id ni org user
-                                // render yung new things
-                                // sample - res.redirect("/")
-                            } else {
-                                res.json("Password Incorrect");
-                                // redirect to same page
+    logInStudent: (req, res) => {
+        let email = req.body.email;
+        let password = req.body.password;
+
+        StudentUser.findOne({email: email})
+            .then(user => {
+                if(user != null){
+                    bcrypt.compare(password, user.password)
+                        .then(isVerify => {
+                            if(isVerify){
+                                req.session.userid = user._id;
+
+                                res.redirect("/feed");
                             }
-                        } else {
-                            res.json("Please input your password.");
-                            // redirect to same page
-                        }
-                    } else {
-                        StudentUser.findOne({ email: req.body.email })
-                            .then((studentuser) => {
-                                if (studentuser) {
-                                    if (req.body.password) {
-                                        if (
-                                            bcrypt.compare(studentuser.password, req.body.password)
-                                        ) {
-                                            res.json(
-                                                `Login successful. Welcome, ${studentuser.name}`
-                                            );
-
-                                            // redirect to student feed
-
-                                        } else {
-                                            res.json("Password Incorrect");
-                                            // same page
-                                        }
-                                    } else {
-                                        res.json("Please input your password.");
-                                        //same page
-                                    }
-                                } else {
-                                    res.json("No Organization or Student Account found.");
-                                    //same page
-                                }
-                            })
-                            .catch((err) => res.json(err));
-                    }
-                })
-                .catch((err) => res.status(400).json("Error " + err));
-        }
+                        })
+                        .catch(err => res.json(err));
+                }
+            })
+            .catch(err => res.json(err));
     },
 
     // studentUserModel
@@ -224,7 +210,9 @@ const controller = {
     getPosts: (req, res) => {
         // gets all posts from the database
         Posts.find()
-            .then((posts) => res.json(posts))
+            .then((posts) => {
+                res.json(posts);
+            })
             .catch((err) => res.status(400).json("Error: " + err));
     },
 

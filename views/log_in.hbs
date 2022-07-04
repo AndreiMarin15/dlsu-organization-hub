@@ -4,6 +4,7 @@
     <script src="https://kit.fontawesome.com/dfcf57d1e4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="./css/styleForLogIn.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<title>DLSU Organization Hub Log-In</title>
 
     <script>
@@ -83,19 +84,19 @@
 				Kindly use your registered <b>DLSU email</b> upon logging in.<br><br>
 			</p>
 
-            <form action = "/login">
+            <form id="dForm" method="post" action="/loginForm" onsubmit="return validateLogIn();">
                 <table class="table">
                     <tr>
                         <td>E-mail:</td>
-                        <td><input type = text id = email size = 40></td>
+                        <td><input type="text" id="email" size="40"></td>
                     </tr>
                     <tr>
                         <td>Password:</td>
-                        <td><input type = password id = password size = 40></td>
+                        <td><input type="password" id="password" size="40"></td>
                     </tr>
                     <tr>
-                        <td colspan = 2 align = "right">
-                        <input type = submit value = "Log In" class="submit_button"></td>
+                        <td colspan=2 align="right">
+                        <input type="submit" value="Log In" class="submit_button"></td>
                     </tr>
                 </table>
                 </form>
@@ -130,5 +131,26 @@
     </div>
 
 </body>
+
+<script>
+        function validateLogIn() {
+            var email = document.forms["dForm"]["email"].value;
+            var pass = document.forms["dForm"]["password"].value;
+            
+            console.log(email);
+
+            return $.get('/validateLog',{email: email, password: pass},function(result) {
+                console.log(result);
+
+                if(!result){
+                    alert("Invalid Login Credentials");
+                    
+                }
+                return result;
+
+            });
+
+        }
+    </script>
 
 </html>
