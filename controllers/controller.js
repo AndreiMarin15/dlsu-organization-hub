@@ -49,12 +49,11 @@ const controller = {
     },
 
     logout: (req, res) => {
-        req.session.destroy(err => {
-            if(err) throw err;
+        req.session.destroy((err) => {
+            if (err) throw err;
             res.redirect("/");
-        })
+        });
     },
-
 
     search: (req, res) => {
         // searches for an org user through the org name, if the inital find method returns a blank array, it searches for posts matching its content
@@ -84,11 +83,15 @@ const controller = {
                             if (bcrypt.compare(orguser.password, req.body.password)) {
                                 res.json(`Login successful. Welcome, ${orguser.name}`);
                                 // assign to session database yung password, email, and id ni org user
+                                // render yung new things
+                                // sample - res.redirect("/")
                             } else {
                                 res.json("Password Incorrect");
+                                // redirect to same page
                             }
                         } else {
                             res.json("Please input your password.");
+                            // redirect to same page
                         }
                     } else {
                         StudentUser.findOne({ email: req.body.email })
@@ -101,14 +104,20 @@ const controller = {
                                             res.json(
                                                 `Login successful. Welcome, ${studentuser.name}`
                                             );
+
+                                            // redirect to student feed
+
                                         } else {
                                             res.json("Password Incorrect");
+                                            // same page
                                         }
                                     } else {
                                         res.json("Please input your password.");
+                                        //same page
                                     }
                                 } else {
                                     res.json("No Organization or Student Account found.");
+                                    //same page
                                 }
                             })
                             .catch((err) => res.json(err));

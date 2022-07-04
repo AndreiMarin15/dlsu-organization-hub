@@ -12,6 +12,7 @@ app.get("/search/", controller.search);
 
 //LOG IN 
 app.get("/logIn", controller.getLogIn);
+app.post("/login", controller.logIn);
 
 //LOG OUT
 app.post("/logout", controller.logout);
