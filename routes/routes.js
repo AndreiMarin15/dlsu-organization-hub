@@ -12,7 +12,7 @@ app.get("/search/", controller.search);
 
 //LOG IN 
 app.get("/logIn", controller.getLogIn);
-app.post("/loginForm", controller.logInStudent);
+app.post("/loginForm", controller.logIn);
 app.get("/validateLog", controller.validateLogIn);
 
 //LOG OUT
@@ -25,10 +25,13 @@ app.get("/userVerif/", controller.getUserVerif);
 app.get("/studentSignUp/", controller.getStudentSignUp);
 
 //STUDENT FEED
-app.post("/feed/", controller.getFeed);
+app.get("/student-feed/", controller.getStudentFeed);
 
 //ORG SIGN UP
 app.get("/orgSignUp/", controller.getOrgSignUp);
+
+//ORG FEED
+app.get("/org-feed/", controller.getOrgFeed);
 
 // STUDENT USERS
 app.get("/studentUsers/", controller.getStudents);

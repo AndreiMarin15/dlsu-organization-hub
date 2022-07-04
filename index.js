@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const hbs = require("hbs");
 const routes = require("./routes/routes.js");
 const path = require("path");
+const bodyParser = require("body-parser");
 
 const session = require("express-session");
 const MongoDBSession = require("connect-mongodb-session")(session);
@@ -16,6 +17,7 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const url = "mongodb://localhost:27017/dlsu-organization-hub"; // database creation || selection
 
@@ -61,6 +63,7 @@ app.use(
         store: store,
     })
 );
+
 
 app.use("/", routes);
 
