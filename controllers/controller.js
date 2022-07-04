@@ -48,6 +48,14 @@ const controller = {
         res.render("org_sign_up");
     },
 
+    logout: (req, res) => {
+        req.session.destroy(err => {
+            if(err) throw err;
+            res.redirect("/");
+        })
+    },
+
+
     search: (req, res) => {
         // searches for an org user through the org name, if the inital find method returns a blank array, it searches for posts matching its content
         OrgUser.find({ name: { $regex: ".*" + req.body.search + ".*" } }, (err, user) => {

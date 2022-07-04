@@ -13,6 +13,9 @@ app.get("/search/", controller.search);
 //LOG IN 
 app.get("/logIn", controller.getLogIn);
 
+//LOG OUT
+app.post("/logout", controller.logout);
+
 //USER VERIF
 app.get("/userVerif", controller.getUserVerif);
 
