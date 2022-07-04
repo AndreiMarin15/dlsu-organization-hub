@@ -26,6 +26,8 @@ const controller = {
             .catch((err) => res.status(400).json(err));
     },
 
+    
+
     // general
     validateLogIn: function (req, res) {
         StudentUser.findOne({ email: req.query.email })
@@ -163,7 +165,7 @@ const controller = {
 
         StudentUser.findOne({ email: email }).then((studentuser) => {
             if (studentuser == null) {
-                if (password === confirm && password.length >= 8 && email.includes("dlsu.edu.ph") ) {
+                if (password === confirm && password.length >= 8 && email.includes("dlsu.edu.ph")) {
                     const newStudentUser = new StudentUser({
                         firstName,
                         lastName,
@@ -174,18 +176,15 @@ const controller = {
                     newStudentUser
                         .save()
                         .then(() => {
-                      
-                            res.redirect("/login");
-                       
+                            res.send(`<script>alert("User added"); window.location.href = "/login"; </script>`);
+                            
                         })
                         .catch((err) => res.status(400).json("Error: " + err));
                 } else {
-                    
-                    res.redirect("/studentSignUp");
+                    res.send(`<script>alert("Invalid Credentials"); window.location.href = "/studentSignUp"; </script>`);
                 }
             } else {
-              
-                res.redirect("/studentSignUp");
+                res.send(`<script>alert("Email already in use. User not added"); window.location.href = "/studentSignUp"; </script>`);
             }
         });
     },
@@ -229,23 +228,20 @@ const controller = {
 
         OrgUser.findOne({ email: email }).then((orguser) => {
             if (orguser == null) {
-                if (password === confirm && password.length >= 8 && email.includes("dlsu.edu.ph") ) {
+                if (password === confirm && password.length >= 8 && email.includes("dlsu.edu.ph")) {
                     const newOrgUser = new OrgUser({ email, password, name });
 
                     newOrgUser
                         .save()
                         .then(() => {
-                            res.send(`<script>alert("User Added"); window.location.href = "localhost:3000/login"; </script>`);
-                            res.redirect("/login");
+                            res.send(`<script>alert("User added"); window.location.href = "/login"; </script>`);
                         })
                         .catch((err) => res.status(400).json("Error: " + err));
                 } else {
-                    
-                    res.redirect("/orgSignUp");
+                    res.send(`<script>alert("Invalid Credentials"); window.location.href = "/orgSignUp"; </script>`);
                 }
             } else {
-                
-                res.redirect("/orgSignUp");
+                res.send(`<script>alert("Email already in use"); window.location.href = "/orgSignUp"; </script>`);
             }
         });
     },

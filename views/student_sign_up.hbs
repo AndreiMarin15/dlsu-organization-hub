@@ -4,9 +4,12 @@
 	<link rel="stylesheet" href="../css/styleForLogIn.css" />
     <script src="https://kit.fontawesome.com/dfcf57d1e4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<title>DLSU Organization Hub Sign-Up</title>
-
+   
     <script>
+      
+
         function checkForm()
         {
             var firstName = document.getElementById("firstName").value;
@@ -115,7 +118,7 @@
 				Kindly use your registered <b>DLSU email</b> upon signing up.<br><br>
 			</p>
 
-            <form id="dForm" name="rForm" method="post" action = "/register" onsubmit="return checkForm();">
+            <form id="dForm" name="rForm" method="post" action = "/register" onsubmit="userAdded()">
                 <table class="table">
                     <tr>
                         <td>First Name:</td>

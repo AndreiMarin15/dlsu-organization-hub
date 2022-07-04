@@ -6,6 +6,9 @@ const app = express();
 // test routes - to be deleted, DO NOT USE IN FRONTEND
 app.post("/testPassword/:id", controller.bcryptTest);
 
+// js functions
+
+
 //index
 app.get("/", controller.getIndex);
 app.get("/search/", controller.search);
