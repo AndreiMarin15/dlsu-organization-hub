@@ -19,10 +19,11 @@ app.get("/validateLog", controller.validateLogIn);
 app.post("/logout/", controller.logout);
 
 //USER VERIF
-app.get("/userVerif/", controller.getUserVerif);
+app.get("/userVerif", controller.getUserVerif);
 
 //STUDENT SIGN UP
-app.get("/studentSignUp/", controller.getStudentSignUp);
+app.get("/studentSignUp", controller.getStudentSignUp);
+app.post("/register", controller.addStudent);
 
 //STUDENT FEED
 app.get("/student-feed/", controller.getStudentFeed);
