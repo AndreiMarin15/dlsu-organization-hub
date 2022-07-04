@@ -7,50 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<title>DLSU Organization Hub Log-In</title>
 
-    <script>
-        function checkForm()
-        {
-            var email = document.getElementById("email").value;
-            var password = document.getElementById("password").value;	
-    
-            var valid = false;		
-            var all_fields = true;
-            
-            
-            if (email != "" && password != "")
-                document.getElementById("email").style.backgroundColor = "white";
-            else
-            {
-                all_fields = false;
-                document.getElementById("email").style.backgroundColor = "red";
-                document.getElementById("password").style.backgroundColor = "red";
-            }
-            
-            if (all_fields == true && email == "alexander_lim@dlsu.edu.ph" && password == "studentUserPassword123")
-            {
-                alert("Welcome "+firstName+" "+lastName);
-                valid = true;
-            }
-            else if (email != "" && password != "" && (email != "alexander_lim@dlsu.edu.ph" || (email != "alexander_lim@dlsu.edu.ph" && password != "studentUserPassword123")))
-            {
-                alert("Account does not exist! Kindly return to the HOME page and sign up.");
-                document.getElementById("email").style.backgroundColor = "red";
-                document.getElementById("password").style.backgroundColor = "red";
-            }
-            else if (email == "alexander_lim@dlsu.edu.ph" && password != "studentUserPassword123")
-            {
-                alert("Incorrect password. Please try again!");
-                document.getElementById("password").style.backgroundColor = "red";
-            }
-            else {
-                document.getElementById("email").style.backgroundColor = "red";
-                document.getElementById("password").style.backgroundColor = "red";
-            }
-            
-            return valid;
-                
-        }	
-        </script>
+  
 </head>
 
 <body>

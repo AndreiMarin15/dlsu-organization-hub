@@ -6,63 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>DLSU Organization Hub Sign-Up</title>
 
-    <script>
-        function checkForm()
-        {
-            var email = document.getElementById("email2").value;
-            var password1 = document.getElementById("password1").value;	
-            var password2 = document.getElementById("password2").value;	
-    
-            var valid = false;		
-            var all_fields = true;
-            
-            if (email != "")
-                document.getElementById("email2").style.backgroundColor = "white";
-            else
-            {
-                all_fields = false;
-                document.getElementById("email2").style.backgroundColor = "red";
-            }
-
-            if (password1 != "")
-                document.getElementById("password1").style.backgroundColor = "white";
-            else
-            {
-                all_fields = false;
-                document.getElementById("password1").style.backgroundColor = "red";
-            }
-
-            if (password2 != "")
-                document.getElementById("password2").style.backgroundColor = "white";
-            else
-            {
-                all_fields = false;
-                document.getElementById("password2").style.backgroundColor = "red";
-            }
-            
-            if (all_fields == true)
-            {
-                if(password1 == password2 && password1.length >= 8 && email1.includes("@dlsu.edu.ph") && email2.includes("@dlsu.edu.ph")){
-                    alert("Welcome, "+firstName+" "+lastName+"!" +" Your account has been created.");
-                    valid = true;
-                }
-                else if(password1.length < 8){
-                    alert("Kindly enter a longer password.");
-                }
-                else if (!email1.includes("@dlsu.edu.ph") || !email2.includes("@dlsu.edu.ph")) {
-                    alert("Kindly use registered DLSU emails for signing up.");
-                }
-                else {
-                    document.getElementById("password1").style.backgroundColor = "red";
-                    document.getElementById("password2").style.backgroundColor = "red";
-                    alert("Passwords entered do not match! Please try again.");
-                }
-            }
-            
-            return valid;
-                
-        }	
-        </script>
+  
 </head>
 
 <body>
@@ -96,19 +40,23 @@
 				Kindly use your registered <b> DLSU email</b> upon signing up.<br><br>
 			</p>
 
-            <form action = "../Pages/student_feed.html" onSubmit = "return checkForm()">
+            <form action = "/registerOrg" method="post">
                 <table class="table">
                     <tr>
+                        <td>Org Name:</td>
+                        <td><input type = "text" id = "name" name="name" size = "40" required></td>
+                    </tr>
+                    <tr>
                         <td>Org. Email:</td>
-                        <td><input type = text id = email2 size = 40></td>
+                        <td><input type = "text" id = "email" name="email" size = "40" required></td>
                     </tr>
                     <tr>
                         <td>Password:</td>
-                        <td><input type = password id = password1 size = 40></td>
+                        <td><input type = "password" id = "password" name="password" size = "40" required></td>
                     </tr>
                     <tr>
                         <td>Confirm Password:</td>
-                        <td><input type = password id = password2 size = 40></td>
+                        <td><input type = "password" id = "confirmPassword" name="confirmPassword" size = "40" required></td>
                     </tr>
                     <tr>
                         <td colspan = 2 align = "right">

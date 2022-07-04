@@ -33,7 +33,7 @@ app.get("/student-feed/", controller.getStudentFeed);
 
 //ORG SIGN UP
 app.get("/orgSignUp/", controller.getOrgSignUp);
-
+app.post("/registerOrg", controller.addOrg);
 //ORG FEED
 app.get("/org-feed/", controller.getOrgFeed);
 
