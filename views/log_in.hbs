@@ -9,41 +9,41 @@
     <script>
         function checkForm()
         {
-            var email1 = document.getElementById("email1").value;
-            var password1 = document.getElementById("password1").value;	
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;	
     
             var valid = false;		
             var all_fields = true;
             
             
-            if (email1 != "" && password1 != "")
-                document.getElementById("email1").style.backgroundColor = "white";
+            if (email != "" && password != "")
+                document.getElementById("email").style.backgroundColor = "white";
             else
             {
                 all_fields = false;
-                document.getElementById("email1").style.backgroundColor = "red";
-                document.getElementById("password1").style.backgroundColor = "red";
+                document.getElementById("email").style.backgroundColor = "red";
+                document.getElementById("password").style.backgroundColor = "red";
             }
             
-            if (all_fields == true && email1 == "alexander_lim@dlsu.edu.ph" && password1 == "studentUserPassword123")
+            if (all_fields == true && email == "alexander_lim@dlsu.edu.ph" && password == "studentUserPassword123")
             {
                 alert("Welcome "+firstName+" "+lastName);
                 valid = true;
             }
-            else if (email1 != "" && password1 != "" && (email1 != "alexander_lim@dlsu.edu.ph" || (email1 != "alexander_lim@dlsu.edu.ph" && password1 != "studentUserPassword123")))
+            else if (email != "" && password != "" && (email != "alexander_lim@dlsu.edu.ph" || (email != "alexander_lim@dlsu.edu.ph" && password != "studentUserPassword123")))
             {
                 alert("Account does not exist! Kindly return to the HOME page and sign up.");
-                document.getElementById("email1").style.backgroundColor = "red";
-                document.getElementById("password1").style.backgroundColor = "red";
+                document.getElementById("email").style.backgroundColor = "red";
+                document.getElementById("password").style.backgroundColor = "red";
             }
-            else if (email1 == "alexander_lim@dlsu.edu.ph" && password1 != "studentUserPassword123")
+            else if (email == "alexander_lim@dlsu.edu.ph" && password1 != "studentUserPassword123")
             {
                 alert("Incorrect password. Please try again!");
-                document.getElementById("password1").style.backgroundColor = "red";
+                document.getElementById("password").style.backgroundColor = "red";
             }
             else {
-                document.getElementById("email1").style.backgroundColor = "red";
-                document.getElementById("password1").style.backgroundColor = "red";
+                document.getElementById("email").style.backgroundColor = "red";
+                document.getElementById("password").style.backgroundColor = "red";
             }
             
             return valid;
@@ -87,11 +87,11 @@
                 <table class="table">
                     <tr>
                         <td>E-mail:</td>
-                        <td><input type = text id = email1 size = 40></td>
+                        <td><input type = text id = email size = 40></td>
                     </tr>
                     <tr>
                         <td>Password:</td>
-                        <td><input type = password id = password1 size = 40></td>
+                        <td><input type = password id = password size = 40></td>
                     </tr>
                     <tr>
                         <td colspan = 2 align = "right">
