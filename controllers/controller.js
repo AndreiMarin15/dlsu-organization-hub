@@ -51,7 +51,7 @@ const controller = {
         });
     },
 
-    orgLogIn: (req, res) => {
+    logIn: (req, res) => {
         if (req.body.email) {
             OrgUser.findOne({ email: req.body.email })
                 .then((orguser) => {
@@ -67,7 +67,27 @@ const controller = {
                             res.json("Please input your password.");
                         }
                     } else {
-                        res.json("No Organization email found.");
+                        StudentUser.findOne({ email: req.body.email })
+                            .then((studentuser) => {
+                                if (studentuser) {
+                                    if (req.body.password) {
+                                        if (
+                                            bcrypt.compare(studentuser.password, req.body.password)
+                                        ) {
+                                            res.json(
+                                                `Login successful. Welcome, ${studentuser.name}`
+                                            );
+                                        } else {
+                                            res.json("Password Incorrect");
+                                        }
+                                    } else {
+                                        res.json("Please input your password.");
+                                    }
+                                } else {
+                                    res.json("No Organization or Student Account found.");
+                                }
+                            })
+                            .catch((err) => res.json(err));
                     }
                 })
                 .catch((err) => res.status(400).json("Error " + err));
