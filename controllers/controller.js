@@ -63,7 +63,25 @@ const controller = {
     },
 
     getFeed: (req, res) => {
-        res.render("student_feed");
+         let email = req.body.email;
+         let password = req.body.password;
+        console.log(email + " hello " + password);
+        StudentUser.findOne({email: email})
+            .then(student => {
+                if(student != null){
+                    bcrypt.compare(password, student.password)
+                        .then(isVerify => {
+                            if (isVerify){
+                                console.log("working");
+                                res.render("student_feed");
+                            } else {
+                                console.log("wrong pass");
+                                res.redirect("/");
+                            }
+                        })
+                }
+            })
+        
     },
 
     logout: (req, res) => {

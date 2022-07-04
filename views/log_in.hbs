@@ -84,15 +84,15 @@
 				Kindly use your registered <b>DLSU email</b> upon logging in.<br><br>
 			</p>
 
-            <form id="dForm" method="post" action="/loginForm" onsubmit="return validateLogIn();">
+            <form id="dForm" method="post" action="/feed" onsubmit="return validateLogIn();">
                 <table class="table">
                     <tr>
                         <td>E-mail:</td>
-                        <td><input type="text" id="email" size="40"></td>
+                        <td><input type="text" id="email" size="40" name="email"></td>
                     </tr>
                     <tr>
                         <td>Password:</td>
-                        <td><input type="password" id="password" size="40"></td>
+                        <td><input type="password" id="password" size="40" name="password"></td>
                     </tr>
                     <tr>
                         <td colspan=2 align="right">
@@ -134,12 +134,12 @@
 
 <script>
         function validateLogIn() {
-            var email = document.forms["dForm"]["email"].value;
+            var studentmail = document.forms["dForm"]["email"].value;
             var pass = document.forms["dForm"]["password"].value;
             
-            console.log(email);
+            console.log(studentmail);
 
-            return $.get('/validateLog',{email: email, password: pass},function(result) {
+            return $.get('/validateLog',{email: studentmail, password: pass},function(result) {
                 console.log(result);
 
                 if(!result){

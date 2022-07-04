@@ -25,7 +25,7 @@ app.get("/userVerif/", controller.getUserVerif);
 app.get("/studentSignUp/", controller.getStudentSignUp);
 
 //STUDENT FEED
-app.get("/feed/", controller.getFeed);
+app.post("/feed/", controller.getFeed);
 
 //ORG SIGN UP
 app.get("/orgSignUp/", controller.getOrgSignUp);
