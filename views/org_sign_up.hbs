@@ -9,41 +9,14 @@
     <script>
         function checkForm()
         {
-            var firstName = document.getElementById("firstName").value;
-            var lastName = document.getElementById("lastName").value;
-            var email1 = document.getElementById("email1").value;
-            var email2 = document.getElementById("email2").value;
+            var email = document.getElementById("email2").value;
             var password1 = document.getElementById("password1").value;	
             var password2 = document.getElementById("password2").value;	
     
             var valid = false;		
             var all_fields = true;
             
-            if (firstName != "")
-                document.getElementById("firstName").style.backgroundColor = "white";
-            else
-            {
-                all_fields = false;
-                document.getElementById("firstName").style.backgroundColor = "red";
-            }
-
-            if (lastName != "")
-                document.getElementById("lastName").style.backgroundColor = "white";
-            else
-            {
-                all_fields = false;
-                document.getElementById("lastName").style.backgroundColor = "red";
-            }
-            
-            if (email1 != "")
-                document.getElementById("email1").style.backgroundColor = "white";
-            else
-            {
-                all_fields = false;
-                document.getElementById("email1").style.backgroundColor = "red";
-            }
-
-            if (email2 != "")
+            if (email != "")
                 document.getElementById("email2").style.backgroundColor = "white";
             else
             {
@@ -99,8 +72,8 @@
 
             <nav>
                 <ul class="navLinks">
-                    <li><a href="../index.html" id="nav_link"><b>HOME</b></a> </li>
-					<li><a href="../Pages/userVerification.html" id="nav_link"><b>LOG-IN</b></a> </li>
+                    <li><a href="/" id="nav_link"><b>HOME</b></a> </li>
+					<li><a href="/logIn" id="nav_link"><b>LOG-IN</b></a> </li>
 					<li><a href="#bottom" id="nav_link" ><b>CONTACT</b></a></li>
                 </ul>
             </nav>
@@ -120,23 +93,11 @@
             <br> <br> <br> <br> <br> <br> <br> <br>
 			<h1 class="log_in"> Sign - Up </h1>
 			<p class="intro"> 
-				Kindly use your registered <b>(personal and organization) DLSU email</b> upon signing up.<br><br>
+				Kindly use your registered <b> DLSU email</b> upon signing up.<br><br>
 			</p>
 
             <form action = "../Pages/student_feed.html" onSubmit = "return checkForm()">
                 <table class="table">
-                    <tr>
-                        <td>First Name:</td>
-                        <td><input type = text id = firstName size = 40></td>
-                    </tr>
-                    <tr>
-                        <td>Last Name:</td>
-                        <td><input type = text id = lastName size = 40></td>
-                    </tr>
-                    <tr>
-                        <td>Personal Email:</td>
-                        <td><input type = text id = email1 size = 40></td>
-                    </tr>
                     <tr>
                         <td>Org. Email:</td>
                         <td><input type = text id = email2 size = 40></td>

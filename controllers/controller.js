@@ -40,6 +40,14 @@ const controller = {
         res.render("userVerificationSignUp");
     },
 
+    getStudentSignUp: (req, res) => {
+        res.render("student_sign_up");
+    },
+
+    getOrgSignUp: (req, res) => {
+        res.render("org_sign_up");
+    },
+
     search: (req, res) => {
         // searches for an org user through the org name, if the inital find method returns a blank array, it searches for posts matching its content
         OrgUser.find({ name: { $regex: ".*" + req.body.search + ".*" } }, (err, user) => {

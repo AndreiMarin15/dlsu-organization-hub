@@ -16,6 +16,12 @@ app.get("/logIn", controller.getLogIn);
 //USER VERIF
 app.get("/userVerif", controller.getUserVerif);
 
+//STUDENT SIGN UP
+app.get("/studentSignUp", controller.getStudentSignUp);
+
+//ORG SIGN UP
+app.get("/orgSignUp", controller.getOrgSignUp);
+
 // STUDENT USERS
 app.get("/studentUsers/", controller.getStudents);
 app.post("/studentUsers/add", controller.addStudent);
