@@ -27,7 +27,7 @@ const eventSchema = new Schema(
         numbergoing: {
             type: [],
             required: false,
-        }
+        },
     },
     {
         timestamps: true,

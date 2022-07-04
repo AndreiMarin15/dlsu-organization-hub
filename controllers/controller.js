@@ -26,8 +26,6 @@ const controller = {
             .catch((err) => res.status(400).json(err));
     },
 
-    
-
     // general
     validateLogIn: function (req, res) {
         StudentUser.findOne({ email: req.query.email })
@@ -176,15 +174,20 @@ const controller = {
                     newStudentUser
                         .save()
                         .then(() => {
-                            res.send(`<script>alert("User added"); window.location.href = "/login"; </script>`);
-                            
+                            res.send(
+                                `<script>alert("Account Created"); window.location.href = "/login"; </script>`
+                            );
                         })
                         .catch((err) => res.status(400).json("Error: " + err));
                 } else {
-                    res.send(`<script>alert("Invalid Credentials"); window.location.href = "/studentSignUp"; </script>`);
+                    res.send(
+                        `<script>alert("Invalid Credentials. Double check your email and password."); window.location.href = "/studentSignUp"; </script>`
+                    );
                 }
             } else {
-                res.send(`<script>alert("Email already in use. User not added"); window.location.href = "/studentSignUp"; </script>`);
+                res.send(
+                    `<script>alert("Email already in use. Account not created"); window.location.href = "/studentSignUp"; </script>`
+                );
             }
         });
     },
@@ -234,14 +237,20 @@ const controller = {
                     newOrgUser
                         .save()
                         .then(() => {
-                            res.send(`<script>alert("User added"); window.location.href = "/login"; </script>`);
+                            res.send(
+                                `<script>alert("Account Created"); window.location.href = "/login"; </script>`
+                            );
                         })
                         .catch((err) => res.status(400).json("Error: " + err));
                 } else {
-                    res.send(`<script>alert("Invalid Credentials"); window.location.href = "/orgSignUp"; </script>`);
+                    res.send(
+                        `<script>alert("Invalid Credentials. Double check your email and password"); window.location.href = "/orgSignUp"; </script>`
+                    );
                 }
             } else {
-                res.send(`<script>alert("Email already in use"); window.location.href = "/orgSignUp"; </script>`);
+                res.send(
+                    `<script>alert("Email already in use. Account not created."); window.location.href = "/orgSignUp"; </script>`
+                );
             }
         });
     },
