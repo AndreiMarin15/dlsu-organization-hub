@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://kit.fontawesome.com/dfcf57d1e4.js" crossorigin="anonymous"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link rel="stylesheet" href="../css/styleForStudentSettings.css" />
+        <title>Page Settings</title>
+    </head>
+    <body>
+        <div class="container1">
+            <div class="box1">
+                <div class="left">
+                    <div class="b1row1">
+                        <img class="responsive" src="../images/logo_feed.png" alt="" />
+                    </div>
+
+                    <div class="b1row2">
+                        <img class="responsive" src="../images/lscs.png" alt="" />
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="b1row3">
+                        <div class="name">
+                            <h1>LSCS</h1>
+                        </div>
+
+                        <div class="navigation">
+                            <a class="button" id="current" href="../Pages/lscs_org.html"><i class="fa-solid fa-newspaper"></i>&nbsp; &nbsp;RETURN TO PROFILE</a><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box2">
+                <div class="b2row1">
+                    <img class="responsive" src="../images/student_header.png" />
+                </div>
+                <div class="b2row2">
+                    <!-- SYSTEM SETTINGS -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>SYSTEM SETTINGS</h2>
+                            <br />
+                        </div>
+                        <div class="container">
+                            <form action = "../Pages/student_profile.html" onSubmit = "return true">
+                                <table class="table">
+                                    <tr>
+                                        <td><strong>DLSU EMAIL: </strong> </td>
+                                        <td><input type = text id = email size = 40></td>
+                                    </tr>
+    
+                                    <tr>
+                                        <td><strong>PASSWORD: </strong> </td>
+                                        <td><input type = password1 id = password1 size = 40></td>
+                                    </tr>
+    
+                                    <tr>
+                                        <td><strong>CONFIRM PASSWORD: </strong> </td>
+                                        <td><input type = password2 id = password2 size = 40></td>
+                                    </tr>
+    
+                                    <tr>
+                                        <td><strong>USER TYPE: </strong> </td>
+                                        <td> 
+                                            <select name="user" id="user">
+                                                <option value="student">Student</option>
+                                                <option value="org">Organization</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+    
+                                    <tr>
+                                        <td><strong>STUDENT ID NO: </strong> </td>
+                                        <td><input type = number id = id size = 40></td>
+                                    </tr>
+    
+                                    <tr>
+                                        <td colspan = 2 align = "right">
+                                        <input type = submit value = "SAVE CHANGES" class="submit_button"></td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="box3">
+                <div class="name">
+                    <h1>ACCOUNT</h1>
+                </div>
+                <div class="b3row1">
+                    <a class="button" href="../Pages/lscs_org_edit.html"
+                        ><i class="fa-solid fa-user-pen"></i>&nbsp; &nbsp; EDIT PROFILE</a
+                    ><br />
+                    <a class="button" id="current" href="../Pages/lscs_org_settings.html"
+                        ><i class="fa-solid fa-gear"></i>&nbsp; &nbsp; PAGE SETTINGS</a
+                    ><br />
+                    <a class="button" href="../index.html"
+                        ><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp; &nbsp;
+                        LOG-OUT</a
+                    ><br />
+                </div>
+                <div class="calendar_name">
+                    <h1>YOUR CALENDAR</h1>
+                </div>
+                <div class="b3row2">
+                    <iframe
+                        class="calendar"
+                        src="https://calendar.google.com/calendar/embed?src=c_5sjo26tm84vmof5ac5fq1dvu4k%40group.calendar.google.com&ctz=Asia%2FManila"
+                        style="border: 0"
+                        width="800"
+                        height="600"
+                        frameborder="0"
+                        scrolling="no"
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="container5" id="bottom">
+            <div class="box5"><img src="../images/logo_footer.png" /> &nbsp;</div>
+
+            <div class="box6">
+                <p>
+                    <i class="fa-solid fa-envelope-open"></i> &nbsp; CONTACT US <br />
+                    <a class="mail" href="mailto:misael_marin@dlsu.edu.ph"
+                        >misael_marin@dlsu.edu.ph</a
+                    ><br />
+                    <a class="mail" href="mailto:criscela_racelis@dlsu.edu.ph"
+                        >criscela_racelis@dlsu.edu.ph</a
+                    ><br />
+                    <a class="mail" href="mailto:jaira_millicent_santos@dlsu.edu.ph"
+                        >jaira_millicent_santos@dlsu.edu.ph</a
+                    >
+                </p>
+            </div>
+            <br />
+            <div class="box7">
+                <p class="title">
+                    <i class="fa-solid fa-location-pin"></i> &nbsp; WHERE TO FIND US <br />
+                </p>
+
+                <p class="content">
+                    Gokongwei Bldg., De La Salle University 2401 Taft Avenue, 1004 Manila,
+                    Philippines
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

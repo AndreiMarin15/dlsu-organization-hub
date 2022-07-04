@@ -7,7 +7,20 @@ TODO:
 [] File upload system
 [] About Org Backend
 
-Significant Pages: Index, user verification, student log in and signup, org login and signup, student feed and profile, student saved posts and events, events going, edit profile, student account settings, org account settings, org profile
+Significant Pages: 
+[/] Index, 
+[/] user verification - signup
+[/] log in (general - for student and org)
+[/] student signup, 
+[/] org signup, 
+[/] student feed and profile, 
+[/] student saved posts and events, 
+[/] events going, 
+[/] edit profile, 
+[/] student account settings, 
+[] org account settings, 
+[/] org feed,
+[/] org profile
 
 Passwords:
     Student - studentUserPassword123
