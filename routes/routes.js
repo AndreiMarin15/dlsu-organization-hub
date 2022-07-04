@@ -10,6 +10,12 @@ app.post("/testPassword/:id", controller.bcryptTest);
 app.get("/", controller.getIndex);
 app.get("/search/", controller.search);
 
+//LOG IN 
+app.get("/logIn", controller.getLogIn);
+
+//USER VERIF
+app.get("/userVerif", controller.getUserVerif);
+
 // STUDENT USERS
 app.get("/studentUsers/", controller.getStudents);
 app.post("/studentUsers/add", controller.addStudent);
