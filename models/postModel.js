@@ -17,7 +17,7 @@ const postSchema = new Schema(
             required: false,
         },
         numberlikes: {
-            type: Number,
+            type: [],
             required: false,
         },
     },

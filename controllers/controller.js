@@ -86,13 +86,20 @@ const controller = {
         // adds a new student to the database
         const email = req.body.email;
         const password = req.body.password;
+        const firstName = req.body.firstName;
+        const lastName = req.body.lastName;
+        const confirm = req.body.confirmPassword;
 
-        const newStudentUser = new StudentUser({ email, password });
+        if (bcrypt.compare(password, confirm)) {
+            const newStudentUser = new StudentUser({ firstName, lastName, email, password });
 
-        newStudentUser
-            .save()
-            .then(() => res.json("User added!"))
-            .catch((err) => res.status(400).json("Error: " + err));
+            newStudentUser
+                .save()
+                .then(() => res.json("User added!"))
+                .catch((err) => res.status(400).json("Error: " + err));
+        } else {
+            //codes for password do not match
+        }
     },
 
     addAffiliation: (req, res) => {
@@ -129,13 +136,19 @@ const controller = {
         // adds a new organization
         const email = req.body.email;
         const password = req.body.password;
+        const name = req.body.name;
+        const confirm = req.body.confirmPassword;
 
-        const newOrgUser = new OrgUser({ email, password });
+        if (bcrypt.compare(password, confirm)) {
+            const newOrgUser = new OrgUser({ email, password, name });
 
-        newOrgUser
-            .save()
-            .then(() => res.json("User added!"))
-            .catch((err) => res.status(400).json("Error: " + err));
+            newOrgUser
+                .save()
+                .then(() => res.json("User added!"))
+                .catch((err) => res.status(400).json("Error: " + err));
+        } else {
+            //codes for password do not match
+        }
     },
 
     updateOrgUser: (req, res) => {
