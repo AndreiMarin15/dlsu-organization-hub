@@ -159,9 +159,11 @@ const controller = {
         const lastName = req.body.lastName;
         const confirm = req.body.confirmPassword;
 
+        console.log(password + " hello " + confirm);
+
         StudentUser.findOne({ email: email }).then((studentuser) => {
             if (studentuser == null) {
-                if (bcrypt.compare(password, confirm)) {
+                if (password === confirm && password.length >= 8 && email.includes("dlsu.edu.ph") ) {
                     const newStudentUser = new StudentUser({
                         firstName,
                         lastName,
@@ -172,32 +174,18 @@ const controller = {
                     newStudentUser
                         .save()
                         .then(() => {
+                      
                             res.redirect("/login");
+                       
                         })
                         .catch((err) => res.status(400).json("Error: " + err));
                 } else {
-                    alert("Email already in use.");
+                    
                     res.redirect("/studentSignUp");
                 }
             } else {
-                alert("Email already used.");
+              
                 res.redirect("/studentSignUp");
-            }
-        });
-
-        OrgUser.findOne({ email: email }).then((orguser) => {
-            if (orguser == null) {
-                if (bcrypt.compare(password, confirm)) {
-                    const newOrgUser = new OrgUser({ email, password, name });
-
-                    newOrgUser
-                        .save()
-                        .then(() => res.json("User added!"))
-                        .catch((err) => res.status(400).json("Error: " + err));
-                } else {
-                    alert("Passwords do not match");
-                    res.redirect("/orgSignUp");
-                }
             }
         });
     },
@@ -241,21 +229,22 @@ const controller = {
 
         OrgUser.findOne({ email: email }).then((orguser) => {
             if (orguser == null) {
-                if (bcrypt.compare(password, confirm)) {
+                if (password === confirm && password.length >= 8 && email.includes("dlsu.edu.ph") ) {
                     const newOrgUser = new OrgUser({ email, password, name });
 
                     newOrgUser
                         .save()
                         .then(() => {
+                            res.send(`<script>alert("User Added"); window.location.href = "localhost:3000/login"; </script>`);
                             res.redirect("/login");
                         })
                         .catch((err) => res.status(400).json("Error: " + err));
                 } else {
-                    alert("Passwords do not match");
+                    
                     res.redirect("/orgSignUp");
                 }
             } else {
-                alert("User email already used");
+                
                 res.redirect("/orgSignUp");
             }
         });
