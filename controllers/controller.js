@@ -29,29 +29,32 @@ const controller = {
     // general
     validateLogIn: function (req, res) {
         StudentUser.findOne({ email: req.query.email })
-        .then((studentuser) => {
-           
-            if (studentuser) {
-                bcrypt.compare(req.query.password, studentuser.password, function (error, isVerify) {
-                    res.send(isVerify);
-                });
-            } else {
-                OrgUser.findOne({email: req.query.email})
-                    .then(orguser => {
-                        if(orguser){
-                            bcrypt.compare(req.query.password, orguser.password, function (error, isVerify) {
-                                res.send(isVerify);
-                            });
+            .then((studentuser) => {
+                if (studentuser) {
+                    bcrypt.compare(
+                        req.query.password,
+                        studentuser.password,
+                        function (error, isVerify) {
+                            res.send(isVerify);
                         }
-
-                        else{
+                    );
+                } else {
+                    OrgUser.findOne({ email: req.query.email }).then((orguser) => {
+                        if (orguser) {
+                            bcrypt.compare(
+                                req.query.password,
+                                orguser.password,
+                                function (error, isVerify) {
+                                    res.send(isVerify);
+                                }
+                            );
+                        } else {
                             res.send(false);
                         }
-                    })
-
-            }
-        })
-        .catch(err => res.json(err));
+                    });
+                }
+            })
+            .catch((err) => res.json(err));
     },
 
     getIndex: (req, res) => {
@@ -75,14 +78,12 @@ const controller = {
     },
 
     getStudentFeed: (req, res) => {
-         res.render("student_feed");
-         
+        res.render("student_feed");
     },
 
     getOrgFeed: (req, res) => {
         res.render("org_feed");
-        
-   },
+    },
 
     logout: (req, res) => {
         req.session.destroy((err) => {
@@ -114,41 +115,32 @@ const controller = {
         let email = req.body.email;
         let password = req.body.password;
 
-        OrgUser.findOne({email: email})
-            .then(orguser => {
-                if(orguser != null){
-                    bcrypt.compare(password, orguser.password)
-                        .then(isVerify => {
-                            if(isVerify){
-                                req.session.id = orguser._id;
-                                res.redirect("/org-feed");
-                            }
-                        })
-                }
-                else {
-                    StudentUser.findOne({email: email})
-                        .then(studentuser => {
-                            if(studentuser != null){
-                                bcrypt.compare(password, studentuser.password)
-                        .then(isVerify => {
-                            if(isVerify){
+        OrgUser.findOne({ email: email }).then((orguser) => {
+            if (orguser != null) {
+                bcrypt.compare(password, orguser.password).then((isVerify) => {
+                    if (isVerify) {
+                        req.session.id = orguser._id;
+                        res.redirect("/org-feed");
+                    }
+                });
+            } else {
+                StudentUser.findOne({ email: email }).then((studentuser) => {
+                    if (studentuser != null) {
+                        bcrypt.compare(password, studentuser.password).then((isVerify) => {
+                            if (isVerify) {
                                 req.session.userid = studentuser._id;
-                                console.log("id: "+ req.session.userid);
                                 res.redirect("/student-feed");
-                                
                             } else {
-
                                 res.redirect("/logIn");
                             }
-                        })
-                            }
-                            else{
-                                console.log("Not found");
-                                res.redirect("/logIn")
-                            }
-                        })
-                }
-            })
+                        });
+                    } else {
+                        console.log("Not found");
+                        res.redirect("/logIn");
+                    }
+                });
+            }
+        });
     },
 
     // studentUserModel
@@ -167,16 +159,47 @@ const controller = {
         const lastName = req.body.lastName;
         const confirm = req.body.confirmPassword;
 
-        if (bcrypt.compare(password, confirm)) {
-            const newStudentUser = new StudentUser({ firstName, lastName, email, password });
+        StudentUser.findOne({ email: email }).then((studentuser) => {
+            if (studentuser == null) {
+                if (bcrypt.compare(password, confirm)) {
+                    const newStudentUser = new StudentUser({
+                        firstName,
+                        lastName,
+                        email,
+                        password,
+                    });
 
-            newStudentUser
-                .save()
-                .then(() => res.json("User added!"))
-                .catch((err) => res.status(400).json("Error: " + err));
-        } else {
-            //codes for password do not match
-        }
+                    newStudentUser
+                        .save()
+                        .then(() => {
+                            res.redirect("/login");
+                        })
+                        .catch((err) => res.status(400).json("Error: " + err));
+                } else {
+                    alert("Email already in use.");
+                    res.redirect("/studentSignUp");
+                }
+            } else {
+                alert("Email already used.");
+                res.redirect("/studentSignUp");
+            }
+        });
+
+        OrgUser.findOne({ email: email }).then((orguser) => {
+            if (orguser == null) {
+                if (bcrypt.compare(password, confirm)) {
+                    const newOrgUser = new OrgUser({ email, password, name });
+
+                    newOrgUser
+                        .save()
+                        .then(() => res.json("User added!"))
+                        .catch((err) => res.status(400).json("Error: " + err));
+                } else {
+                    alert("Passwords do not match");
+                    res.redirect("/orgSignUp");
+                }
+            }
+        });
     },
 
     addAffiliation: (req, res) => {
@@ -216,16 +239,26 @@ const controller = {
         const name = req.body.name;
         const confirm = req.body.confirmPassword;
 
-        if (bcrypt.compare(password, confirm)) {
-            const newOrgUser = new OrgUser({ email, password, name });
+        OrgUser.findOne({ email: email }).then((orguser) => {
+            if (orguser == null) {
+                if (bcrypt.compare(password, confirm)) {
+                    const newOrgUser = new OrgUser({ email, password, name });
 
-            newOrgUser
-                .save()
-                .then(() => res.json("User added!"))
-                .catch((err) => res.status(400).json("Error: " + err));
-        } else {
-            //codes for password do not match
-        }
+                    newOrgUser
+                        .save()
+                        .then(() => {
+                            res.redirect("/login");
+                        })
+                        .catch((err) => res.status(400).json("Error: " + err));
+                } else {
+                    alert("Passwords do not match");
+                    res.redirect("/orgSignUp");
+                }
+            } else {
+                alert("User email already used");
+                res.redirect("/orgSignUp");
+            }
+        });
     },
 
     updateOrgUser: (req, res) => {
