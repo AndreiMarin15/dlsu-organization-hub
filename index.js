@@ -3,8 +3,11 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const hbs = require("hbs");
-const routes = require("./routes/routes.js")
+const routes = require("./routes/routes.js");
 const path = require("path");
+
+const session = require("express-session");
+const MongoDBSession = require("connect-mongodb-session")(session);
 
 require("dotenv").config();
 
@@ -20,7 +23,6 @@ const options = {
     useUnifiedTopology: true,
     useNewUrlParser: true,
 };
-
 
 hbs.registerHelper("ifEquals", function (arg1, arg2, options) {
     return arg1 == arg2 ? options.fn(this) : options.inverse(this);
@@ -39,7 +41,6 @@ app.set("view engine", "hbs");
 
 hbs.registerPartials(__dirname + `/views/partials`);
 
-
 mongoose.connect(url, options);
 const connection = mongoose.connection;
 
@@ -47,7 +48,19 @@ connection.once("open", () => {
     console.log(`MongoDB Connection Established on: ${url}`);
 });
 
+const store = new MongoDBSession({
+    uri: url,
+    collection: "Sessions",
+});
 
+app.use(
+    session({
+        secret: "database",
+        resave: false,
+        saveUninitialized: false,
+        store: store,
+    })
+);
 
 app.use("/", routes);
 
