@@ -13,19 +13,7 @@ const bcrypt = require("bcrypt");
 
 const controller = {
     // test functions - to be deleted, DO NOT USE IN FRONTEND
-    bcryptTest: (req, res) => {
-        OrgUser.findById(req.params.id)
-            .then((orguser) => {
-                let password = req.body.password;
-
-                if (bcrypt.compare(orguser.password, password)) {
-                    res.json(orguser);
-                } else {
-                    res.json("error in bcrypt");
-                }
-            })
-            .catch((err) => res.status(400).json(err));
-    },
+    
 
     // general
     validateLogIn: function (req, res) {
@@ -63,6 +51,8 @@ const controller = {
     },
 
     getLogIn: (req, res) => {
+        
+
         res.render("log_in");
     },
 
@@ -79,7 +69,26 @@ const controller = {
     },
 
     getStudentFeed: (req, res) => {
-        res.render("student_feed");
+        let user = new StudentUser({
+            email: req.session.email,
+            password: req.session.password,
+            firstName: req.session.firstName,
+            lastName: req.session.lastName,
+            _id: req.session.userid
+
+        })
+
+        // Posts.find()
+        //     .then(posts => {
+        //         Event.find()
+        //             .then(events => {
+                        
+        //             })
+        //             .catch(err => console.log(err));
+        //     })
+
+            res.render("student_feed", {user: user});
+        
     },
 
     getOrgFeed: (req, res) => {
@@ -92,6 +101,8 @@ const controller = {
             res.redirect("/");
         });
     },
+
+    
 
     search: (req, res) => {
         // searches for an org user through the org name, if the inital find method returns a blank array, it searches for posts matching its content
@@ -132,6 +143,8 @@ const controller = {
                     if (isVerify) {
                         req.session.email = orguser.email;
                         req.session.userid = orguser._id;
+                        req.session.name = orguser.name;
+
                         res.redirect("/org-feed");
                     }
                 });
@@ -142,6 +155,9 @@ const controller = {
                             if (isVerify) {
                                 req.session.email = studentuser.email;
                                 req.session.userid = studentuser._id;
+                                req.session.firstName = studentuser.firstName;
+                                req.session.lastName = studentuser.lastName;
+
                                 res.redirect("/student-feed");
                             } else {
                                 res.redirect("/logIn");
@@ -334,7 +350,7 @@ const controller = {
 
     addPost: (req, res) => {
         // creates a new post
-        const email = req.body.email;
+        const email = req.session.email;
         const content = req.body.content;
         const image = req.body.image;
         let numberlikes = 0;

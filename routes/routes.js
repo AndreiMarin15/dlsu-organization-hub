@@ -8,7 +8,7 @@ const app = express();
 
 
 // test routes - to be deleted, DO NOT USE IN FRONTEND
-app.post("/testPassword/:id", controller.bcryptTest);
+
 
 // js functions
 
@@ -60,5 +60,9 @@ app.post("/posts/add", controller.addPost);
 app.get("/posts/:id", controller.getPostById);
 app.delete("/posts/:id", controller.deletePost);
 app.post("/posts/update/:id", controller.updatePost);
+
+// EVENTS
+app.post("/events/add", controller.addEvent);
+
 
 module.exports = app;

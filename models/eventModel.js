@@ -18,7 +18,7 @@ const eventSchema = new Schema(
         },
         eventdate: {
             type: Date,
-            required: true,
+            required: false,
         },
         numberlikes: {
             type: [],
