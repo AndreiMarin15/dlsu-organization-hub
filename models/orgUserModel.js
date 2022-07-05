@@ -20,7 +20,7 @@ const orgUserSchema = new Schema(
         name: {
             type: String,
             required: false,
-        },
+        },    
     },
     {
         timestamps: true,

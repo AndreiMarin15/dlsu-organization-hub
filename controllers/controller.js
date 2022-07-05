@@ -78,16 +78,18 @@ const controller = {
 
         })
 
-        // Posts.find()
-        //     .then(posts => {
-        //         Event.find()
-        //             .then(events => {
-                        
-        //             })
-        //             .catch(err => console.log(err));
-        //     })
+        Posts.find()
+            .then(posts => {
+                Event.find()
+                    .then(events => {
+                        res.render("student_feed", {user: user, post: posts, event: events});
+                    })
+                    .catch(err => console.log(err));
+            })
 
-            res.render("student_feed", {user: user});
+         
+
+            
         
     },
 
@@ -99,7 +101,7 @@ const controller = {
         req.session.destroy((err) => {
             if (err) throw err;
             res.redirect("/");
-        });
+        });  
     },
 
     

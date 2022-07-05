@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="../css/styleForFeed.css" />
         <title>Feed</title>
     </head>
-    <body>
+    <div>
       
          <div class="container1">
             <div class="box1">
@@ -58,224 +58,16 @@
                 </div>
                 <div class="b2row2">
                     <!-- LSCS EVENT COUNTDOWN POSTING -->
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="logo">
-                                <img src="../images/lscs.png">
-                            </div>
-                            <div class="header-title">
-                                <a href="../Pages/lscs.html" id="nav_link"><b>LA SALLE COMPUTER SOCIETY</b></a><br>
-                                <p><strong>Posted on: </strong>May 18, 2022</p>
-                                <p><strong>Type: </strong>Event</p>
-                                <p><strong>Date of event: </strong>May 23, 2022</p>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="attachment">
-                                <img src="../images/lscs_post1.png">
-                            </div>
-                            <div class="caption">
-                                <p>1 day left to join our long awaited Mock Interview! 🚀
-                                    Don’t miss out on your chance to engage with tech professionals and boost your interview skills!
-                                    Hurry up, join us by pre-registering at: <a class="post_link" href=https://bit.ly/TechCareersInterviewPreReg>
-                                        https://bit.ly/TechCareersInterviewPreReg</a><br>
-                                    <br><br> Caption by: Hannah Chen
-                                    <br> Pub by: Allen Aboy
-                                </p>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-thumbs-up"></i></i> &nbsp; LIKE</button>
-                            </div>
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-bookmark"></i> &nbsp; SAVE</button>
-                            </div>
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-person-running"></i> &nbsp; MARK AS GOING</button>
-                            </div>
-                        </div>
-                      </div>
+                    {{#each post}}
+                    {{> posts}}
+                    {{/each}}
 
-                    <!-- SPRINT EVENT POSTING -->
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="logo">
-                                <img src="../images/sprint.png">
-                            </div>
-                            <div class="header-title">
-                                <a href="../Pages/sprint.html" id="nav_link"><b>SOCIETY OF PROACTIVE MODELS INSPIRING TOTAL DEVELOPMENT</b></a><br>
-                                <p><strong>Posted on: </strong>May 18, 2022</p>
-                                <p><strong>Type: </strong>Event</p>
-                                <p><strong>Date of event: </strong>May 28, 2022</p>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="attachment">
-                                <img src="../images/sprint_post1.png">
-                            </div>
-                            <div class="caption">
-                                <p>Bored of the same old slides for your presentations? 😩🤷 <br><br>
-                                    LSCS and SPRINT got your back ✨ as we unveil the event that will bring life to your 
-                                    presentations— Computer Literacy Program (CLiP): The Art of Presenting! <br><br>
-                                    Join us on this one-day webinar on May 28, 2022 from 12NN to 2PM and learn about the basics of Figma, 
-                                    a powerful design tool that is usually used for prototyping but can also be utilized to 
-                                    create aesthetic and informative slide decks just like how you want it to be! 
-                                    <br> <br> 𝘗𝘶𝘣 𝘣𝘺 𝘒𝘪𝘮 𝘞𝘪𝘭𝘭𝘪𝘢𝘮𝘦 𝘓𝘦𝘦
-                                </p>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-thumbs-up"></i></i> &nbsp; LIKE</button>
-                            </div>
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-bookmark"></i> &nbsp; SAVE</button>
-                            </div>
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-person-running"></i> &nbsp; MARK AS GOING</button>
-                            </div>
-                        </div>
-                      </div>
-
-                    <!-- SPRINT EVENT POSTING -->
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="logo">
-                                <img src="../images/sprint.png">
-                            </div>
-                            <div class="header-title">
-                                <a href="../Pages/sprint.html" id="nav_link"><b>SOCIETY OF PROACTIVE MODELS INSPIRING TOTAL DEVELOPMENT</b></a><br>
-                                <p><strong>Posted on: </strong>May 2, 2022</p>
-                                <p><strong>Type: </strong>Event</p>
-                                <p><strong>Date of event: </strong>May 28, 2022</p>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="attachment">
-                                <img src="../images/sprint_post2.png">
-                            </div>
-                            <div class="caption">
-                                <p>[MIND MATTERS: Yours and Mine] <br><br>
-
-                                    "You can't control everything. Sometimes you just need yo relax and have faith that things will work out. 
-                                    Let go a little and just let life happen." - Kody Kiplinger <br><br>
-                                    
-                                    Still feeling like the pandemic has taken a toll on your mental health? 
-                                    Join us for a mental health panel discussion, Mind Matters: Yours and Mine, 
-                                    on May 28, 2022 (Saturday) from 2:00 PM - 4:00 PM. <br><br>
-
-                                    <a class="post_link" href=https://bit.ly/SPRINTMMYMPrereg>
-                                        https://bit.ly/SPRINTMMYMPrereg</a><br>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-thumbs-up"></i></i> &nbsp; LIKE</button>
-                            </div>
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-bookmark"></i> &nbsp; SAVE</button>
-                            </div>
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-person-running"></i> &nbsp; MARK AS GOING</button>
-                            </div>
-                        </div>
-                      </div>
-                    
-                    <!-- CSG EVENT POSTING -->
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="logo">
-                                <img src="../images/csg.png">
-                            </div>
-                            <div class="header-title">
-                                <a href="../Pages/csg.html" id="nav_link"><b>DLSU - COMPUTER STUDIES GOVERNMENT</b></a><br>
-                                <p><strong>Posted on: </strong>May 7, 2022</p>
-                                <p><strong>Type: </strong>Event</p>
-                                <p><strong>Date of launch: </strong>May 17, 2022</p>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="attachment">
-                                <img src="../images/csg_post1.png">
-                            </div>
-                            <div class="caption">
-                                <p>Did this week's merch lineup excite you? <br>
-                                    Animo.CCS has more in store for you in the
-                                    following weeks! 🤩 <br><br>
-                                    No need to wait any longer to
-                                    purchase your desired merchandise, as selling
-                                    period starts on May 17, 2022! Mark your calendars📍📆 <br><br>
-                                    #AnimoCCS
-                                    #CSG2122 <br><br>
-                                    Caption by Daphne Go <br>
-                                    Pub by Richard Narvaez
-                                </p>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-thumbs-up"></i></i> &nbsp; LIKE</button>
-                            </div>
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-bookmark"></i> &nbsp; SAVE</button>
-                            </div>
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-person-running"></i> &nbsp; MARK AS GOING</button>
-                            </div>
-                        </div>
-                      </div>
-                    
-                    <!-- CATCH2T24  POSTING -->
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="logo">
-                                <img src="../images/catch2t24.png">
-                            </div>
-                            <div class="header-title">
-                                <a href="../Pages/catch2t24.html" id="nav_link"><b>DLSU - COMPUTER BATCH 2T24 (CATCH2T24)</b></a><br>
-                                <p><strong>Posted on: </strong>May 7, 2022</p>
-                                <p><strong>Type: </strong>Project Post</p>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="attachment">
-                                <img src="../images/catch2t24_post1.png">
-                            </div>
-                            <div class="caption">
-                                <p>Do you have any questions or concerns about DLSU's academic system that 
-                                    need to be addressed right away? 🤔 <br><br>
-
-                                    Worry no more, because PAIMON is here to help! Remember that CATCH2T24 has Personal Assistant for 
-                                    Information and MONitoring (PAIMON), a manual and a messenger bot that can provide you with information 
-                                    about your concerns, such as important university websites, CCS/DLSU/CATCH2T24 office contacts, course 
-                                    flowcharts, common university processes, the academic calendar, and much more! ✨ <br><br>
-                                    
-                                    Everything you need will be ready in a single click! 🖱️ You can find it at 
-                                    <a class="post_link" href=http://catch2t24-paimon.carrd.co/>
-                                    http://catch2t24-paimon.carrd.co/</a> and 
-                                    
-                                    <a class="post_link" href=http://m.me/catch2t24>
-                                        http://m.me/catch2t24</a><br><br>
-                                    
-                                    Pub by Dani Solis <br>
-                                    Caption by Nicole Tabije 
-                                </p>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-thumbs-up"></i></i> &nbsp; LIKE</button>
-                            </div>
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-bookmark"></i> &nbsp; SAVE</button>
-                            </div>
-                        </div>
-                      </div>
-            
+                    {{#each event}}
+                    {{> events}}
+                    {{/each}}
                 </div>
             </div>
+          
 
             <div class="box3">
                 <div class="name">
