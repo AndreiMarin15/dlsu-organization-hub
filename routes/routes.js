@@ -1,19 +1,22 @@
 const express = require(`express`);
 const controller = require("../controllers/controller");
 
+const multer = require("multer");
 const app = express();
+
+
+
 
 // test routes - to be deleted, DO NOT USE IN FRONTEND
 app.post("/testPassword/:id", controller.bcryptTest);
 
 // js functions
 
-
 //index
 app.get("/", controller.getIndex);
 app.get("/search/", controller.search);
 
-//LOG IN 
+//LOG IN
 app.get("/logIn", controller.getLogIn);
 app.post("/loginForm", controller.logIn);
 app.get("/validateLog", controller.validateLogIn);

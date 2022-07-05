@@ -1,6 +1,7 @@
 const StudentUser = require("../models/studentUserModel");
 const OrgUser = require("../models/orgUserModel");
 const Posts = require("../models/postModel");
+const Event = require("../models/eventModel");
 const bcrypt = require("bcrypt");
 
 /* POSSIBLE CHANGES (once frontend is implemented):
@@ -100,11 +101,21 @@ const controller = {
             }
 
             if (!user.length) {
-                Posts.find({ content: { $regex: ".*" + req.body.search + ".*" } })
-                    .then((post) => {
-                        res.json(post);
-                    })
-                    .catch((err) => res.status(400).json("Error: " + err));
+                Posts.find({ content: { $regex: ".*" + req.body.search + ".*" } }, (err, post) => {
+                    if (err) {
+                        res.status(400).json("Error: " + err);
+                    }
+
+                    if (!post.length) {
+                        Event.find({content: {$regex: ".*" + req.body.search + ".*"}})
+                            .then(event => {
+                                res.json(event);
+                            })
+                            .catch(err => res.status(400).json("Error: ") + err);
+                    } else {
+                        res.json(post)
+                    }
+                });
             } else {
                 res.json(user);
             }
@@ -119,7 +130,8 @@ const controller = {
             if (orguser != null) {
                 bcrypt.compare(password, orguser.password).then((isVerify) => {
                     if (isVerify) {
-                        req.session.id = orguser._id;
+                        req.session.email = orguser.email;
+                        req.session.userid = orguser._id;
                         res.redirect("/org-feed");
                     }
                 });
@@ -128,6 +140,7 @@ const controller = {
                     if (studentuser != null) {
                         bcrypt.compare(password, studentuser.password).then((isVerify) => {
                             if (isVerify) {
+                                req.session.email = studentuser.email;
                                 req.session.userid = studentuser._id;
                                 res.redirect("/student-feed");
                             } else {
@@ -330,7 +343,7 @@ const controller = {
 
         newPost
             .save()
-            .then(() => res.json("Post added!"))
+            .then(() => res.json("Event added!"))
             .catch((err) => res.status(400).json("Error: " + err));
     },
 
@@ -360,6 +373,100 @@ const controller = {
             })
             .catch((err) => res.status(400).json("Error: " + err));
     },
+
+    // eventModel
+
+    getEvents: (req, res) => {
+        Event.find()
+            .then(events => {
+                res.json(events);
+            })
+            .catch(err => res.json(err));
+    },
+
+    getEventsByAffiliations: (req, res) => {
+        // returns all posts by the followed organizations of a student through the student's id
+        StudentUser.findById(req.params.id)
+            .then((user) => {
+                let affiliations = user.affiliations;
+
+                OrgUser.find({ _id: { $in: affiliations } })
+                    .then((orguser) => {
+                        let orgemails = [];
+
+                        orguser.forEach((element) => {
+                            orgemails.push(element.email);
+                        });
+
+                        Event.find({ email: { $in: orgemails } })
+                            .sort({ createdAt: -1 })
+                            .then((events) => {
+                                res.json(events);
+                            })
+                            .catch((err) => res.status(400).json("Error: " + err));
+                    })
+                    .catch((err) => res.status(400).json("Error: " + err));
+            })
+            .catch((err) => res.status(400).json("Error: " + err));
+    },
+
+    getEventsByUser: (req, res) => {
+        // gets the posts of a specific organization using the orgnization id
+        OrgUser.findById(req.params.id)
+            .then((user) => {
+                let userEmail = user.email;
+                Event.find({ email: userEmail })
+                    .then((events) => res.json(events))
+                    .catch((err) => res.status(400).json("Error: " + err));
+            })
+            .catch((err) => res.status(400).json("Error: " + err));
+    },
+
+    addEvent: (req, res) => {
+        // creates a new post
+        const email = req.session.email;
+        const content = req.body.content;
+        const image = req.body.image;
+        const eventdate = req.body.date;
+        let numberlikes = 0;
+        let numbergoing = 0
+
+        const newEvent = new Event({ email, content, image, eventdate, numberlikes, numbergoing });
+
+        newEvent
+            .save()
+            .then(() => res.json("Post added!"))
+            .catch((err) => res.status(400).json("Error: " + err));
+    },
+
+    getEventById: (req, res) => {
+        // gets a post using its id
+        Event.findById(req.params.id)
+            .then((events) => res.json(events))
+            .catch((err) => res.status(400).json("Error: " + err));
+    },
+
+    deleteEvent: (req, res) => {
+        // deletes a post using its id
+        Event.findByIdAndDelete(req.params.id)
+            .then(() => res.json("Event Deleted"))
+            .catch((err) => res.status(400).json("Error: ") + err);
+    },
+
+    updateEvent: (req, res) => {
+        // updates a post using its id
+        Event.findById(req.params.id)
+            .then((event) => {
+                event.content = req.body.content;
+
+                event.save()
+                    .then(() => res.json("Post Updated"))
+                    .catch((err) => res.status(400).json("Error: " + err));
+            })
+            .catch((err) => res.status(400).json("Error: " + err));
+    },
+
+
 };
 
 module.exports = controller;
