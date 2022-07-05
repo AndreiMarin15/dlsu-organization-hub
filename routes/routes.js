@@ -22,7 +22,7 @@ app.post("/loginForm", controller.logIn);
 app.get("/validateLog", controller.validateLogIn);
 
 //LOG OUT
-app.post("/logout/", controller.logout);
+app.get("/logout", controller.logout);
 
 //USER VERIF
 app.get("/userVerif", controller.getUserVerif);
