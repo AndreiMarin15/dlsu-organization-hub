@@ -13,7 +13,6 @@ const bcrypt = require("bcrypt");
 
 const controller = {
     // test functions - to be deleted, DO NOT USE IN FRONTEND
-    
 
     // general
     validateLogIn: function (req, res) {
@@ -51,8 +50,6 @@ const controller = {
     },
 
     getLogIn: (req, res) => {
-        
-
         res.render("log_in");
     },
 
@@ -74,23 +71,16 @@ const controller = {
             password: req.session.password,
             firstName: req.session.firstName,
             lastName: req.session.lastName,
-            _id: req.session.userid
+            _id: req.session.userid,
+        });
 
-        })
-
-        Posts.find()
-            .then(posts => {
-                Event.find()
-                    .then(events => {
-                        res.render("student_feed", {user: user, post: posts, event: events});
-                    })
-                    .catch(err => console.log(err));
-            })
-
-         
-
-            
-        
+        Posts.find().then((posts) => {
+            Event.find()
+                .then((events) => {
+                    res.render("student_feed", { user: user, post: posts, event: events });
+                })
+                .catch((err) => console.log(err));
+        });
     },
 
     getOrgFeed: (req, res) => {
@@ -101,10 +91,8 @@ const controller = {
         req.session.destroy((err) => {
             if (err) throw err;
             res.redirect("/");
-        });  
+        });
     },
-
-    
 
     search: (req, res) => {
         // searches for an org user through the org name, if the inital find method returns a blank array, it searches for posts matching its content
@@ -120,13 +108,13 @@ const controller = {
                     }
 
                     if (!post.length) {
-                        Event.find({content: {$regex: ".*" + req.body.search + ".*"}})
-                            .then(event => {
+                        Event.find({ content: { $regex: ".*" + req.body.search + ".*" } })
+                            .then((event) => {
                                 res.json(event);
                             })
-                            .catch(err => res.status(400).json("Error: ") + err);
+                            .catch((err) => res.status(400).json("Error: ") + err);
                     } else {
-                        res.json(post)
+                        res.json(post);
                     }
                 });
             } else {
@@ -312,6 +300,24 @@ const controller = {
             .catch((err) => res.status(400).json("Error: " + err));
     },
 
+    getStudentFeedPosts: (req, res) => {
+        // gets all posts from the database
+        Posts.find()
+            .then((posts) => {
+                res.render("student_feed", { post: posts });
+            })
+            .catch((err) => res.status(400).json("Error: " + err));
+    },
+
+    getOrgFeedPosts: (req, res) => {
+        // gets all posts from the database
+        Posts.find()
+            .then((posts) => {
+                res.render("org_feed", { post: posts });
+            })
+            .catch((err) => res.status(400).json("Error: " + err));
+    },
+
     getPostsByAffiliations: (req, res) => {
         // returns all posts by the followed organizations of a student through the student's id
         StudentUser.findById(req.params.id)
@@ -357,12 +363,16 @@ const controller = {
         const image = req.body.image;
         let numberlikes = 0;
 
-        const newPost = new Posts({ email, content, image, numberlikes });
+        OrgUser.findOne({ email: email }).then((user) => {
+            const accountName = user.name;
 
-        newPost
-            .save()
-            .then(() => res.json("Event added!"))
-            .catch((err) => res.status(400).json("Error: " + err));
+            const newPost = new Posts({ accountName, email, content, image, numberlikes });
+
+            newPost
+                .save()
+                .then(() => res.json("Post added!"))
+                .catch((err) => res.status(400).json("Error: " + err));
+        });
     },
 
     getPostById: (req, res) => {
@@ -396,10 +406,26 @@ const controller = {
 
     getEvents: (req, res) => {
         Event.find()
-            .then(events => {
+            .then((events) => {
                 res.json(events);
             })
-            .catch(err => res.json(err));
+            .catch((err) => res.json(err));
+    },
+
+    getStudentFeedEvents: (req, res) => {
+        Event.find()
+            .then((events) => {
+                res.render("student_feed", { event: events });
+            })
+            .catch((err) => res.json(err));
+    },
+
+    getOrgFeedEvents: (req, res) => {
+        Event.find()
+            .then((events) => {
+                res.render("org_feed", { event: events });
+            })
+            .catch((err) => res.json(err));
     },
 
     getEventsByAffiliations: (req, res) => {
@@ -447,14 +473,26 @@ const controller = {
         const image = req.body.image;
         const eventdate = req.body.date;
         let numberlikes = 0;
-        let numbergoing = 0
+        let numbergoing = 0;
 
-        const newEvent = new Event({ email, content, image, eventdate, numberlikes, numbergoing });
+        OrgUser.findOne({ email: email }).then((user) => {
+            const accountName = user.name;
 
-        newEvent
-            .save()
-            .then(() => res.json("Post added!"))
-            .catch((err) => res.status(400).json("Error: " + err));
+            const newEvent = new Event({
+                accountName,
+                email,
+                content,
+                image,
+                eventdate,
+                numberlikes,
+                numbergoing,
+            });
+
+            newEvent
+                .save()
+                .then(() => res.json("Event added!"))
+                .catch((err) => res.status(400).json("Error: " + err));
+        });
     },
 
     getEventById: (req, res) => {
@@ -477,14 +515,13 @@ const controller = {
             .then((event) => {
                 event.content = req.body.content;
 
-                event.save()
+                event
+                    .save()
                     .then(() => res.json("Post Updated"))
                     .catch((err) => res.status(400).json("Error: " + err));
             })
             .catch((err) => res.status(400).json("Error: " + err));
     },
-
-
 };
 
 module.exports = controller;

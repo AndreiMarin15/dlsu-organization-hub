@@ -4,6 +4,9 @@
         <script src="https://kit.fontawesome.com/dfcf57d1e4.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../css/styleForFeed.css" />
+         <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+         <script src="./js/feed.js" type="text/javascript"></script>
+
         <title>Feed</title>
     </head>
     <div>
@@ -50,21 +53,27 @@
                 <div class="feed_type">
                     <nav>
                         <ul class="navLinks">
-                            <li><a class="current" href="../Pages/student_feed.html" id="nav_link"><b>ALL</b></a> </li>
-                            <li><a href="../Pages/student_feed_posts.html" id="nav_link"><b>POSTS</b></a> </li>
-                            <li><a href="../Pages/student_feed_events.html" id="nav_link" ><b>EVENTS</b></a></li>
+                            <li><a class="current" href="/student-feed/" id="nav_link"><b>ALL</b></a> </li>
+                            <li><a class="notCurrent-post" href="/student-feed/posts" id="nav_link"><b>POSTS</b></a> </li>
+                            <li><a class="notCurrent-event" href="/student-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="b2row2">
                     <!-- LSCS EVENT COUNTDOWN POSTING -->
+                    {{#if post}}
                     {{#each post}}
                     {{> posts}}
                     {{/each}}
+                    {{/if}}
 
+                    {{script}}
+
+                    {{#if event}}
                     {{#each event}}
                     {{> events}}
                     {{/each}}
+                    {{/if}}
                 </div>
             </div>
           
@@ -116,4 +125,6 @@
 
     
     </body>
+
+    
 </html>

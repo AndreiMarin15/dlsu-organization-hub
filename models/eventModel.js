@@ -3,6 +3,11 @@ const Schema = mongoose.Schema;
 
 const eventSchema = new Schema(
     {
+        accountName: {
+            type: String,
+            required: true,
+            trim: false,
+        },
         email: {
             type: String,
             required: true,

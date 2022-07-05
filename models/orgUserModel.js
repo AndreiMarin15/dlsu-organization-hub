@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 
 const orgUserSchema = new Schema(
-    {
+    {    
         //remove personal details (first name, last name, personal email) from index.html
         email: {
             type: String,
