@@ -87,17 +87,14 @@
                             <table class="table">
                                 <tr>
                                     <td><strong>NAME: </strong> </td>
-                                    <td> Alexander Lim</td>
+                                    <td>{{user.firstName}} {{user.lastName}}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>DLSU EMAIL: </strong> </td>
-                                    <td> alexander_lim@dlsu.edu.ph</td>
+                                    <td> {{user.email}} </td>
                                 </tr>
 
-                                <tr>
-                                    <td><strong>USER TYPE: </strong> </td>
-                                    <td> Student</td>
-                                </tr>
+                                
                             </table>
                         </div>
                     </div>
@@ -109,66 +106,52 @@
                         </div>
                         <div class="container">
                             <table class="table">
-                                
+                                {{#if user.program}}
                                 <tr>
                                     <td><strong>PROGRAM: </strong></td>
-                                    <td> BS Computer Science Major in Software Technology</td>
+                                    <td> {{user.program}}</td>
                                 </tr>
 
+                                {{else}}
+                                <tr>
+                                    <td><strong>PROGRAM: </strong></td>
+                                    <td>Not yet added</td>
+                                </tr>
+
+                                {{/if}}
+                                {{#if user.college}}
                                 <tr>
                                     <td><strong>COLLEGE: </strong> </td>
-                                    <td> College of Computer Studies</td>
+                                    <td> {{user.college}}</td>
                                 </tr>
 
+                                {{else}}
                                 <tr>
-                                    <td><strong>AGE: </strong> </td>
-                                    <td> 19</td>
+                                    <td><strong>COLLEGE: </strong></td>
+                                    <td>Not yet added</td>
+                                </tr>
+                                {{/if}}
+
+                                {{#if user.dlsuid}}
+                                <tr>
+                                    <td><strong>ID NUMBER: </strong> </td>
+                                    <td> {{user.dlsuid}} </td>
                                 </tr>
 
+                                {{else}}
                                 <tr>
-                                    <td><strong>SEX: </strong> </td>
-                                    <td> M</td>
+                                    <td><strong>ID NUMBER: </strong></td>
+                                    <td>Not yet added</td>
                                 </tr>
+                                {{/if}}
 
-                                <tr>
-                                    <td><strong>BIRTHDAY: </strong></td>
-                                    <td> 01 / 01 / 2002</td>
-                                </tr>
-
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- AFFILIATIONS -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h2>AFFILIATIONS</h2>
-                            <br />
-                        </div>
-                        <div class="container">
-                            <table class="table">
-                                <tr>
-                                    <td><strong>ORGANIZATION 1: </strong> </td>
-                                    <td>
-                                        <a href="../Pages/lscs.html" id="nav_link"><b>LA SALLE
-                                                COMPUTER SOCIETY</b></a><br /></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>ORGANIZATION 2: </strong> </td>
-                                    <td>
-                                        <a href="../Pages/csg.html" id="nav_link"><b>DLSU - COMPUTER
-                                                STUDIES GOVERNMENT</b></a><br /></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>ORGANIZATION 3: </strong> </td>
-                                    <td>
-                                        <a href="../Pages/catch2t24.html" id="nav_link"><b>DLSU -
-                                                COMPUTER BATCH 2T24</b></a><br /></td>
-                                </tr>
+                                
 
                             </table>
                         </div>
                     </div>
+
+                    
 
                 </div>
             </div>
