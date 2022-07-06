@@ -12,6 +12,24 @@ const bcrypt = require("bcrypt");
     - optimize for using handlebars
 */
 
+var studentUser = {
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    program: "",
+    college: "",
+    age: "",
+    sex: "",
+    birthday: "",
+};
+
+var orgUser = {
+    email: "",
+    password: "",
+    name: "",
+};
+
 const controller = {
     // test functions - to be deleted, DO NOT USE IN FRONTEND
 
@@ -67,44 +85,26 @@ const controller = {
     },
 
     getStudentFeed: (req, res) => {
-        let user = new StudentUser({
-            email: req.session.email,
-            password: req.session.password,
-            firstName: req.session.firstName,
-            lastName: req.session.lastName,
-            _id: req.session.userid,
-        });
+       
 
         Posts.find().then((posts) => {
             Event.find()
                 .then((events) => {
-                    res.render("student_feed", { user: user, post: posts, event: events });
+                    res.render("student_feed", { user: studentUser, post: posts, event: events });
                 })
                 .catch((err) => console.log(err));
         });
     },
 
     getStudentProfile: (req, res) => {
-        let user = new StudentUser({
-            email: req.session.email,
-            password: req.session.password,
-            firstName: req.session.firstName,
-            lastName: req.session.lastName,
-            _id: req.session.userid,
-        });
+        
 
-        res.render("student_profile", { user: user });
+        res.render("student_profile", { user: studentUser });
     },
 
     getStudentSettings: (req, res) => {
-        let user = new StudentUser({
-            email: req.session.email,
-            password: req.session.password,
-            firstName: req.session.firstName,
-            lastName: req.session.lastName,
-            _id: req.session.userid,
-        });
-        res.render("student_settings", { user: user });
+        
+        res.render("student_settings", { user: studentUser });
     },
 
     getOrgFeed: (req, res) => {
@@ -159,6 +159,14 @@ const controller = {
                         req.session.userid = orguser._id;
                         req.session.name = orguser.name;
 
+                        let login = {
+                            email: orguser.email,
+                            password: orguser.password,
+                            name: orguser.name,
+                        };
+
+                        orgUser = login;
+
                         res.redirect("/org-feed");
                     }
                 });
@@ -171,6 +179,22 @@ const controller = {
                                 req.session.userid = studentuser._id;
                                 req.session.firstName = studentuser.firstName;
                                 req.session.lastName = studentuser.lastName;
+
+                                var login = {
+                                    email: studentuser.email,
+                                    password: studentuser.password,
+                                    firstName: studentuser.firstName,
+                                    lastName: studentuser.lastName,
+                                    program: studentuser.program,
+                                    college: studentuser.college,
+                                    age: studentuser.age,
+                                    sex: studentuser.sex,
+                                    birthday: studentuser.birthday,
+                                    
+                                
+                                }
+
+                                studentUser = login;
 
                                 res.redirect("/student-feed");
                             } else {
@@ -263,6 +287,8 @@ const controller = {
                 req.session.lastName = req.body.lastName;
                 req.session.password = req.body.password;
 
+                studentUser = req.session;
+
                 user.save()
                     .then(() =>
                         res.send(
@@ -331,6 +357,8 @@ const controller = {
                 user.email = req.body.email;
                 user.password = req.body.password;
                 user.name = req.body.name;
+
+                orgUser = req.session;
 
                 user.save()
                     .then(() => res.json("User Updated"))
@@ -480,7 +508,7 @@ const controller = {
         });
         Event.find()
             .then((events) => {
-                res.render("student_feed", {user: user, event: events });
+                res.render("student_feed", { user: user, event: events });
             })
             .catch((err) => res.json(err));
     },
