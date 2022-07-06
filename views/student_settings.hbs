@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
     <head>
         <script src="https://kit.fontawesome.com/dfcf57d1e4.js" crossorigin="anonymous"></script>
@@ -24,32 +23,33 @@
                 <div class="right">
                     <div class="b1row3">
                         <div class="name">
-                            <h1>ALEXANDER LIM</h1>
+                            <h1>{{user.firstName}} {{user.lastName}}</h1>
                         </div>
 
                         <div class="navigation">
-                            <a class="button" href="../Pages/student_feed.html"
-                                ><i class="fa-solid fa-newspaper"></i>&nbsp; &nbsp; FEED</a
-                            ><br />
-                            <a class="button" href="../Pages/student_profile.html"
-                                ><i class="fa-solid fa-user"></i>&nbsp; &nbsp; PROFILE</a
-                            ><br />
+                            <a class="button" href="/student-feed"><i
+                                    class="fa-solid fa-newspaper"
+                                ></i>&nbsp; &nbsp; FEED</a><br />
+                            <a class="button" href="/student-profile"><i
+                                    class="fa-solid fa-user"
+                                ></i>&nbsp; &nbsp; PROFILE</a><br />
                             <div class="dropdown">
-                                <a id="dropbtn" href="#"
-                                    ><i class="fa-solid fa-bookmark"></i>&nbsp; &nbsp; SAVED</a
-                                ><br />
+                                <a id="dropbtn" href="#"><i class="fa-solid fa-bookmark"></i>&nbsp;
+                                    &nbsp; SAVED</a><br />
                                 <div class="drop-content">
-                                    <a href="../Pages/saved_posts.html"
-                                        ><i class="fa-solid fa-clipboard"></i> &nbsp; POSTS</a
-                                    ><br />
-                                    <a href="../Pages/saved_events.html"
-                                        ><i class="fa-solid fa-calendar-plus"></i> &nbsp; EVENTS</a
-                                    ><br />
+                                    <a href="/saved-posts"><i
+                                            class="fa-solid fa-clipboard"
+                                        ></i>
+                                        &nbsp; POSTS</a><br />
+                                    <a href="/saved-events"><i
+                                            class="fa-solid fa-calendar-plus"
+                                        ></i>
+                                        &nbsp; EVENTS</a><br />
                                 </div>
                             </div>
-                            <a class="button" href="../Pages/events_going.html"
-                                ><i class="fa-solid fa-person-running"></i>&nbsp; &nbsp; GOING</a
-                            ><br />
+                            <a class="button" href="/events-going"><i
+                                    class="fa-solid fa-person-running"
+                                ></i>&nbsp; &nbsp; GOING</a><br />
                         </div>
                     </div>
                 </div>
@@ -67,47 +67,42 @@
                             <br />
                         </div>
                         <div class="container">
-                            <form action = "../Pages/student_profile.html" onSubmit = "return true">
+                            <form action="/update-student-profile" onSubmit="return true" method="post">
                                 <table class="table">
                                     <tr>
                                         <td><strong>DLSU EMAIL: </strong> </td>
-                                        <td><input type = text id = email size = 40></td>
+                                        <td><input type="text" id="email" size="40" name="email" required/></td>
                                     </tr>
-    
+
+                                    <tr>
+                                        <td><strong>FIRST NAME: </strong> </td>
+                                        <td><input type="text" id="firstName" size="40" name="firstName" required/></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong>LAST NAME: </strong> </td>
+                                        <td><input type="text" id="lastName" size="40" name="lastName" required/></td>
+                                    </tr>
+
                                     <tr>
                                         <td><strong>PASSWORD: </strong> </td>
-                                        <td><input type = password1 id = password1 size = 40></td>
+                                        <td><input type="password" id="password1" size="40" name="password" required/></td>
                                     </tr>
-    
+                                    
+
                                     <tr>
-                                        <td><strong>CONFIRM PASSWORD: </strong> </td>
-                                        <td><input type = password2 id = password2 size = 40></td>
-                                    </tr>
-    
-                                    <tr>
-                                        <td><strong>USER TYPE: </strong> </td>
-                                        <td> 
-                                            <select name="user" id="user">
-                                                <option value="student">Student</option>
-                                                <option value="org">Organization</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-    
-                                    <tr>
-                                        <td><strong>STUDENT ID NO: </strong> </td>
-                                        <td><input type = number id = id size = 40></td>
-                                    </tr>
-    
-                                    <tr>
-                                        <td colspan = 2 align = "right">
-                                        <input type = submit value = "SAVE CHANGES" class="submit_button"></td>
+                                        <td colspan="2" align="right">
+                                            <input
+                                                type="submit"
+                                                value="SAVE CHANGES"
+                                                class="submit_button"
+                                            /></td>
                                     </tr>
                                 </table>
                             </form>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -116,16 +111,15 @@
                     <h1>ACCOUNT</h1>
                 </div>
                 <div class="b3row1">
-                    <a class="button" href="../Pages/student_edit_profile.html"
-                        ><i class="fa-solid fa-user-pen"></i>&nbsp; &nbsp; EDIT PROFILE</a
-                    ><br />
-                    <a class="button" id="current" href="../Pages/student_settings.html"
-                        ><i class="fa-solid fa-gear"></i>&nbsp; &nbsp; ACCT. SETTINGS</a
-                    ><br />
-                    <a class="button" href="/logout"
-                        ><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp; &nbsp;
-                        LOG-OUT</a
-                    ><br />
+                    <a class="button" href="/student-edit-profile"><i
+                            class="fa-solid fa-user-pen"
+                        ></i>&nbsp; &nbsp; EDIT PROFILE</a><br />
+                    <a class="button" id="current" href="/student-settings"><i
+                            class="fa-solid fa-gear"
+                        ></i>&nbsp; &nbsp; ACCT. SETTINGS</a><br />
+                    <a class="button" href="/logout"><i
+                            class="fa-solid fa-arrow-right-from-bracket"
+                        ></i>&nbsp; &nbsp; LOG-OUT</a><br />
                 </div>
                 <div class="calendar_name">
                     <h1>YOUR CALENDAR</h1>
@@ -149,22 +143,29 @@
 
             <div class="box6">
                 <p>
-                    <i class="fa-solid fa-envelope-open"></i> &nbsp; CONTACT US <br />
-                    <a class="mail" href="mailto:misael_marin@dlsu.edu.ph"
-                        >misael_marin@dlsu.edu.ph</a
-                    ><br />
-                    <a class="mail" href="mailto:criscela_racelis@dlsu.edu.ph"
-                        >criscela_racelis@dlsu.edu.ph</a
-                    ><br />
-                    <a class="mail" href="mailto:jaira_millicent_santos@dlsu.edu.ph"
-                        >jaira_millicent_santos@dlsu.edu.ph</a
-                    >
+                    <i class="fa-solid fa-envelope-open"></i>
+                    &nbsp; CONTACT US
+                    <br />
+                    <a
+                        class="mail"
+                        href="mailto:misael_marin@dlsu.edu.ph"
+                    >misael_marin@dlsu.edu.ph</a><br />
+                    <a
+                        class="mail"
+                        href="mailto:criscela_racelis@dlsu.edu.ph"
+                    >criscela_racelis@dlsu.edu.ph</a><br />
+                    <a
+                        class="mail"
+                        href="mailto:jaira_millicent_santos@dlsu.edu.ph"
+                    >jaira_millicent_santos@dlsu.edu.ph</a>
                 </p>
             </div>
             <br />
             <div class="box7">
                 <p class="title">
-                    <i class="fa-solid fa-location-pin"></i> &nbsp; WHERE TO FIND US <br />
+                    <i class="fa-solid fa-location-pin"></i>
+                    &nbsp; WHERE TO FIND US
+                    <br />
                 </p>
 
                 <p class="content">

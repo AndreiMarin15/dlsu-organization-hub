@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
     <head>
         <script src="https://kit.fontawesome.com/dfcf57d1e4.js" crossorigin="anonymous"></script>
@@ -24,32 +23,33 @@
                 <div class="right">
                     <div class="b1row3">
                         <div class="name">
-                            <h1>ALEXANDER LIM</h1>
+                            <h1>{{user.firstName}} {{user.lastName}}</h1>
                         </div>
 
                         <div class="navigation">
-                            <a class="button" href="../Pages/student_feed.html"
-                                ><i class="fa-solid fa-newspaper"></i>&nbsp; &nbsp; FEED</a
-                            ><br />
-                            <a class="button" id="current" href="../Pages/student_profile.html"
-                                ><i class="fa-solid fa-user"></i>&nbsp; &nbsp; PROFILE</a
-                            ><br />
+                            <a class="button" href="/student-feed"><i
+                                    class="fa-solid fa-newspaper"
+                                ></i>&nbsp; &nbsp; FEED</a><br />
+                            <a class="button" id="current" href="/student-profile"><i
+                                    class="fa-solid fa-user"
+                                ></i>&nbsp; &nbsp; PROFILE</a><br />
                             <div class="dropdown">
-                                <a id="dropbtn" href="#"
-                                    ><i class="fa-solid fa-bookmark"></i>&nbsp; &nbsp; SAVED</a
-                                ><br />
+                                <a id="dropbtn" href="#"><i class="fa-solid fa-bookmark"></i>&nbsp;
+                                    &nbsp; SAVED</a><br />
                                 <div class="drop-content">
-                                    <a href="../Pages/saved_posts.html"
-                                        ><i class="fa-solid fa-clipboard"></i> &nbsp; POSTS</a
-                                    ><br />
-                                    <a href="../Pages/saved_events.html"
-                                        ><i class="fa-solid fa-calendar-plus"></i> &nbsp; EVENTS</a
-                                    ><br />
+                                    <a href="/saved-posts"><i
+                                            class="fa-solid fa-clipboard"
+                                        ></i>
+                                        &nbsp; POSTS</a><br />
+                                    <a href="/saved-events"><i
+                                            class="fa-solid fa-calendar-plus"
+                                        ></i>
+                                        &nbsp; EVENTS</a><br />
                                 </div>
                             </div>
-                            <a class="button" href="../Pages/events_going.html"
-                                ><i class="fa-solid fa-person-running"></i>&nbsp; &nbsp; GOING</a
-                            ><br />
+                            <a class="button" href="/events-going"><i
+                                    class="fa-solid fa-person-running"
+                                ></i>&nbsp; &nbsp; GOING</a><br />
                         </div>
                     </div>
                 </div>
@@ -65,15 +65,13 @@
                             <li>
                                 <a
                                     class="current"
-                                    href="../Pages/student_profile.html"
+                                    href="/student-profile"
                                     id="nav_link"
-                                    ><b>PROFILE INFORMATION</b></a
-                                >
+                                ><b>PROFILE INFORMATION</b></a>
                             </li>
                             <li>
-                                <a href="../Pages/student_following.html" id="nav_link"
-                                    ><b>FOLLOWING LIST</b></a
-                                >
+                                <a href="/student-profile" id="nav_link"><b>FOLLOWING
+                                        LIST</b></a>
                             </li>
                         </ul>
                     </nav>
@@ -136,7 +134,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td><strong>BIRTHDAY:  </strong></td>
+                                    <td><strong>BIRTHDAY: </strong></td>
                                     <td> 01 / 01 / 2002</td>
                                 </tr>
 
@@ -154,17 +152,23 @@
                             <table class="table">
                                 <tr>
                                     <td><strong>ORGANIZATION 1: </strong> </td>
-                                    <td> <a href="../Pages/lscs.html" id="nav_link"><b>LA SALLE COMPUTER SOCIETY</b></a><br></td>
+                                    <td>
+                                        <a href="../Pages/lscs.html" id="nav_link"><b>LA SALLE
+                                                COMPUTER SOCIETY</b></a><br /></td>
                                 </tr>
                                 <tr>
                                     <td><strong>ORGANIZATION 2: </strong> </td>
-                                    <td> <a href="../Pages/csg.html" id="nav_link"><b>DLSU - COMPUTER STUDIES GOVERNMENT</b></a><br></td>
+                                    <td>
+                                        <a href="../Pages/csg.html" id="nav_link"><b>DLSU - COMPUTER
+                                                STUDIES GOVERNMENT</b></a><br /></td>
                                 </tr>
                                 <tr>
                                     <td><strong>ORGANIZATION 3: </strong> </td>
-                                    <td> <a href="../Pages/catch2t24.html" id="nav_link"><b>DLSU - COMPUTER BATCH 2T24</b></a><br></td>
+                                    <td>
+                                        <a href="../Pages/catch2t24.html" id="nav_link"><b>DLSU -
+                                                COMPUTER BATCH 2T24</b></a><br /></td>
                                 </tr>
-                                
+
                             </table>
                         </div>
                     </div>
@@ -177,16 +181,15 @@
                     <h1>ACCOUNT</h1>
                 </div>
                 <div class="b3row1">
-                    <a class="button" id="current" href="../Pages/student_edit_profile.html"
-                        ><i class="fa-solid fa-user-pen"></i>&nbsp; &nbsp; EDIT PROFILE</a
-                    ><br />
-                    <a class="button" id="current" href="../Pages/student_settings.html"
-                        ><i class="fa-solid fa-gear"></i>&nbsp; &nbsp; ACCT. SETTINGS</a
-                    ><br />
-                    <a class="button" id="current" href="/logout"
-                        ><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp; &nbsp;
-                        LOG-OUT</a
-                    ><br />
+                    <a class="button" id="current" href="/student-edit-profile"><i
+                            class="fa-solid fa-user-pen"
+                        ></i>&nbsp; &nbsp; EDIT PROFILE</a><br />
+                    <a class="button" id="current" href="/student-settings"><i
+                            class="fa-solid fa-gear"
+                        ></i>&nbsp; &nbsp; ACCT. SETTINGS</a><br />
+                    <a class="button" id="current" href="/logout"><i
+                            class="fa-solid fa-arrow-right-from-bracket"
+                        ></i>&nbsp; &nbsp; LOG-OUT</a><br />
                 </div>
                 <div class="calendar_name">
                     <h1>YOUR CALENDAR</h1>
@@ -210,22 +213,29 @@
 
             <div class="box6">
                 <p>
-                    <i class="fa-solid fa-envelope-open"></i> &nbsp; CONTACT US <br />
-                    <a class="mail" href="mailto:misael_marin@dlsu.edu.ph"
-                        >misael_marin@dlsu.edu.ph</a
-                    ><br />
-                    <a class="mail" href="mailto:criscela_racelis@dlsu.edu.ph"
-                        >criscela_racelis@dlsu.edu.ph</a
-                    ><br />
-                    <a class="mail" href="mailto:jaira_millicent_santos@dlsu.edu.ph"
-                        >jaira_millicent_santos@dlsu.edu.ph</a
-                    >
+                    <i class="fa-solid fa-envelope-open"></i>
+                    &nbsp; CONTACT US
+                    <br />
+                    <a
+                        class="mail"
+                        href="mailto:misael_marin@dlsu.edu.ph"
+                    >misael_marin@dlsu.edu.ph</a><br />
+                    <a
+                        class="mail"
+                        href="mailto:criscela_racelis@dlsu.edu.ph"
+                    >criscela_racelis@dlsu.edu.ph</a><br />
+                    <a
+                        class="mail"
+                        href="mailto:jaira_millicent_santos@dlsu.edu.ph"
+                    >jaira_millicent_santos@dlsu.edu.ph</a>
                 </p>
             </div>
             <br />
             <div class="box7">
                 <p class="title">
-                    <i class="fa-solid fa-location-pin"></i> &nbsp; WHERE TO FIND US <br />
+                    <i class="fa-solid fa-location-pin"></i>
+                    &nbsp; WHERE TO FIND US
+                    <br />
                 </p>
 
                 <p class="content">

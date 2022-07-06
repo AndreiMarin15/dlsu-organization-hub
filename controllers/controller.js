@@ -2,7 +2,7 @@ const StudentUser = require("../models/studentUserModel");
 const OrgUser = require("../models/orgUserModel");
 const Posts = require("../models/postModel");
 const Event = require("../models/eventModel");
-const Image = require("../models/imageModel")
+const Image = require("../models/imageModel");
 const bcrypt = require("bcrypt");
 
 /* POSSIBLE CHANGES (once frontend is implemented):
@@ -82,6 +82,29 @@ const controller = {
                 })
                 .catch((err) => console.log(err));
         });
+    },
+
+    getStudentProfile: (req, res) => {
+        let user = new StudentUser({
+            email: req.session.email,
+            password: req.session.password,
+            firstName: req.session.firstName,
+            lastName: req.session.lastName,
+            _id: req.session.userid,
+        });
+
+        res.render("student_profile", { user: user });
+    },
+
+    getStudentSettings: (req, res) => {
+        let user = new StudentUser({
+            email: req.session.email,
+            password: req.session.password,
+            firstName: req.session.firstName,
+            lastName: req.session.lastName,
+            _id: req.session.userid,
+        });
+        res.render("student_settings", { user: user });
     },
 
     getOrgFeed: (req, res) => {
@@ -225,6 +248,32 @@ const controller = {
             })
             .catch((err) => res.status(400).json("Error: " + err));
     },
+
+    updateStudentUser: (req, res) => {
+        // updates the properties of an organization using its id
+        StudentUser.findById(req.session.userid)
+            .then((user) => {
+                user.email = req.body.email;
+                user.firstName = req.body.firstName;
+                user.lastName = req.body.lastName;
+                user.password = req.body.password;
+
+                req.session.email = req.body.email;
+                req.session.firstName = req.body.firstName;
+                req.session.lastName = req.body.lastName;
+                req.session.password = req.body.password;
+
+                user.save()
+                    .then(() =>
+                        res.send(
+                            `<script>alert("Account Updated"); window.location.href = "/student-settings"; </script>`
+                        )
+                    )
+                    .catch((err) => res.status(400).json("Error: " + err));
+            })
+            .catch((err) => res.status(400).json("Error: " + err));
+    },
+
     // orgUserModel
 
     getOrgs: (req, res) => {
@@ -303,9 +352,17 @@ const controller = {
 
     getStudentFeedPosts: (req, res) => {
         // gets all posts from the database
+        let user = new StudentUser({
+            email: req.session.email,
+            password: req.session.password,
+            firstName: req.session.firstName,
+            lastName: req.session.lastName,
+            _id: req.session.userid,
+        });
+
         Posts.find()
             .then((posts) => {
-                res.render("student_feed", { post: posts });
+                res.render("student_feed", { user: user, post: posts });
             })
             .catch((err) => res.status(400).json("Error: " + err));
     },
@@ -414,9 +471,16 @@ const controller = {
     },
 
     getStudentFeedEvents: (req, res) => {
+        let user = new StudentUser({
+            email: req.session.email,
+            password: req.session.password,
+            firstName: req.session.firstName,
+            lastName: req.session.lastName,
+            _id: req.session.userid,
+        });
         Event.find()
             .then((events) => {
-                res.render("student_feed", { event: events });
+                res.render("student_feed", {user: user, event: events });
             })
             .catch((err) => res.json(err));
     },
