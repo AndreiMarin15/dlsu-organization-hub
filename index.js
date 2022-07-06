@@ -19,7 +19,10 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const url = "mongodb+srv://admin:00000000@dlsu-organization-hub.lrjh1.mongodb.net/?retryWrites=true&w=majority"; // database creation || selection
+const test = "test";
+const official = "dlsu-org-hub";
+
+const url = `mongodb+srv://admin:00000000@dlsu-organization-hub.lrjh1.mongodb.net/${test}?retryWrites=true&w=majority`; // database creation || selection
 
 const options = {
     useUnifiedTopology: true,
