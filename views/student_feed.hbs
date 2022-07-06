@@ -54,21 +54,12 @@
                     <nav>
                         <ul class="navLinks">
 
-                            {{#if post}}
-
-                            {{#if event}}
-                            <li><a class="current" href="/student-feed/" id="nav_link"><b>ALL</b></a> </li>
-                            <li><a class="notCurrent" href="/student-feed/posts" id="nav_link"><b>POSTS</b></a> </li>
-                            <li><a class="notCurrent" href="/student-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
-                            {{/if}}
-                            
-                            {{/if}}
 
                             {{#if post}}
 
                             {{#unless event}}
-                            <li><a class="notCurrent" href="/student-feed/" id="nav_link"><b>ALL</b></a> </li>
-                            <li><a class="current" href="/student-feed/posts" id="nav_link"><b>POSTS</b></a> </li>
+                  
+                            <li><a class="current" href="/student-feed" id="nav_link"><b>POSTS</b></a> </li>
                             <li><a class="notCurrent" href="/student-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
                             {{/unless}}
                             
@@ -77,13 +68,13 @@
                             {{#if event}}
 
                             {{#unless post}}
-                            <li><a class="notCurrent" href="/student-feed/" id="nav_link"><b>ALL</b></a> </li>
-                            <li><a class="notCurrent" href="/student-feed/posts" id="nav_link"><b>POSTS</b></a> </li>
+                          
+                            <li><a class="notCurrent" href="/student-feed" id="nav_link"><b>POSTS</b></a> </li>
                             <li><a class="current" href="/student-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
-                            {{/unless}}
-                            
+                            {{/unless}}                            
                             {{/if}}
 
+                            
                         </ul>
                     </nav>
                 </div>
@@ -93,9 +84,7 @@
                     {{#each post}}
                     {{> posts}}
                     {{/each}}
-                    {{/if}}
-
-                    
+                    {{/if}}       
 
                     {{#if event}}
                     {{#each event}}
