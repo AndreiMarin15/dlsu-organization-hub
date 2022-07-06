@@ -38,9 +38,11 @@ app.get("/student-feed/events", controller.getStudentFeedEvents);
 // STUDENT PROFILE
 app.get("/student-profile", controller.getStudentProfile);
 
+
 // STUDENT SETTINGS
 app.get("/student-settings", controller.getStudentSettings);
-app.post("/update-student-profile", controller.updateStudentUser);
+app.get("/student-edit-profile", controller.getUpdateProfile);
+app.post("/student-edit-profile", controller.updateStudentProfile);
 
 //ORG SIGN UP
 app.get("/orgSignUp/", controller.getOrgSignUp);
@@ -62,7 +64,7 @@ app.post("/orgUsers/update/:id", controller.updateOrgUser);
 // POSTS
 
 app.get("/posts/", controller.getPosts);
-app.get("/posts/home/:id", controller.getPostsByAffiliations);
+app.get("/posts/home/following", controller.getPostsByAffiliations);
 app.get("/posts/user/:id", controller.getPostsByUser);
 app.post("/posts/add", controller.addPost);
 app.get("/posts/:id", controller.getPostById);

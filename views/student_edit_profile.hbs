@@ -23,7 +23,7 @@
                 <div class="right">
                     <div class="b1row3">
                         <div class="name">
-                            <h1>ALEXANDER LIM</h1>
+                            <h1>{{user.firstName}} {{user.lastName}}</h1>
                         </div>
 
                         <div class="navigation">
@@ -37,9 +37,7 @@
                                 <a id="dropbtn" href="#"><i class="fa-solid fa-bookmark"></i>&nbsp;
                                     &nbsp; SAVED</a><br />
                                 <div class="drop-content">
-                                    <a href="/saved-posts"><i
-                                            class="fa-solid fa-clipboard"
-                                        ></i>
+                                    <a href="/saved-posts"><i class="fa-solid fa-clipboard"></i>
                                         &nbsp; POSTS</a><br />
                                     <a href="/saved-events"><i
                                             class="fa-solid fa-calendar-plus"
@@ -60,7 +58,7 @@
                     <img class="responsive" src="../images/student_header.png" />
                 </div>
                 <div class="b2row2">
-                    
+
                     <!-- ADDITIONAL INFO -->
                     <div class="card">
                         <div class="card-header">
@@ -68,97 +66,48 @@
                             <br />
                         </div>
                         <div class="container">
-                            <form action="../Pages/student_profile.html" onSubmit="return true">
+                            <form action="/student-edit-profile" method="post" onSubmit="return true">
                                 <table class="table">
                                     <tr>
                                         <td><strong>PROGRAM: </strong></td>
-                                        <td><input type="text" id="id" size="40" /></td>
+                                        <td><input type="text" id="id" size="40" name="program" value={{user.program}} /></td>
                                     </tr>
 
                                     <tr>
                                         <td><strong>COLLEGE: </strong> </td>
                                         <td>
                                             <select name="college" id="college">
-                                                <option value="CCS">College of Computer Studies</option>
-                                                <option value="COS">College of Science</option>
-                                                <option value="GCOE">Gokongwei College of
+                                                <option value="N/A">Select College</option>
+                                                <option value="College of Computer Studies">College of Computer Studies</option>
+                                                <option value="College of Science">College of Science</option>
+                                                <option value="Gokongwei College of
+                                                    Engineering">Gokongwei College of
                                                     Engineering</option>
-                                                <option value="COB">College of Business</option>
-                                                <option value="COE">College of Education</option>
-                                                <option value="CLA">College of Liberal Arts</option>
-                                                <option value="SOE">School of Economics</option>
+                                                <option value="College of Business">College of Business</option>
+                                                <option value="College of Education">College of Education</option>
+                                                <option value="College of Liberal Arts">College of Liberal Arts</option>
+                                                <option value="School of Economics">School of Economics</option>
                                             </select>
                                         </td>
                                     </tr>
 
                                     <tr>
-                                        <td><strong>AGE: </strong> </td>
-                                        <td><input type="number" id="age" size="40" /></td>
+                                        <td><strong>ID NUMBER: </strong> </td>
+                                        <td><input type="text" id="age" size="40" name="idNumber" value={{user.idNumber}} /></td>
                                     </tr>
 
                                     <tr>
-                                        <td><strong>SEX: </strong> </td>
-                                        <td>
-                                            <select name="sex" id="sex">
-                                                <option value="male">M</option>
-                                                <option value="female">F</option>
-                                            </select>
-                                        </td>
+                                        <td colspan = 2 align = "right">
+                                        <input type = submit value = "SAVE CHANGES" class="submit_button"></td>
                                     </tr>
-
-                                    <tr>
-                                        <td><strong>BIRTHDAY: </strong></td>
-                                        <td><input type="date" id="birthday" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" align="right">
-                                            <input
-                                                type="submit"
-                                                value="SAVE CHANGES"
-                                                class="submit_button"
-                                            /></td>
-                                    </tr>
+                                    
 
                                 </table>
                             </form>
                         </div>
                     </div>
 
-                    <!-- AFFILIATIONS -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h2>AFFILIATIONS</h2>
-                            <br />
-                        </div>
-                        <div class="container">
-                            <form action="../Pages/student_profile.html" onSubmit="return true">
-                                <table class="table">
-                                    <tr>
-                                        <td><strong>ORGANIZATION 1: </strong> </td>
-                                        <td><input type="link" id="org1" size="40" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>ORGANIZATION 2: </strong> </td>
-                                        <td><input type="link" id="org2" size="40" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>ORGANIZATION 3: </strong> </td>
-                                        <td><input type="link" id="org3" size="40" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" align="right">
-                                            <input
-                                                type="submit"
-                                                value="SAVE CHANGES"
-                                                class="submit_button"
-                                            /></td>
-                                    </tr>
-
-                                </table>
-                            </form>
-
-                        </div>
-                    </div>
+                   
 
                 </div>
             </div>

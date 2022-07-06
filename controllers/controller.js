@@ -19,9 +19,7 @@ var studentUser = {
     lastName: "",
     program: "",
     college: "",
-    age: "",
-    sex: "",
-    birthday: "",
+    idNumber: "",
 };
 
 var orgUser = {
@@ -105,6 +103,10 @@ const controller = {
     getStudentSettings: (req, res) => {
         
         res.render("student_settings", { user: studentUser });
+    },
+
+    getUpdateProfile: (req, res) => {
+        res.render("student_edit_profile", {user: studentUser});
     },
 
     getOrgFeed: (req, res) => {
@@ -261,7 +263,7 @@ const controller = {
 
     addAffiliation: (req, res) => {
         // used when a student follows an organization
-        StudentUser.findById(req.params.id)
+        StudentUser.findById(req.session.userid)
             .then((student) => {
                 const org = req.body.org;
 
@@ -298,6 +300,29 @@ const controller = {
                     .catch((err) => res.status(400).json("Error: " + err));
             })
             .catch((err) => res.status(400).json("Error: " + err));
+    },
+
+    updateStudentProfile: (req, res) => {
+        StudentUser.findById(req.session.userid)
+            .then(user => {
+
+                if(req.body.college == "N/A"){
+                user.program = req.body.program;;
+                user.idNumber = req.body.idNumber;
+
+                studentUser = user
+                } else {
+                user.program = req.body.program;
+                user.college = req.body.college;
+                user.idNumber = req.body.idNumber;
+
+                studentUser = user;
+                }
+                user.save()
+                    .then(() => {
+                        res.send(`<script>alert("Profile Updated"); window.location.href = "/student-edit-profile"; </script>`)
+                    })
+            })
     },
 
     // orgUserModel
@@ -352,7 +377,7 @@ const controller = {
 
     updateOrgUser: (req, res) => {
         // updates the properties of an organization using its id
-        OrgUser.findById(req.params.id)
+        OrgUser.findById(req.session.userid)
             .then((user) => {
                 user.email = req.body.email;
                 user.password = req.body.password;
@@ -406,7 +431,7 @@ const controller = {
 
     getPostsByAffiliations: (req, res) => {
         // returns all posts by the followed organizations of a student through the student's id
-        StudentUser.findById(req.params.id)
+        StudentUser.findById(req.session.userid)
             .then((user) => {
                 let affiliations = user.affiliations;
 

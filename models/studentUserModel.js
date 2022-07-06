@@ -34,18 +34,11 @@ const studentUserSchema = new Schema(
             type: String,
             required: false,
         },
-        age: {
+        idNumber: {
             type: Number,
             required: false,
         },
-        sex: {
-            type: String,
-            required: false,
-        },
-        birthday: {
-            type: Date,
-            required: false,
-        },
+        
         affiliations: [],
         saved: [],
     },
