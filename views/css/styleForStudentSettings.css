@@ -294,6 +294,23 @@ a.button:active,
     display: inline-block;
     position: relative;
     border-radius: 10px;
+    background-color:  #1c4c3b;
+    box-shadow: 0 2px 2px #888888;
+    transition: color 0.3s, background-image 0.5s, ease-in-out;
+}
+
+.delete_button {
+    color: #f7f5ee;
+    width: 150px;
+    height: 40px;
+    text-decoration: none;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+    display: inline-block;
+    position: relative;
+    border-radius: 10px;
     background-color: #a6513e;
     box-shadow: 0 2px 2px #888888;
     transition: color 0.3s, background-image 0.5s, ease-in-out;
@@ -307,11 +324,23 @@ a.button:active,
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
     font-size: 16px;
     text-align: center;
-    background-color: #1c4c3b;
+    background-color: #043423;
     box-shadow: 0 2px 2px #888888;
     cursor: pointer;
 }
 
+.delete_button:hover,
+.delete_button:active {
+    color: #f7f5ee;
+    width: 150px;
+    height: 40px;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    font-size: 16px;
+    text-align: center;
+    background-color: #4c241c;
+    box-shadow: 0 2px 2px #888888;
+    cursor: pointer;
+}
 /* end of box 2 style */
 
 /* styles for box 3 */

@@ -18,23 +18,36 @@
                 </div>
 
                 <div class="b1row3">
-                    <div class="name">
-                        <h1>ALEXANDER LIM</h1>
-                    </div>
-                    <div class="navigation">
-                        <br>
-                        <a class="button" href="../Pages/student_feed.html"><i class="fa-solid fa-newspaper"></i>&nbsp; &nbsp; FEED</a><br>
-                        <a class="button" href="../Pages/student_profile.html"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; PROFILE</a><br>
-                        <div class="dropdown">
-                            <a id="dropbtn" href="#"><i class="fa-solid fa-bookmark"></i>&nbsp; &nbsp; SAVED</a><br>
-                            <div class="drop-content">
-                                <a href="../Pages/saved_posts.html"><i class="fa-solid fa-clipboard"></i> &nbsp; POSTS</a><br>
-                                <a href="../Pages/saved_events.html"><i class="fa-solid fa-calendar-plus"></i> &nbsp; EVENTS</a><br>
-                            </div>
+                        <div class="name">
+                            <h1>{{user.firstName}} {{user.lastName}}</h1>
                         </div>
-                        <a class="button" href="../Pages/events_going.html"><i class="fa-solid fa-person-running"></i>&nbsp; &nbsp; GOING</a><br>
+
+                        <div class="navigation">
+                            <a class="button" href="/student-feed"><i
+                                    class="fa-solid fa-newspaper"
+                                ></i>&nbsp; &nbsp; FEED</a><br />
+                            <a class="button" href="/student-profile"><i
+                                    class="fa-solid fa-user"
+                                ></i>&nbsp; &nbsp; PROFILE</a><br />
+                            <div class="dropdown">
+                                <a id="dropbtn" href="#"><i class="fa-solid fa-bookmark"></i>&nbsp;
+                                    &nbsp; SAVED</a><br />
+                                <div class="drop-content">
+                                    <a href="/saved-posts"><i
+                                            class="fa-solid fa-clipboard"
+                                        ></i>
+                                        &nbsp; POSTS</a><br />
+                                    <a href="/saved-events"><i
+                                            class="fa-solid fa-calendar-plus"
+                                        ></i>
+                                        &nbsp; EVENTS</a><br />
+                                </div>
+                            </div>
+                            <a class="button" href="/events-going"><i
+                                    class="fa-solid fa-person-running"
+                                ></i>&nbsp; &nbsp; GOING</a><br />
+                        </div>
                     </div>
-                </div>
             </div>
 
             <div class="box2">
@@ -44,53 +57,12 @@
                     <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> &nbsp; GO!</button>
                 </div>
                 <div class="b2row2">
-                    <!-- CATCH2T24  POSTING -->
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="logo">
-                                <img src="../images/catch2t24.png">
-                            </div>
-                            <div class="header-title">
-                                <a href="../Pages/catch2t24.html" id="nav_link"><b>DLSU - COMPUTER BATCH 2T24 (CATCH2T24)</b></a><br>
-                                <p><strong>Posted on: </strong>May 7, 2022</p>
-                                <p><strong>Type: </strong>Project Post</p>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="attachment">
-                                <img src="../images/catch2t24_post1.png">
-                            </div>
-                            <div class="caption">
-                                <p>Do you have any questions or concerns about DLSU's academic system that 
-                                    need to be addressed right away? 🤔 <br><br>
+                    {{#if post}}
+                    {{#each post}}
+                    {{> posts}}
+                    {{/each}}
+                    {{/if}}      
 
-                                    Worry no more, because PAIMON is here to help! Remember that CATCH2T24 has Personal Assistant for 
-                                    Information and MONitoring (PAIMON), a manual and a messenger bot that can provide you with information 
-                                    about your concerns, such as important university websites, CCS/DLSU/CATCH2T24 office contacts, course 
-                                    flowcharts, common university processes, the academic calendar, and much more! ✨ <br><br>
-                                    
-                                    Everything you need will be ready in a single click! 🖱️ You can find it at 
-                                    <a class="post_link" href=http://catch2t24-paimon.carrd.co/>
-                                    http://catch2t24-paimon.carrd.co/</a> and 
-                                    
-                                    <a class="post_link" href=http://m.me/catch2t24>
-                                        http://m.me/catch2t24</a><br><br>
-                                    
-                                    Pub by Dani Solis <br>
-                                    Caption by Nicole Tabije 
-                                </p>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-thumbs-up"></i></i> &nbsp; LIKE</button>
-                            </div>
-                            <div class="action-btn">
-                                <button id ="saved" type="submit"><i class="fa-solid fa-bookmark"></i> &nbsp; SAVE</button>
-                            </div>
-                        </div>
-                      </div>
-            
                 </div>
             </div>
 

@@ -25,7 +25,7 @@ div {
 /* styles for box 1 */
 .box1 {
     flex: 1;
-    
+    flex-direction: column;
     border-radius: 10px;
     background-color: #F7F5EE;
 }
@@ -692,10 +692,7 @@ li a.navItems {
     }
     
 
-    /* .b1row2{
-        order: 2;
-    }
-
+    /* 
     .b1row3{
         order: 1;
     } */
