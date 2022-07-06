@@ -54,6 +54,11 @@ a:active {
     color: #1c4c3b;
 }
 
+a.current {
+    border-bottom:3px solid #ffeeb0;
+    color: #ffeeb0;
+}
+
 li a.navItems {
     padding: 30px;
 }
