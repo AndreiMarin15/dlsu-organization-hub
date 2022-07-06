@@ -12,6 +12,9 @@ const app = express();
 
 // js functions
 
+//feed
+app.post("/like/:account/:date", controller.likePost);
+
 //index
 app.get("/", controller.getIndex);
 app.get("/search/", controller.search);
@@ -43,6 +46,7 @@ app.get("/student-profile", controller.getStudentProfile);
 app.get("/student-settings", controller.getStudentSettings);
 app.get("/student-edit-profile", controller.getUpdateProfile);
 app.post("/student-edit-profile", controller.updateStudentProfile);
+app.post("/update-student-profile", controller.updateStudentUser);
 
 //ORG SIGN UP
 app.get("/orgSignUp/", controller.getOrgSignUp);

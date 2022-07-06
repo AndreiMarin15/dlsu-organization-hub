@@ -16,7 +16,7 @@
     <div class="container">
         <div class="attachment">
             {{#if image}}
-                <img src="./pictures/{{image}}" width="300">
+                <img src="./images/{{image}}" width="300">
             {{/if}}
         </div>
         <div class="caption">
@@ -27,13 +27,18 @@
 
      <div class="actions">
         <div class="action-btn">
-            <button type="submit"><i class="fa-solid fa-thumbs-up"></i></i> &nbsp;{{numberlikes}} LIKES</button>
+            <button onclick="/like/{{accountName}}/{{createdAt}}" method="post"><i class="fa-solid fa-thumbs-up"></i></i> &nbsp;{{numberlikes}} LIKES</button>
+            
+
+
+
+            
         </div>
         <div class="action-btn">
-            <button type="submit"><i class="fa-solid fa-bookmark"></i> &nbsp;SAVE</button>
+            <button action="/save" type="submit"><i class="fa-solid fa-bookmark"></i> &nbsp;SAVE</button>
         </div>
         <div class="action-btn">
-            <button type="submit"><i class="fa-solid fa-person-running"></i> &nbsp;MARK AS GOING</button>
+            <button action="/going" type="submit"><i class="fa-solid fa-person-running"></i> &nbsp;MARK AS GOING</button>
         </div>
     </div>
 </div>

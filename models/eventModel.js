@@ -26,11 +26,11 @@ const eventSchema = new Schema(
             required: false,
         },
         numberlikes: {
-            type: [],
+            type: Number,
             required: false,
         },
         numbergoing: {
-            type: [],
+            type: Number,
             required: false,
         },
     },

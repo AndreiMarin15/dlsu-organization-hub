@@ -37,9 +37,7 @@
                                 <a id="dropbtn" href="#"><i class="fa-solid fa-bookmark"></i>&nbsp;
                                     &nbsp; SAVED</a><br />
                                 <div class="drop-content">
-                                    <a href="/saved-posts"><i
-                                            class="fa-solid fa-clipboard"
-                                        ></i>
+                                    <a href="/saved-posts"><i class="fa-solid fa-clipboard"></i>
                                         &nbsp; POSTS</a><br />
                                     <a href="/saved-events"><i
                                             class="fa-solid fa-calendar-plus"
@@ -67,28 +65,56 @@
                             <br />
                         </div>
                         <div class="container">
-                            <form action="/update-student-profile" onSubmit="return true" method="post">
+                            <form
+                                action="/update-student-profile"
+                                onSubmit="return true"
+                                method="post"
+                            >
                                 <table class="table">
                                     <tr>
                                         <td><strong>DLSU EMAIL: </strong> </td>
-                                        <td><input type="text" id="email" size="40" name="email" value = {{user.email}} /></td>
+                                        <td><input
+                                                type="text"
+                                                id="email"
+                                                size="40"
+                                                name="email"
+                                                value={{user.email}}
+                                            /></td>
                                     </tr>
 
                                     <tr>
                                         <td><strong>FIRST NAME: </strong> </td>
-                                        <td><input type="text" id="firstName" size="40" name="firstName" value = {{user.firstName}} /></td>
+                                        <td><input
+                                                type="text"
+                                                id="firstName"
+                                                size="40"
+                                                name="firstName"
+                                                value={{user.firstName}}
+                                            /></td>
                                     </tr>
 
                                     <tr>
                                         <td><strong>LAST NAME: </strong> </td>
-                                        <td><input type="text" id="lastName" size="40" name="lastName" value = {{user.lastName}} /></td>
+                                        <td><input
+                                                type="text"
+                                                id="lastName"
+                                                size="40"
+                                                name="lastName"
+                                                value={{user.lastName}}
+                                            /></td>
                                     </tr>
 
                                     <tr>
                                         <td><strong>PASSWORD: </strong> </td>
-                                        <td><input type="text" id="password1" size="40" name="password" placeholder = "Input current or new password"  /></td>
+                                        <td><input
+                                                type="text"
+                                                id="password1"
+                                                size="40"
+                                                name="password"
+                                                placeholder="Input current or new password"
+                                            /></td>
                                     </tr>
-                                
+
                                     <tr>
                                         <td colspan="2" align="right">
                                             <input
