@@ -212,6 +212,7 @@ li a.navItems {
     border-radius: 10px;
     border: 1px solid #cfc5bf;
     margin-right: 5px;
+    margin-bottom: 0;
     padding-bottom: 10px;
 }
 
@@ -898,7 +899,6 @@ div {
 }
 
 .b2row1{
-    height: 150px;
     align-items: center;
     text-align: center;
     border: 0px;
