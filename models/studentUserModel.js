@@ -39,8 +39,9 @@ const studentUserSchema = new Schema(
             required: false,
         },
         
-        affiliations: [],
+        following: [],
         saved: [],
+        liked: []
     },
     {
         timestamps: true,

@@ -82,6 +82,30 @@ const controller = {
         res.render("org_sign_up");
     },
 
+    likePost: (req, res) => {
+
+            Posts.findOne({accountName: req.params.account, createdAt: req.params.date})
+                .then(post => {
+                    StudentUser.findById(req.session.userid)
+                        .then(user => {
+                            if(user.liked.indexOf(post._id) == -1){
+                                user.liked.push(post._id);
+                                post.numberlikes = post.numberlikes + 1;
+
+                                user.save();
+                                post.save();
+                            } else {
+                                let index = user.liked.indexOf(post._id);
+                                user.liked.splice(index, 1);
+                                post.numberlikes = post.numberlikes - 1;
+
+                                user.save();
+                                post.save();
+                            }
+                        })
+                })
+    },
+
     getStudentFeed: (req, res) => {
        
 
@@ -152,6 +176,8 @@ const controller = {
     logIn: (req, res) => {
         let email = req.body.email;
         let password = req.body.password;
+        req.session.email = email;
+        req.session.password = password;
 
         OrgUser.findOne({ email: email }).then((orguser) => {
             if (orguser != null) {
@@ -160,6 +186,7 @@ const controller = {
                         req.session.email = orguser.email;
                         req.session.userid = orguser._id;
                         req.session.name = orguser.name;
+                        
 
                         let login = {
                             email: orguser.email,
@@ -181,6 +208,7 @@ const controller = {
                                 req.session.userid = studentuser._id;
                                 req.session.firstName = studentuser.firstName;
                                 req.session.lastName = studentuser.lastName;
+                               
 
                                 var login = {
                                     email: studentuser.email,
@@ -189,9 +217,7 @@ const controller = {
                                     lastName: studentuser.lastName,
                                     program: studentuser.program,
                                     college: studentuser.college,
-                                    age: studentuser.age,
-                                    sex: studentuser.sex,
-                                    birthday: studentuser.birthday,
+                                    idNumber: studentuser.idNumber,
                                     
                                 
                                 }
@@ -289,7 +315,7 @@ const controller = {
                 req.session.lastName = req.body.lastName;
                 req.session.password = req.body.password;
 
-                studentUser = req.session;
+                studentUser = req.session.password;
 
                 user.save()
                     .then(() =>
@@ -307,14 +333,16 @@ const controller = {
             .then(user => {
 
                 if(req.body.college == "N/A"){
-                user.program = req.body.program;;
+                user.program = req.body.program;
                 user.idNumber = req.body.idNumber;
+                user.password = req.session.password;
 
                 studentUser = user
                 } else {
                 user.program = req.body.program;
                 user.college = req.body.college;
                 user.idNumber = req.body.idNumber;
+                user.password = req.session.password;
 
                 studentUser = user;
                 }
