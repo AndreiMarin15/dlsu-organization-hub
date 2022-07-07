@@ -51,16 +51,15 @@
                             </div>
                         </div>
                             <div class="container">
-                                {{!--<form></form>--}}
                                 <form action="/new-post" method="post">
                                 <table class="table">
                                 <tr>
-                                    <td><textarea placeholder="Type caption here..." id="caption" name="content"></textarea></td>
+                                    <td><textarea id="caption" name="content" value={{user.content}}></textarea></td>
                                 </tr>
                                 <tr>
                                     <td>
-                                    <input type="Submit" id="attach" value="Attach image">
-                                    <input type="submit" id="submit" value="Submit">
+                                    <input type="Submit" id="attach" name="attachment" value="Attach image">
+                                    <input type="submit" id="submit" value="Apply Changes">
                                     </td>
                                 </tr>
                                 </table>

@@ -73,6 +73,10 @@ app.get("/org-create-event", controller.getCreateEvent);
 app.get("/org-edit-profile", controller.getUpdateOrgProfile);
 app.get("/org-settings", controller.getOrgSettings);
 
+//ORG EDIT
+app.get("/org-edit-post", controller.getEditOrgPost);
+//app.get("/org-edit-event", controller.getEditOrgEvent);
+
 // STUDENT USERS
 app.get("/studentUsers/", controller.getStudents);
 app.post("/studentUsers/add", controller.addStudent);

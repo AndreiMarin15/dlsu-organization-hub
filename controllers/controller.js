@@ -95,6 +95,10 @@ const controller = {
         res.render("org_create_post", {user: orgUser});
     },
 
+    getEditOrgPost: (req, res) => {
+        res.render("org_edit_post", {user: orgUser});
+    },
+
     getCreateEvent: (req, res) => {
         res.render("org_create_event", {user: orgUser});
     },
