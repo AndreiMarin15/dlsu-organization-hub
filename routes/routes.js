@@ -63,6 +63,8 @@ app.post("/registerOrg", controller.addOrg);
 //ORG FEED
 app.get("/org-feed/", controller.getOrgFeedPosts);
 app.get("/org-feed/events", controller.getOrgFeedEvents);
+app.get("/org-create-post", controller.getCreatePost);
+app.get("/org-create-event", controller.getCreateEvent);
 
 //ORG SETTINGS
 app.get("/org-edit-profile", controller.getUpdateOrgProfile);

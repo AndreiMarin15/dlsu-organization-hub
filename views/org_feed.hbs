@@ -36,8 +36,13 @@
                     <input type="text" name="searchbar" id="searchbar" placeholder="   Search posts, events, and pages..." />
                     
                     <button type="submit" id="search"><i class="fa-solid fa-magnifying-glass"></i> &nbsp; GO!</button>
-                    <button type="submit" id="create"><i class="fa-solid fa-file-plus"></i> &nbsp; CREATE POST</button>
-                    <button type="submit" id="create"><i class="fa-solid fa-file-plus"></i> &nbsp; CREATE EVENT</button>
+                    <form action="/org-create-post" method="get">
+                        <button type="submit" action="/org-create-post" id="create"><i class="fa-solid fa-file-plus"></i> &nbsp; CREATE POST</button>
+                    </form>
+                    <form action="/org-create-event" method="get">
+                        <button type="submit" id="create"><i class="fa-solid fa-file-plus"></i> &nbsp; CREATE EVENT</button>
+                    </form>
+                    
                 </div>
                 <div class="feed_type">
                     <nav>

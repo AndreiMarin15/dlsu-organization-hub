@@ -92,6 +92,14 @@ const controller = {
         res.render("org_sign_up");
     },
 
+    getCreatePost: (req, res) => {
+        res.render("org_create_post");
+    },
+
+    getCreateEvent: (req, res) => {
+        res.render("org_create_event");
+    },
+
     likePost: (req, res) => {
         Posts.findById(req.params.id).then((post) => {
             if (post != null) {
