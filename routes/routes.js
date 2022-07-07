@@ -14,7 +14,8 @@ const app = express();
 
 //feed
 app.post("/like/:id", controller.likePost);
-
+app.post("/save/:id", controller.savePost);
+app.post("/going/:id", controller.going);
 //index
 app.get("/", controller.getIndex);
 app.get("/search/", controller.search);
@@ -48,9 +49,13 @@ app.get("/student-edit-profile", controller.getUpdateProfile);
 app.post("/student-edit-profile", controller.updateStudentProfile);
 app.post("/update-student-profile", controller.updateStudentUser);
 
+// STUDENT-VIEW ORG FEED AND PROFILE
+app.get("/student-view-org", controller.getOrgFeedStudentView);
+app.get("/student-view-org-profile", controller.getOrgProfileStudentView);
+
 // ORG PROFILE
 app.get("/org-profile", controller.getOrgProfile);
-
+ 
 //ORG SIGN UP
 app.get("/orgSignUp/", controller.getOrgSignUp);
 app.post("/registerOrg", controller.addOrg);

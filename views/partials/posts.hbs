@@ -5,7 +5,7 @@
             <img src="../images/lscs.png" />
         </div>
         <div class="header-title">
-            <a href="../Pages/lscs.html" id="nav_link"><b>{{accountName}}</b></a><br />
+            <a href="/student-view-org" id="nav_link"><b>{{accountName}}</b></a><br />
             <p class="details"> <strong> Posted on: </strong> {{createdAt}}</p>
             <p class="details"><strong> Type: </strong> Post</p>
 
@@ -31,12 +31,10 @@
                     LIKES</button></form>
         </div>
         <div class="action-btn">
-            <button action="/save" type="submit"><i class="fa-solid fa-bookmark"></i>
-                &nbsp;SAVE</button>
+            <form action="/save/{{_id}}" method="post">
+            <button type="submit"><i class="fa-solid fa-bookmark"></i>
+                &nbsp;SAVE</button></form>
         </div>
-        <div class="action-btn">
-            <button action="/going" type="submit"><i class="fa-solid fa-person-running"></i>
-                &nbsp;MARK AS GOING</button>
-        </div>
+        
     </div>
 </div>

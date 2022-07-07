@@ -41,6 +41,7 @@ const controller = {
                         req.query.password,
                         studentuser.password,
                         function (error, isVerify) {
+                           
                             res.send(isVerify);
                         }
                     );
@@ -68,7 +69,15 @@ const controller = {
     },
 
     getLogIn: (req, res) => {
-        res.render("log_in");
+        if (req.session.userid) {
+            if (req.session.usertype == "student") {
+                res.redirect("/student-feed");
+            } else {
+                res.redirect("/org-feed");
+            }
+        } else {
+            res.render("log_in");
+        }
     },
 
     getUserVerif: (req, res) => {
@@ -101,23 +110,87 @@ const controller = {
                     res.redirect("/student-feed/");
                 }
             } else {
-                Events.findById(req.params.id).then( event => {
+                Events.findById(req.params.id).then((event) => {
                     if (event.likes.indexOf(req.session.userid) == -1 || event.likes == null) {
                         event.likes.push(req.session.userid);
-    
+
                         event.save();
-    
+
                         res.redirect("/student-feed/events");
                     } else {
                         index = event.likes.indexOf(req.session.userid);
-    
+
                         event.likes.splice(index, 1);
-    
+
                         event.save();
                         res.redirect("/student-feed/events");
                     }
-                })
+                });
             }
+        });
+    },
+
+    savePost: (req, res) => {
+        StudentUser.findById(req.session.userid).then((student) => {
+            Posts.findById(req.params.id).then((post) => {
+                if (post) {
+                    if (student.saved.indexOf(post._id) == -1 || student.saved == null) {
+                        student.saved.push(post._id);
+
+                        student.save();
+
+                        res.redirect("/student-feed/");
+                    } else {
+                        index = student.saved.indexOf(post._id);
+
+                        student.saved.splice(index, 1);
+
+                        student.save();
+
+                        res.redirect("/student-feed/");
+                    }
+                } else {
+                    Events.findById(req.params.id).then((event) => {
+                        if (student.saved.indexOf(event._id) == -1 || student.saved == null) {
+                            student.saved.push(event._id);
+
+                            student.save();
+
+                            res.redirect("/student-feed/events");
+                        } else {
+                            index = student.saved.indexOf(event._id);
+
+                            student.saved.splice(index, 1);
+
+                            student.save();
+
+                            res.redirect("/student-feed/events");
+                        }
+                    });
+                }
+            });
+        });
+    },
+
+    going: (req, res) => {
+        StudentUser.findById(req.session.userid).then((student) => {
+            Events.findById(req.params.id).then((event) => {
+                if (student.going.indexOf(event._id) == -1 || student.going == null) {
+                    student.going.push(event._id);
+
+                    student.save();
+
+                    res.redirect("/student-feed/events");
+                } else {
+                    index = student.going.indexOf(event._id);
+
+                    student.going.splice(index, 1);
+
+                    student.save();
+
+                    res.redirect("/student-feed/events");
+                }
+            });
         });
     },
 
@@ -143,14 +216,14 @@ const controller = {
         res.render("student_edit_profile", { user: studentUser });
     },
 
-    /*
+    
     getOrgFeedStudentView: (req, res) => {
         res.render("student_org_feed"); 
     },
 
     getOrgProfileStudentView: (req, res) => {
         res.render("student_org_profile");
-    },*/
+    },
 
     getOrgFeed: (req, res) => {
         Posts.find().then((posts) => {
@@ -167,7 +240,7 @@ const controller = {
     },
 
     getUpdateOrgProfile: (req, res) => {
-        res.render("org_edit_profile", {user: orgUser});
+        res.render("org_edit_profile", { user: orgUser });
     },
 
     getOrgSettings: (req, res) => {
@@ -214,7 +287,7 @@ const controller = {
         let email = req.body.email;
         let password = req.body.password;
         req.session.email = email;
-        req.session.password = password;
+        req.session.password = password;    
 
         OrgUser.findOne({ email: email }).then((orguser) => {
             if (orguser != null) {
@@ -223,6 +296,9 @@ const controller = {
                         req.session.email = orguser.email;
                         req.session.userid = orguser._id;
                         req.session.name = orguser.name;
+                        req.session.usertype = "org";
+
+                        req.session.save();
 
                         let login = {
                             email: orguser.email,
@@ -244,7 +320,9 @@ const controller = {
                                 req.session.userid = studentuser._id;
                                 req.session.firstName = studentuser.firstName;
                                 req.session.lastName = studentuser.lastName;
+                                req.session.usertype = "student";
 
+                                req.session.save();
                                 var login = {
                                     email: studentuser.email,
                                     password: studentuser.password,
@@ -287,7 +365,7 @@ const controller = {
         const lastName = req.body.lastName;
         const confirm = req.body.confirmPassword;
 
-        console.log(password + " hello " + confirm);
+        
 
         StudentUser.findOne({ email: email }).then((studentuser) => {
             if (studentuser == null) {
@@ -341,18 +419,24 @@ const controller = {
                 user.email = req.body.email;
                 user.firstName = req.body.firstName;
                 user.lastName = req.body.lastName;
-                user.password = req.body.password;
+                if (req.body.password) {
+                    user.password = req.body.password;
+                } else {
+                    user.password = req.session.password;
+                }
 
                 req.session.email = req.body.email;
                 req.session.firstName = req.body.firstName;
                 req.session.lastName = req.body.lastName;
-                req.session.password = req.body.password;
+                if (req.body.password) {
+                    req.session.password = req.body.password;
+                }
 
                 // studentUser.email = req.session.email;
                 // studentUser.firstName = req.session.firstName;
                 // studentUser.lastName = req.session.lastName;
                 // studentUser.password = req.session.password;
-
+                req.session.save();
                 studentUser = user;
 
                 user.save()
