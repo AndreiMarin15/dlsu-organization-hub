@@ -342,6 +342,20 @@ li a.navItems {
     padding-top: 10px;
 }
 
+.actions inactivebtn {
+    color: #1C4C3B;
+    width: 200px;
+    height: 50px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    line-height: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: #F7F5EE;
+    box-shadow: 0 2px 2px #888888;
+}
+
 .actions button{
     color: #1C4C3B;
     width: 200px;
