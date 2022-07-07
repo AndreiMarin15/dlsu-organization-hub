@@ -26,12 +26,18 @@
     <div class="actions">
         <div class="action-btn">
             <button><i class="fa-solid fa-thumbs-up" background-color=""></i>
-                &nbsp;{{likes.length}}
-                LIKES</button></form>
+                    &nbsp;{{likes.length}}
+                    LIKES</button>
         </div>
         <div class="action-btn">
-            <button><i class="fa-solid fa-person-running"></i>
-                &nbsp;MARK AS GOING</button>
+            <form action="/edit/{{_id}}" method="post">
+                <button type="submit"><i class="fa-solid fa-pen"></i>
+                    &nbsp;EDIT</button></form>
+        </div>
+            <form action="/delete/{{_id}}" method="post">
+        <div class="action-btn">
+            <button type="submit"><i class="fa-solid fa-trash"></i>
+                &nbsp;DELETE</button>
                 </form>
         </div>
     </div>
