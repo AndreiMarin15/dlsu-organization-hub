@@ -64,9 +64,10 @@ app.use(
         resave: false,
         saveUninitialized: false,
         store: store,
+        expires: new Date(Date.now() + 864000000),
+        maxAge: new Date(Date.now() + 864000000),
     })
 );
-
 
 app.use("/", routes);
 

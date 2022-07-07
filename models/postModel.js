@@ -21,8 +21,8 @@ const postSchema = new Schema(
             type: String,
             required: false,
         },
-        numberlikes: {
-            type: Number,
+        likes: {
+            type: [],
             required: false,
         },
     },

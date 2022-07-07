@@ -25,12 +25,12 @@ const eventSchema = new Schema(
             type: Date,
             required: false,
         },
-        numberlikes: {
-            type: Number,
+        likes: {
+            type: [],
             required: false,
         },
-        numbergoing: {
-            type: Number,
+        going: {
+            type: [],
             required: false,
         },
     },

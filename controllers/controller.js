@@ -83,32 +83,25 @@ const controller = {
     },
 
     likePost: (req, res) => {
+        Posts.findById(req.params.id).then((post) => {
+            if (post.likes.indexOf(req.session.userid) == -1 || post.likes == null) {
+                post.likes.push(req.session.userid);
 
-            Posts.findOne({accountName: req.params.account, createdAt: req.params.date})
-                .then(post => {
-                    StudentUser.findById(req.session.userid)
-                        .then(user => {
-                            if(user.liked.indexOf(post._id) == -1){
-                                user.liked.push(post._id);
-                                post.numberlikes = post.numberlikes + 1;
+                post.save();
+                console.log(post.likes.length + " " + req.session.userid);
+                res.redirect("/student-feed/");
+            } else {
+                index = post.likes.indexOf(req.session.userid);
 
-                                user.save();
-                                post.save();
-                            } else {
-                                let index = user.liked.indexOf(post._id);
-                                user.liked.splice(index, 1);
-                                post.numberlikes = post.numberlikes - 1;
+                post.likes.splice(index, 1);
 
-                                user.save();
-                                post.save();
-                            }
-                        })
-                })
+                post.save();
+                res.redirect("/student-feed/");
+            }
+        });
     },
 
     getStudentFeed: (req, res) => {
-       
-
         Posts.find().then((posts) => {
             Event.find()
                 .then((events) => {
@@ -119,18 +112,15 @@ const controller = {
     },
 
     getStudentProfile: (req, res) => {
-        
-
         res.render("student_profile", { user: studentUser });
     },
 
     getStudentSettings: (req, res) => {
-        
         res.render("student_settings", { user: studentUser });
     },
 
     getUpdateProfile: (req, res) => {
-        res.render("student_edit_profile", {user: studentUser});
+        res.render("student_edit_profile", { user: studentUser });
     },
 
     /*
@@ -207,7 +197,6 @@ const controller = {
                         req.session.email = orguser.email;
                         req.session.userid = orguser._id;
                         req.session.name = orguser.name;
-                        
 
                         let login = {
                             email: orguser.email,
@@ -229,7 +218,6 @@ const controller = {
                                 req.session.userid = studentuser._id;
                                 req.session.firstName = studentuser.firstName;
                                 req.session.lastName = studentuser.lastName;
-                               
 
                                 var login = {
                                     email: studentuser.email,
@@ -239,9 +227,7 @@ const controller = {
                                     program: studentuser.program,
                                     college: studentuser.college,
                                     idNumber: studentuser.idNumber,
-                                    
-                                
-                                }
+                                };
 
                                 studentUser = login;
 
@@ -336,7 +322,12 @@ const controller = {
                 req.session.lastName = req.body.lastName;
                 req.session.password = req.body.password;
 
-                studentUser = req.session.password;
+                // studentUser.email = req.session.email;
+                // studentUser.firstName = req.session.firstName;
+                // studentUser.lastName = req.session.lastName;
+                // studentUser.password = req.session.password;
+
+                studentUser = user;
 
                 user.save()
                     .then(() =>
@@ -350,28 +341,27 @@ const controller = {
     },
 
     updateStudentProfile: (req, res) => {
-        StudentUser.findById(req.session.userid)
-            .then(user => {
-
-                if(req.body.college == "N/A"){
+        StudentUser.findById(req.session.userid).then((user) => {
+            if (req.body.college == "N/A") {
                 user.program = req.body.program;
                 user.idNumber = req.body.idNumber;
                 user.password = req.session.password;
 
-                studentUser = user
-                } else {
+                studentUser = user;
+            } else {
                 user.program = req.body.program;
                 user.college = req.body.college;
                 user.idNumber = req.body.idNumber;
                 user.password = req.session.password;
 
                 studentUser = user;
-                }
-                user.save()
-                    .then(() => {
-                        res.send(`<script>alert("Profile Updated"); window.location.href = "/student-edit-profile"; </script>`)
-                    })
-            })
+            }
+            user.save().then(() => {
+                res.send(
+                    `<script>alert("Profile Updated"); window.location.href = "/student-edit-profile"; </script>`
+                );
+            });
+        });
     },
 
     // orgUserModel
@@ -521,12 +511,11 @@ const controller = {
         const email = req.session.email;
         const content = req.body.content;
         const image = req.body.image;
-        let numberlikes = 0;
 
         OrgUser.findOne({ email: email }).then((user) => {
             const accountName = user.name;
 
-            const newPost = new Posts({ accountName, email, content, image, numberlikes });
+            const newPost = new Posts({ accountName, email, content, image });
 
             newPost
                 .save()
@@ -639,8 +628,6 @@ const controller = {
         const content = req.body.content;
         const image = req.body.image;
         const eventdate = req.body.date;
-        let numberlikes = 0;
-        let numbergoing = 0;
 
         OrgUser.findOne({ email: email }).then((user) => {
             const accountName = user.name;
@@ -651,8 +638,6 @@ const controller = {
                 content,
                 image,
                 eventdate,
-                numberlikes,
-                numbergoing,
             });
 
             newEvent
