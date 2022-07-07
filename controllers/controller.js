@@ -153,7 +153,13 @@ const controller = {
     },*/
 
     getOrgFeed: (req, res) => {
-        res.render("org_feed", { user: orgUser });
+        Posts.find().then((posts) => {
+            Event.find()
+                .then((events) => {
+                    res.render("org_feed", { user: orgUser, post: posts, event: events });
+                })
+                .catch((err) => console.log(err));
+        });
     },
 
     getOrgProfile: (req, res) => {
