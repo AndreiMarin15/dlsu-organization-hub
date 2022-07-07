@@ -92,11 +92,11 @@ const controller = {
     },
 
     getCreatePost: (req, res) => {
-        res.render("org_create_post");
+        res.render("org_create_post", {user: orgUser});
     },
 
     getCreateEvent: (req, res) => {
-        res.render("org_create_event");
+        res.render("org_create_event", {user: orgUser});
     },
 
     likePost: (req, res) => {
@@ -722,7 +722,7 @@ const controller = {
     getOrgFeedEvents: (req, res) => {
         Event.find()
             .then((events) => {
-                res.render("org_feed", { event: events });
+                res.render("org_feed", { user: orgUser, event: events });
             })
             .catch((err) => res.json(err));
     },
