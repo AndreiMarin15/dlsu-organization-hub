@@ -261,7 +261,7 @@ const controller = {
     getStudentSavedPosts: (req, res) => {
         StudentUser.findById(req.session.userid).then((student) => {
             Posts.find({ _id: { $in: student.saved } }).then((posts) => {
-                res.render("student_saved", { post: posts });
+                res.render("student_saved", { user: studentUser, post: posts });
             });
         });
     },
@@ -277,7 +277,7 @@ const controller = {
     getStudentGoing: (req, res) => {
         StudentUser.findById(req.session.userid).then((student) => {
             Events.find({ _id: { $in: student.going } }).then((events) => {
-                res.render("student_going", { event: events });
+                res.render("student_going", { user: studentUser, event: events });
             });
         });
     },
