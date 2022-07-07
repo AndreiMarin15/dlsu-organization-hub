@@ -17,37 +17,17 @@
                     </div>
 
                     <div class="b1row2">
-                        <img class="responsive" src="../images/student_user.png" alt="" />
+                        <img class="responsive" src="../images/lscs.png" alt="" />
                     </div>
                 </div>
                 <div class="right">
                     <div class="b1row3">
                         <div class="name">
-                            <h1>{{user.firstName}} {{user.lastName}}</h1>
+                            <h1>{{user.name}}</h1>
                         </div>
 
                         <div class="navigation">
-                            <a class="button" href="/student-feed"><i
-                                    class="fa-solid fa-newspaper"
-                                ></i>&nbsp; &nbsp; FEED</a><br />
-                            <a class="button" href="/student-profile"><i
-                                    class="fa-solid fa-user"
-                                ></i>&nbsp; &nbsp; PROFILE</a><br />
-                            <div class="dropdown">
-                                <a id="dropbtn" href="#"><i class="fa-solid fa-bookmark"></i>&nbsp;
-                                    &nbsp; SAVED</a><br />
-                                <div class="drop-content">
-                                    <a href="/saved-posts"><i class="fa-solid fa-clipboard"></i>
-                                        &nbsp; POSTS</a><br />
-                                    <a href="/saved-events"><i
-                                            class="fa-solid fa-calendar-plus"
-                                        ></i>
-                                        &nbsp; EVENTS</a><br />
-                                </div>
-                            </div>
-                            <a class="button" href="/events-going"><i
-                                    class="fa-solid fa-person-running"
-                                ></i>&nbsp; &nbsp; GOING</a><br />
+                            <a class="button" href="/org-profile"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; ABOUT</a><br>
                         </div>
                     </div>
                 </div>
@@ -59,41 +39,23 @@
                 </div>
                 <div class="b2row2">
 
-                    <!-- ADDITIONAL INFO -->
+                    <!-- ORG INFO -->
                     <div class="card">
                         <div class="card-header">
-                            <h2>BASIC INFORMATION</h2>
+                            <h2>ORG INFORMATION</h2>
                             <br />
                         </div>
                         <div class="container">
-                            <form action="/student-edit-profile" method="post" onSubmit="return true">
+                            <form action="/org-edit-profile" method="post" onSubmit="return true">
                                 <table class="table">
                                     <tr>
-                                        <td><strong>PROGRAM: </strong></td>
-                                        <td><input type="text" id="id" size="40" name="program" value={{user.program}} /></td>
+                                        <td><strong>ORG TYPE: </strong></td>
+                                        <td><input type="text" id="id" size="40" name="program" value={{user.type}} /></td>
                                     </tr>
 
                                     <tr>
-                                        <td><strong>COLLEGE: </strong> </td>
-                                        <td>
-                                            <select name="college" id="college">
-                                                <option value="N/A">Select College</option>
-                                                <option value="College of Computer Studies">College of Computer Studies</option>
-                                                <option value="College of Science">College of Science</option>
-                                                <option value="Gokongwei College of
-                                                    Engineering">Gokongwei College of
-                                                    Engineering</option>
-                                                <option value="College of Business">College of Business</option>
-                                                <option value="College of Education">College of Education</option>
-                                                <option value="College of Liberal Arts">College of Liberal Arts</option>
-                                                <option value="School of Economics">School of Economics</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td><strong>ID NUMBER: </strong> </td>
-                                        <td><input type="text" id="age" size="40" name="idNumber" value={{user.idNumber}} /></td>
+                                        <td><strong>AFFILIATION: </strong> </td>
+                                        <td><input type="text" id="id" size="40" name="program" value={{user.affiliation}} /></td>
                                     </tr>
 
                                     <tr>
@@ -101,7 +63,45 @@
                                         <input type = submit value = "SAVE CHANGES" class="submit_button"></td>
                                     </tr>
                                     
+                                </table>
+                            </form>
+                        </div>
+                    </div>
 
+                    <!-- ORG SOCIALS -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>ORG INFORMATION</h2>
+                            <br />
+                        </div>
+                        <div class="container">
+                            <form action="/org-edit-profile" method="post" onSubmit="return true">
+                                <table class="table">
+                                    <tr>
+                                        <td><strong>FACEBOOK: </strong></td>
+                                        <td><input type="text" id="id" size="40" name="program" value={{user.facebook}} /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong>INSTAGRAM: </strong> </td>
+                                        <td><input type="text" id="id" size="40" name="program" value={{user.instagram}} /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong>TWITTER: </strong> </td>
+                                        <td><input type="text" id="id" size="40" name="program" value={{user.twitter}} /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong>LINKEDIN: </strong> </td>
+                                        <td><input type="text" id="id" size="40" name="program" value={{user.linkedin}} /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan = 2 align = "right">
+                                        <input type = submit value = "SAVE CHANGES" class="submit_button"></td>
+                                    </tr>
+                                    
                                 </table>
                             </form>
                         </div>
@@ -117,10 +117,10 @@
                     <h1>ACCOUNT</h1>
                 </div>
                 <div class="b3row1">
-                    <a class="button" id="current" href="/student-edit-profile"><i
+                    <a class="button" id="current" href="/org-edit-profile"><i
                             class="fa-solid fa-user-pen"
                         ></i>&nbsp; &nbsp; EDIT PROFILE</a><br />
-                    <a class="button" href="/student-settings"><i
+                    <a class="button" href="/org-settings"><i
                             class="fa-solid fa-gear"
                         ></i>&nbsp; &nbsp; ACCT. SETTINGS</a><br />
                     <a class="button" href="/logout"><i
