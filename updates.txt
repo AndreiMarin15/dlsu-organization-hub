@@ -5,12 +5,15 @@ TODO:
 [/] Liking, saving, going page update
 [/] About Org Backend
 [/] Create backend for event schema
+[/] Student Saved Posts and Events
+[/] Student Going
 [] Follow, unfollow
 [] File upload system
 [] Stuent Following List
-[] Student Saved Posts and Events
-[] Student Going
 [] Student Org View
+[] Fix post retrieval
+[] Org avatar in schema
+[] Edit Post Backend
 
 
 Significant Pages: 

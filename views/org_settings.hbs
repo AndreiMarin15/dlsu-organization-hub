@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
     <head>
         <script src="https://kit.fontawesome.com/dfcf57d1e4.js" crossorigin="anonymous"></script>
@@ -28,7 +27,9 @@
                         </div>
 
                         <div class="navigation">
-                            <a class="button" href="/org-feed"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; RETURN TO PROFILE</a><br>
+                            <a class="button" href="/org-feed"><i
+                                    class="fa-solid fa-user"
+                                ></i>&nbsp; &nbsp; RETURN TO PROFILE</a><br />
                         </div>
                     </div>
                 </div>
@@ -46,35 +47,54 @@
                             <br />
                         </div>
                         <div class="container">
-                            <form 
-                                action="/update-org-profile"
-                                onSubmit="return true"
-                                method="post">
+                            <form action="/update-org-profile" onSubmit="return true" method="post">
                                 <table class="table">
                                     <tr>
                                         <td><strong>NAME: </strong> </td>
-                                        <td><input type="text" name="name" id="name" size="40"></td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><strong>DLSU EMAIL: </strong> </td>
-                                        <td><input type="text" name="email" id="email" size="40"></td>
-                                    </tr>
-    
-                                    <tr>
-                                        <td><strong>PASSWORD: </strong> </td>
-                                        <td><input type="text" name="password" id="password" size="40"></td>
+                                        <td><input
+                                                type="text"
+                                                name="name"
+                                                id="name"
+                                                size="40"
+                                                value="{{user.name}}"
+                                            /></td>
                                     </tr>
 
                                     <tr>
-                                        <td colspan = 2 align = "right">
-                                        <input type = submit value = "SAVE CHANGES" class="submit_button"></td>
+                                        <td><strong>DLSU EMAIL: </strong> </td>
+                                        <td><input
+                                                type="text"
+                                                name="email"
+                                                id="email"
+                                                size="40"
+                                                value={{user.email}}
+                                            /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong>PASSWORD: </strong> </td>
+                                        <td><input
+                                                type="text"
+                                                name="password"
+                                                id="password"
+                                                size="40"
+                                                placeholder="Please input your new password."
+                                            /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="2" align="right">
+                                            <input
+                                                type="submit"
+                                                value="SAVE CHANGES"
+                                                class="submit_button"
+                                            /></td>
                                     </tr>
                                 </table>
                             </form>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -83,16 +103,15 @@
                     <h1>ACCOUNT</h1>
                 </div>
                 <div class="b3row1">
-                    <a class="button" href="/org-edit-profile"
-                        ><i class="fa-solid fa-user-pen"></i>&nbsp; &nbsp; EDIT PROFILE</a
-                    ><br />
-                    <a class="button" id="current" href="/org-settings"
-                        ><i class="fa-solid fa-gear"></i>&nbsp; &nbsp; PAGE SETTINGS</a
-                    ><br />
-                    <a class="button" href="/logout"
-                        ><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp; &nbsp;
-                        LOG-OUT</a
-                    ><br />
+                    <a class="button" href="/org-edit-profile"><i
+                            class="fa-solid fa-user-pen"
+                        ></i>&nbsp; &nbsp; EDIT PROFILE</a><br />
+                    <a class="button" id="current" href="/org-settings"><i
+                            class="fa-solid fa-gear"
+                        ></i>&nbsp; &nbsp; PAGE SETTINGS</a><br />
+                    <a class="button" href="/logout"><i
+                            class="fa-solid fa-arrow-right-from-bracket"
+                        ></i>&nbsp; &nbsp; LOG-OUT</a><br />
                 </div>
                 <div class="calendar_name">
                     <h1>YOUR CALENDAR</h1>
@@ -116,22 +135,29 @@
 
             <div class="box6">
                 <p>
-                    <i class="fa-solid fa-envelope-open"></i> &nbsp; CONTACT US <br />
-                    <a class="mail" href="mailto:misael_marin@dlsu.edu.ph"
-                        >misael_marin@dlsu.edu.ph</a
-                    ><br />
-                    <a class="mail" href="mailto:criscela_racelis@dlsu.edu.ph"
-                        >criscela_racelis@dlsu.edu.ph</a
-                    ><br />
-                    <a class="mail" href="mailto:jaira_millicent_santos@dlsu.edu.ph"
-                        >jaira_millicent_santos@dlsu.edu.ph</a
-                    >
+                    <i class="fa-solid fa-envelope-open"></i>
+                    &nbsp; CONTACT US
+                    <br />
+                    <a
+                        class="mail"
+                        href="mailto:misael_marin@dlsu.edu.ph"
+                    >misael_marin@dlsu.edu.ph</a><br />
+                    <a
+                        class="mail"
+                        href="mailto:criscela_racelis@dlsu.edu.ph"
+                    >criscela_racelis@dlsu.edu.ph</a><br />
+                    <a
+                        class="mail"
+                        href="mailto:jaira_millicent_santos@dlsu.edu.ph"
+                    >jaira_millicent_santos@dlsu.edu.ph</a>
                 </p>
             </div>
             <br />
             <div class="box7">
                 <p class="title">
-                    <i class="fa-solid fa-location-pin"></i> &nbsp; WHERE TO FIND US <br />
+                    <i class="fa-solid fa-location-pin"></i>
+                    &nbsp; WHERE TO FIND US
+                    <br />
                 </p>
 
                 <p class="content">
