@@ -240,8 +240,7 @@ const controller = {
         Posts.find().then((posts) => {
             Event.find()
                 .then((events) => {
-                    console.log("hello" + orgUser + "hello");
-                    res.render("org_feed", { user: orgUser, post: posts, event: events });
+                    res.render("org_feed", { user: orgUser, post: posts});
                 })
                 .catch((err) => console.log(err));
         });
