@@ -79,7 +79,6 @@ div {
 .b1row3 .navigation {
     background-color: #d5d5cc;
     border-radius: 10px;
-    text-align: center;
 }
 
 .b1row3 a.button, #dropbtn {
@@ -111,14 +110,6 @@ div {
     background-color: #ca9576;
     box-shadow: 0 2px 2px #888888;
     transition: color 0.3s, background-image 0.5s, ease-in-out;
-}
-
-#currentAcc{
-    color: #1C4C3B;
-    width: 200px;
-    height: 40px;
-    border-radius: 20px;
-    background-color: #E4C8B8;
 }
 
 .b1row3 a.button:hover, a.button:active, #current:hover, #dropbtn:hover {

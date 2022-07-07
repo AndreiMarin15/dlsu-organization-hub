@@ -249,7 +249,7 @@ li a.navItems {
     position: relative;
     border: none;
     border-radius: 10px;
-    background-color: #E4C8B8;
+    background-color: #d5d5cc;
     box-shadow: 0 2px 2px #888888;
     transition: color 0.3s, background-image 0.5s, ease-in-out;
 }
@@ -381,7 +381,7 @@ li a.navItems {
     padding-bottom: 0px;
 }
 
-.card-header .header-title a{
+.card-header .header-title #org_name{
     font-family:'Gill Sans Light', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size:14px;
     padding:5px 10px;
@@ -389,11 +389,13 @@ li a.navItems {
     line-height: 4px;
     text-align:center;
     display:inline-block;
-    color:#74511c;
+    color: #1C4C3B;
+    
 }
 
-.card-header .header-title a:hover{
-    color:#1C4C3B;
+.card-header .header-title #org_name:active, #org_name:hover{
+    border-bottom: 0px;
+    color:#74511c;
 }
 .card-header .header-title p{
     color:#74511c;

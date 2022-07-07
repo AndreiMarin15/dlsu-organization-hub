@@ -9,12 +9,13 @@ TODO:
 [/] Student Going
 [] Follow, unfollow
 [] File upload system
-[] Stuent Following List
+[] Student Following List
 [] Student Org View
 [] Fix post retrieval
 [] Org avatar in schema
 [] Edit Post Backend
-
+[] Delete Post connect to front end
+[] Like, saved, marked as going button colors
 
 Significant Pages: 
 [/] Index, 

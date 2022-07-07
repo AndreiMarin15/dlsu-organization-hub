@@ -249,11 +249,11 @@ const controller = {
     },
 
     getOrgFeedStudentView: (req, res) => {
-        res.render("student_org_feed");
+        res.render("student_org_feed",  { user: orgUser });
     },
 
     getOrgProfileStudentView: (req, res) => {
-        res.render("student_org_profile");
+        res.render("student_org_profile",  { user: orgUser });
     },
 
     getOrgFeed: (req, res) => {
@@ -296,7 +296,7 @@ const controller = {
             Events.find({ _id: { $in: student.saved } })
                 .sort({ createdAt: -1 })
                 .then((events) => {
-                    res.render("student_saved", { event: events });
+                    res.render("student_saved", { user: studentUser, event: events });
                 });
         });
     },

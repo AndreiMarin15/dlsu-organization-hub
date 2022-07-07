@@ -24,8 +24,10 @@
                     </div>
                
                     <div class="navigation">
-                        <a class="button" href="/org-profile"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; ABOUT</a><br>
+                        <a class="button" href="/student-org-profile"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; ABOUT</a><br>
                     </div>
+                    <br>
+                    <a class="button" href="/student-feed"><i class="fa-solid fa-arrow-left"></i></i>&nbsp; &nbsp;RETURN TO FEED</a><br>
                 </div>
             </div>
                 
@@ -42,8 +44,8 @@
                             {{#if post}}
                                 {{#unless event}}
                                     {{#unless about}}
-                                        <li><a class="current" href="/org-feed/" id="nav_link"><b>POSTS</b></a> </li>
-                                        <li><a class="notCurrent" href="/org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
+                                        <li><a class="current" href="/student-org-feed/" id="nav_link"><b>POSTS</b></a> </li>
+                                        <li><a class="notCurrent" href="/student-org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
                                     {{/unless}}
                                 {{/unless}}
                             {{/if}}
@@ -51,21 +53,12 @@
                             {{#if event}}
                                 {{#unless post}}
                                     {{#unless about}}
-                                        <li><a class="notCurrent" href="/org-feed/" id="nav_link"><b>POSTS</b></a> </li>
-                                        <li><a class="current" href="/org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
+                                        <li><a class="notCurrent" href="/student-org-feed/" id="nav_link"><b>POSTS</b></a> </li>
+                                        <li><a class="current" href="/student-org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
                                     {{/unless}}
                                 {{/unless}}
                             {{/if}}
 
-                            {{#if about}}
-                                {{#unless post}}
-                                    {{#unless event}}
-                                        <li><a class="notCurrent" href="/org-feed/" id="nav_link"><b>POSTS</b></a> </li>
-                                        <li><a class="notCurrent" href="/org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
-                                        <li><a class="current" href="/org-profile" id="nav_link"><b>ABOUT</b></a> </li>
-                                    {{/unless}}
-                                {{/unless}}
-                            {{/if}}
                         </ul>
                     </nav>
                 </div>
@@ -90,10 +83,10 @@
                     <h1>ACCOUNT</h1>
                 </div>
                 <div class="b3row1">
-                    <a class="button" href="/org-edit-profile"
+                    <a class="button" href="/student-edit-profile"
                         ><i class="fa-solid fa-user-pen"></i>&nbsp; &nbsp; EDIT PROFILE</a
                     ><br />
-                    <a class="button" id="current" href="/org-settings"
+                    <a class="button" id="current" href="/student-settings"
                         ><i class="fa-solid fa-gear"></i>&nbsp; &nbsp; PAGE SETTINGS</a
                     ><br />
                     <a class="button" href="/logout"

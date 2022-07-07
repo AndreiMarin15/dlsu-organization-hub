@@ -2,10 +2,10 @@
 
     <div class="card-header">
         <div class="logo">
-            <img src="../images/lscs.png" />
+            <img src="./images/{{image}}" />
         </div>
         <div class="header-title">
-            <a href="/org-feed/events" id="nav_link"><b>{{accountName}}</b></a><br />
+            <a href="/org-feed/events" id="org_name"><b>{{accountName}}</b></a><br />
             <p class="details"> <strong> Posted on: </strong> {{createdAt}}</p>
             <p class="details"><strong> Type: </strong> Event</p>
         </div>
@@ -24,7 +24,7 @@
 
     <div class="actions">
         <div class="inactivebtn">
-            <button class="buttonDisabled"><i class="fa-solid fa-thumbs-up" background-color=""></i>
+            <button class="buttonDisabled" background-color="#888888"><i class="fa-solid fa-thumbs-up"></i>
                     &nbsp;{{likes.length}}
                     LIKES</button>
         </div>
