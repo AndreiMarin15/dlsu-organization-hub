@@ -1,0 +1,34 @@
+<div class="card">
+
+    <div class="card-header">
+        <div class="logo">
+            <img src="../images/lscs.png" />
+        </div>
+        <div class="header-title">
+            <a href="/student-view-org" id="nav_link"><b>{{accountName}}</b></a><br />
+            <p class="details"> <strong> Posted on: </strong> {{createdAt}}</p>
+            <p class="details"><strong> Type: </strong> Post</p>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="attachment">
+            {{#if image}}
+                <img src="./images/{{image}}" width="300" />
+            {{/if}}
+        </div>
+        <div class="caption">
+            <p>{{content}}</p>
+        </div>
+    </div>
+
+    <div class="actions">
+        <div class="action-btn">
+            <button><i class="fa-solid fa-thumbs-up" background-color=""></i>
+                &nbsp;{{likes.length}}
+                LIKES</button></form>
+        </div>
+        
+    </div>
+</div>
