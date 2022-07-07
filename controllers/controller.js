@@ -41,7 +41,6 @@ const controller = {
                         req.query.password,
                         studentuser.password,
                         function (error, isVerify) {
-                           
                             res.send(isVerify);
                         }
                     );
@@ -136,6 +135,7 @@ const controller = {
                 if (post) {
                     if (student.saved.indexOf(post._id) == -1 || student.saved == null) {
                         student.saved.push(post._id);
+                        student.password = req.session.password;
 
                         student.save();
 
@@ -144,6 +144,7 @@ const controller = {
                         index = student.saved.indexOf(post._id);
 
                         student.saved.splice(index, 1);
+                        student.password = req.session.password;
 
                         student.save();
 
@@ -153,6 +154,7 @@ const controller = {
                     Events.findById(req.params.id).then((event) => {
                         if (student.saved.indexOf(event._id) == -1 || student.saved == null) {
                             student.saved.push(event._id);
+                            student.password = req.session.password;
 
                             student.save();
 
@@ -161,6 +163,7 @@ const controller = {
                             index = student.saved.indexOf(event._id);
 
                             student.saved.splice(index, 1);
+                            student.password = req.session.password;
 
                             student.save();
 
@@ -177,13 +180,14 @@ const controller = {
             Events.findById(req.params.id).then((event) => {
                 if (student.going.indexOf(event._id) == -1 || student.going == null) {
                     student.going.push(event._id);
+                    student.password = req.session.password;
 
                     student.save();
 
                     res.redirect("/student-feed/events");
                 } else {
                     index = student.going.indexOf(event._id);
-
+                    student.password = req.session.password;
                     student.going.splice(index, 1);
 
                     student.save();
@@ -216,9 +220,8 @@ const controller = {
         res.render("student_edit_profile", { user: studentUser });
     },
 
-    
     getOrgFeedStudentView: (req, res) => {
-        res.render("student_org_feed"); 
+        res.render("student_org_feed");
     },
 
     getOrgProfileStudentView: (req, res) => {
@@ -239,6 +242,30 @@ const controller = {
 
     getOrgSettings: (req, res) => {
         res.render("org_settings", { user: orgUser });
+    },
+
+    getStudentSavedPosts: (req, res) => {
+        StudentUser.findById(req.session.userid).then((student) => {
+            Posts.find({ _id: { $in: student.saved } }).then((posts) => {
+                res.render("student_saved", { post: posts });
+            });
+        });
+    },
+
+    getStudentSavedEvents: (req, res) => {
+        StudentUser.findById(req.session.userid).then((student) => {
+            Events.find({ _id: { $in: student.saved } }).then((events) => {
+                res.render("student_saved", { event: events });
+            });
+        });
+    },
+
+    getStudentGoing: (req, res) => {
+        StudentUser.findById(req.session.userid).then((student) => {
+            Events.find({ _id: { $in: student.going } }).then((events) => {
+                res.render("student_going", { event: events });
+            });
+        });
     },
 
     logout: (req, res) => {
@@ -281,7 +308,7 @@ const controller = {
         let email = req.body.email;
         let password = req.body.password;
         req.session.email = email;
-        req.session.password = password;    
+        req.session.password = password;
 
         OrgUser.findOne({ email: email }).then((orguser) => {
             if (orguser != null) {
@@ -358,8 +385,6 @@ const controller = {
         const firstName = req.body.firstName;
         const lastName = req.body.lastName;
         const confirm = req.body.confirmPassword;
-
-        
 
         StudentUser.findOne({ email: email }).then((studentuser) => {
             if (studentuser == null) {
