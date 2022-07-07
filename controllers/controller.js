@@ -269,6 +269,7 @@ const controller = {
     },
 
     getOrgProfile: (req, res) => {
+        console.log("Hello "+ orgUser);
         res.render("org_profile", { user: orgUser });
     },
 
@@ -359,14 +360,28 @@ const controller = {
                         req.session.email = orguser.email;
                         req.session.userid = orguser._id;
                         req.session.name = orguser.name;
+                        req.session.type = orguser.type;
+                        req.session.affiliation = orguser.affiliation;
+                        req.session.facebook = orguser.facebook;
+                        req.session.twitter = orguser.twitter;
+                        req.session.instagram = orguser.instagram;
+                        req.session.linkedin = orguser.linkedin;
+                        
                         req.session.usertype = "org";
 
                         req.session.save();
 
-                        let login = {
+                        var login = {
                             email: orguser.email,
                             password: orguser.password,
                             name: orguser.name,
+                            type: orguser.type,
+                            affiliation: orguser.affiliation,
+                            facebook: orguser.facebook,
+                            twitter: orguser.twitter,
+                            instagram: orguser.instagram,
+                            linkedin: orguser.linkedin,
+
                         };
 
                         orgUser = login;
