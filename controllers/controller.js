@@ -157,7 +157,7 @@ const controller = {
                 if (post) {
                     if (student.saved.indexOf(post._id) == -1 || student.saved == null) {
                         student.saved.push(post._id);
-                        student.password = req.session.password;
+                        student.password = studentUser.password;
 
                         student.save();
 
@@ -166,7 +166,7 @@ const controller = {
                         index = student.saved.indexOf(post._id);
 
                         student.saved.splice(index, 1);
-                        student.password = req.session.password;
+                        student.password = studentUser.password;
 
                         student.save();
 
@@ -176,7 +176,7 @@ const controller = {
                     Events.findById(req.params.id).then((event) => {
                         if (student.saved.indexOf(event._id) == -1 || student.saved == null) {
                             student.saved.push(event._id);
-                            student.password = req.session.password;
+                            student.password = studentUser.password;
 
                             student.save();
 
@@ -185,7 +185,7 @@ const controller = {
                             index = student.saved.indexOf(event._id);
 
                             student.saved.splice(index, 1);
-                            student.password = req.session.password;
+                            student.password = studentUser.password;
 
                             student.save();
 
@@ -202,14 +202,14 @@ const controller = {
             Events.findById(req.params.id).then((event) => {
                 if (student.going.indexOf(event._id) == -1 || student.going == null) {
                     student.going.push(event._id);
-                    student.password = req.session.password;
+                    student.password = studentUser.password;
 
                     student.save();
 
                     res.redirect("/student-feed/events");
                 } else {
                     index = student.going.indexOf(event._id);
-                    student.password = req.session.password;
+                    student.password = studentUser.password;
                     student.going.splice(index, 1);
 
                     student.save();
@@ -351,10 +351,12 @@ const controller = {
         let email = req.body.email;
         let password = req.body.password;
         req.session.email = email;
-        req.session.password = password;
+        
+        
 
         OrgUser.findOne({ email: email }).then((orguser) => {
             if (orguser != null) {
+                orgUser.password = password;
                 bcrypt.compare(password, orguser.password).then((isVerify) => {
                     if (isVerify) {
                         req.session.email = orguser.email;
@@ -373,7 +375,7 @@ const controller = {
 
                         var login = {
                             email: orguser.email,
-                            password: orguser.password,
+                            password: orgUser.password,
                             name: orguser.name,
                             type: orguser.type,
                             affiliation: orguser.affiliation,
@@ -391,6 +393,7 @@ const controller = {
             } else {
                 StudentUser.findOne({ email: email }).then((studentuser) => {
                     if (studentuser != null) {
+                        studentUser.password = password;
                         bcrypt.compare(password, studentuser.password).then((isVerify) => {
                             if (isVerify) {
                                 req.session.email = studentuser.email;
@@ -402,7 +405,7 @@ const controller = {
                                 req.session.save();
                                 var login = {
                                     email: studentuser.email,
-                                    password: studentuser.password,
+                                    password: studentUser.password,
                                     firstName: studentuser.firstName,
                                     lastName: studentuser.lastName,
                                     program: studentuser.program,
@@ -497,15 +500,18 @@ const controller = {
 
                 if (req.body.password) {
                     user.password = req.body.password;
+                    studentUser = user;
                 } else {
-                    user.password = req.session.password;
+                    user.password = studentUser.password;
+                    studentUser = user;
                 }
 
                 req.session.email = req.body.email;
                 req.session.firstName = req.body.firstName;
                 req.session.lastName = req.body.lastName;
                 if (req.body.password) {
-                    req.session.password = req.body.password;
+                    studentUser = user;
+                    studentUser.password = req.body.password;
                 }
 
                 // studentUser.email = req.session.email;
@@ -513,7 +519,7 @@ const controller = {
                 // studentUser.lastName = req.session.lastName;
                 // studentUser.password = req.session.password;
                 req.session.save();
-                studentUser = user;
+                
 
                 user.save()
                     .then(() =>
@@ -531,14 +537,14 @@ const controller = {
             if (req.body.college == "N/A") {
                 user.program = req.body.program;
                 user.idNumber = req.body.idNumber;
-                user.password = req.session.password;
+                user.password = studentUser.password;
 
                 studentUser = user;
             } else {
                 user.program = req.body.program;
                 user.college = req.body.college;
                 user.idNumber = req.body.idNumber;
-                user.password = req.session.password;
+                user.password = studentUser.password;
 
                 studentUser = user;
             }
@@ -609,18 +615,21 @@ const controller = {
 
                 if (req.body.password) {
                     user.password = req.body.password;
+                    orgUser = user;
                 } else {
-                    user.password = req.session.password;
+                    user.password = orgUser.password;
+                    orgUser = user;
                 }
 
                 req.session.name = req.body.name;
                 req.session.email = req.body.email;
                 if (req.body.password) {
-                    req.session.password = req.body.password;
+                    orgUser = user;
+                    orgUser.password = req.body.password;
                 }
 
                 req.session.save();
-                orgUser = user;
+                
 
                 user.save()
                     .then(() =>
@@ -642,7 +651,7 @@ const controller = {
                 user.twitter = req.body.twitter;
                 user.linkedin = req.body.linkedin;
 
-                user.password = req.session.password;
+                user.password = orgUser.password;
 
                 orgUser = user;
             } else {
@@ -653,7 +662,7 @@ const controller = {
                 user.twitter = req.body.twitter;
                 user.linkedin = req.body.linkedin;
 
-                user.password = req.session.password;
+                user.password = orgUser.password;
 
                 orgUser = user;
             }
@@ -679,18 +688,12 @@ const controller = {
 
     getStudentFeedPosts: (req, res) => {
         // gets all posts from the database
-        let user = new StudentUser({
-            email: req.session.email,
-            password: req.session.password,
-            firstName: req.session.firstName,
-            lastName: req.session.lastName,
-            _id: req.session.userid,
-        });
+       
 
         Posts.find()
             .sort({ createdAt: -1 })
             .then((posts) => {
-                res.render("student_feed", { user: user, post: posts });
+                res.render("student_feed", { user: studentUser, post: posts });
             })
             .catch((err) => res.status(400).json("Error: " + err));
     },
@@ -813,17 +816,11 @@ const controller = {
     },
 
     getStudentFeedEvents: (req, res) => {
-        let user = new StudentUser({
-            email: req.session.email,
-            password: req.session.password,
-            firstName: req.session.firstName,
-            lastName: req.session.lastName,
-            _id: req.session.userid,
-        });
+        
         Event.find()
             .sort({ createdAt: -1 })
             .then((events) => {
-                res.render("student_feed", { user: user, event: events });
+                res.render("student_feed", { user: studentUser, event: events });
             })
             .catch((err) => res.json(err));
     },
