@@ -18,7 +18,13 @@
                     </div>
 
                     <div class="b1row2">
-                        <img class="responsive" src="../images/lscs.png" alt="" />
+                        {{#if user.image}}
+                            <img class="responsive" src="../images/{{user.image}}" alt="" />
+
+                        {{else}}
+                            <img class="responsive" src="../images/student_user.png" alt="" />
+
+                        {{/if}}
                     </div>
                 </div>
                 <div class="right"><div class="b1row3">

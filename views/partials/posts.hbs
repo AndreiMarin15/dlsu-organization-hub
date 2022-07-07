@@ -2,7 +2,11 @@
 
     <div class="card-header">
         <div class="logo">
+            {{#if image}}
             <img src="./images/{{image}}" />
+            {{else}}
+            <img src="../images/student_user.png" />
+            {{/if}}
         </div>
         <div class="header-title">
             <a href="/student-view-org" id="org_name"><b>{{accountName}}</b></a><br />
