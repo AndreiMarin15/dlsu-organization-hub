@@ -48,11 +48,13 @@
                         <div class="container">
                             <form action="/org-edit-profile" method="post" onSubmit="return true">
                                 <table class="table">
+
+                                   
                                     <tr>
                                         <td><strong>ORG TYPE: </strong></td>
                                         <td><input type="text" id="id" size="40" name="type" value={{user.type}} /></td>
                                     </tr>
-
+                            
                                     <tr>
                                         <td><strong>AFFILIATION: </strong> </td>
                                         <td>
@@ -67,25 +69,6 @@
                                         </td>
                                     </tr>
 
-                                    <tr>
-                                        <td colspan = 2 align = "right">
-                                        <input type = submit value = "SAVE CHANGES" class="submit_button"></td>
-                                    </tr>
-                                    
-                                </table>
-                            </form>
-                        </div>
-                    </div>
-
-                    <!-- ORG SOCIALS -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h2>ORG INFORMATION</h2>
-                            <br />
-                        </div>
-                        <div class="container">
-                            <form action="/org-edit-profile" method="post" onSubmit="return true">
-                                <table class="table">
                                     <tr>
                                         <td><strong>FACEBOOK: </strong></td>
                                         <td><input type="text" id="id" size="40" name="facebook" value={{user.facebook}} /></td>
@@ -115,6 +98,9 @@
                             </form>
                         </div>
                     </div>
+
+                    <!-- ORG SOCIALS -->
+                   
 
                    
 

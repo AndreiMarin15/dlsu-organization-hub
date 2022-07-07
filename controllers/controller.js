@@ -27,6 +27,12 @@ var orgUser = {
     email: "",
     password: "",
     name: "",
+    type: "",
+    affiliation: "",
+    facebook: "",
+    instagram: "",
+    twitter: "",
+    linkedin: "",
 };
 
 const controller = {
@@ -92,7 +98,7 @@ const controller = {
     },
 
     getCreatePost: (req, res) => {
-        res.render("org_create_post", {user: orgUser});
+        res.render("org_create_post", { user: orgUser });
     },
 
     getEditOrgPost: (req, res) => {
@@ -104,7 +110,7 @@ const controller = {
     },
 
     getCreateEvent: (req, res) => {
-        res.render("org_create_event", {user: orgUser});
+        res.render("org_create_event", { user: orgUser });
     },
 
     likePost: (req, res) => {
@@ -215,13 +221,19 @@ const controller = {
     },
 
     getStudentFeed: (req, res) => {
-        Posts.find().sort({createdAt: -1}).then((posts) => {
-            Event.find()
-                .then((events) => {
-                    res.render("student_feed", { user: studentUser, post: posts, event: events });
-                })
-                .catch((err) => console.log(err));
-        });
+        Posts.find()
+            .sort({ createdAt: -1 })
+            .then((posts) => {
+                Event.find()
+                    .then((events) => {
+                        res.render("student_feed", {
+                            user: studentUser,
+                            post: posts,
+                            event: events,
+                        });
+                    })
+                    .catch((err) => console.log(err));
+            });
     },
 
     getStudentProfile: (req, res) => {
@@ -245,13 +257,15 @@ const controller = {
     },
 
     getOrgFeed: (req, res) => {
-        Posts.find().sort({createdAt: -1}).then((posts) => {
-            Event.find()
-                .then((events) => {
-                    res.render("org_feed", { user: orgUser, post: posts });
-                })
-                .catch((err) => console.log(err));
-        });
+        Posts.find()
+            .sort({ createdAt: -1 })
+            .then((posts) => {
+                Event.find()
+                    .then((events) => {
+                        res.render("org_feed", { user: orgUser, post: posts });
+                    })
+                    .catch((err) => console.log(err));
+            });
     },
 
     getOrgProfile: (req, res) => {
@@ -268,25 +282,31 @@ const controller = {
 
     getStudentSavedPosts: (req, res) => {
         StudentUser.findById(req.session.userid).then((student) => {
-            Posts.find({ _id: { $in: student.saved } }).sort({createdAt: -1}).then((posts) => {
-                res.render("student_saved", { user: studentUser, post: posts });
-            });
+            Posts.find({ _id: { $in: student.saved } })
+                .sort({ createdAt: -1 })
+                .then((posts) => {
+                    res.render("student_saved", { user: studentUser, post: posts });
+                });
         });
     },
 
     getStudentSavedEvents: (req, res) => {
         StudentUser.findById(req.session.userid).then((student) => {
-            Events.find({ _id: { $in: student.saved } }).sort({createdAt: -1}).then((events) => {
-                res.render("student_saved", { event: events });
-            });
+            Events.find({ _id: { $in: student.saved } })
+                .sort({ createdAt: -1 })
+                .then((events) => {
+                    res.render("student_saved", { event: events });
+                });
         });
     },
 
     getStudentGoing: (req, res) => {
         StudentUser.findById(req.session.userid).then((student) => {
-            Events.find({ _id: { $in: student.going } }).sort({createdAt: -1}).then((events) => {
-                res.render("student_going", { user: studentUser, event: events });
-            });
+            Events.find({ _id: { $in: student.going } })
+                .sort({ createdAt: -1 })
+                .then((events) => {
+                    res.render("student_going", { user: studentUser, event: events });
+                });
         });
     },
 
@@ -582,6 +602,39 @@ const controller = {
             .catch((err) => res.status(400).json("Error: " + err));
     },
 
+    updateOrgProfile: (req, res) => {
+        OrgUser.findById(req.session.userid).then((user) => {
+            if (req.body.affiliation == "N/A") {
+                user.type = req.body.type;
+                user.facebook = req.body.facebook;
+                user.instagram = req.body.instagram;
+                user.twitter = req.body.twitter;
+                user.linkedin = req.body.linkedin;
+
+                user.password = req.session.password;
+
+                orgUser = user;
+            } else {
+                user.type = req.body.type;
+                user.affiliation = req.body.affiliation;
+                user.facebook = req.body.facebook;
+                user.instagram = req.body.instagram;
+                user.twitter = req.body.twitter;
+                user.linkedin = req.body.linkedin;
+
+                user.password = req.session.password;
+
+                orgUser = user;
+            }
+
+            user.save().then(() => {
+                res.send(
+                    `<script>alert("Org Updated"); window.location.href = "/org-edit-profile"; </script>`
+                );
+            });
+        });
+    },
+
     // postModel
 
     getPosts: (req, res) => {
@@ -603,7 +656,8 @@ const controller = {
             _id: req.session.userid,
         });
 
-        Posts.find().sort({createdAt: -1})
+        Posts.find()
+            .sort({ createdAt: -1 })
             .then((posts) => {
                 res.render("student_feed", { user: user, post: posts });
             })
@@ -612,7 +666,8 @@ const controller = {
 
     getOrgFeedPosts: (req, res) => {
         // gets all posts from the database
-        Posts.find().sort({createdAt: -1})
+        Posts.find()
+            .sort({ createdAt: -1 })
             .then((posts) => {
                 res.render("org_feed", { post: posts });
             })
@@ -650,7 +705,8 @@ const controller = {
         OrgUser.findById(req.params.id)
             .then((user) => {
                 let userEmail = user.email;
-                Posts.find({ email: userEmail }).sort({createdAt: -1})
+                Posts.find({ email: userEmail })
+                    .sort({ createdAt: -1 })
                     .then((posts) => res.json(posts))
                     .catch((err) => res.status(400).json("Error: " + err));
             })
@@ -733,7 +789,8 @@ const controller = {
             lastName: req.session.lastName,
             _id: req.session.userid,
         });
-        Event.find().sort({createdAt: -1})
+        Event.find()
+            .sort({ createdAt: -1 })
             .then((events) => {
                 res.render("student_feed", { user: user, event: events });
             })
@@ -741,7 +798,8 @@ const controller = {
     },
 
     getOrgFeedEvents: (req, res) => {
-        Event.find().sort({createdAt: -1})
+        Event.find()
+            .sort({ createdAt: -1 })
             .then((events) => {
                 res.render("org_feed", { user: orgUser, event: events });
             })
@@ -806,7 +864,7 @@ const controller = {
                 newEvent
                     .save()
                     .then(() => {
-                        res.redirect("/org-feed/events")
+                        res.redirect("/org-feed/events");
                     })
                     .catch((err) => res.status(400).json("Error: " + err));
             } else {
@@ -814,13 +872,12 @@ const controller = {
                     accountName,
                     email,
                     content,
-           
                 });
 
                 newEvent
                     .save()
                     .then(() => {
-                        res.redirect("/org-feed/events")
+                        res.redirect("/org-feed/events");
                     })
                     .catch((err) => res.status(400).json("Error: " + err));
             }
