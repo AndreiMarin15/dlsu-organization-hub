@@ -5,6 +5,7 @@ const Event = require("../models/eventModel");
 const Image = require("../models/imageModel");
 const bcrypt = require("bcrypt");
 const Events = require("../models/eventModel");
+const moment = require("moment");
 
 /* POSSIBLE CHANGES (once frontend is implemented):
     - Some req.___ might need to be changed depending on front end
@@ -751,13 +752,17 @@ const controller = {
         // creates a new post
         const email = req.session.email;
         const content = req.body.content;
+        var date = new Date(Date.now());
+
+        date = moment(date).format("MMMM DD, YYYY h:mm A");
+        
 
         OrgUser.findOne({ email: email }).then((user) => {
             const accountName = user.name;
 
             if (req.body.image) {
                 const image = req.body.image;
-                const newPost = new Posts({ accountName, email, content, image });
+                const newPost = new Posts({ accountName, email, content, image, date });
 
                 newPost
                     .save()
@@ -766,7 +771,7 @@ const controller = {
                     })
                     .catch((err) => res.status(400).json("Error: " + err));
             } else {
-                const newPost = new Posts({ accountName, email, content });
+                const newPost = new Posts({ accountName, email, content, date });
 
                 newPost
                     .save()
@@ -876,6 +881,9 @@ const controller = {
         // creates a new post
         const email = req.session.email;
         const content = req.body.content;
+        var date = new Date(Date.now());
+        
+        date = moment(date).format("MMMM DD, YYYY h:mm A");
 
         OrgUser.findOne({ email: email }).then((user) => {
             const accountName = user.name;
@@ -887,6 +895,7 @@ const controller = {
                     email,
                     content,
                     image,
+                    date,
                 });
 
                 newEvent
@@ -900,6 +909,7 @@ const controller = {
                     accountName,
                     email,
                     content,
+                    date,
                 });
 
                 newEvent

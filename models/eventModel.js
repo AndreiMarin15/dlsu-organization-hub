@@ -33,6 +33,10 @@ const eventSchema = new Schema(
             type: [],
             required: false,
         },
+        date: {
+            type: String,
+            required: false,
+        },
     },
     {
         timestamps: true,

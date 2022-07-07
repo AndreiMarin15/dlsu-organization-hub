@@ -25,6 +25,11 @@ const postSchema = new Schema(
             type: [],
             required: false,
         },
+
+        date: {
+            type: String,
+            required: false,
+        },
     },
     {
         timestamps: true,

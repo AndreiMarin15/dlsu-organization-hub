@@ -7,6 +7,7 @@ const routes = require("./routes/routes.js");
 const path = require("path");
 const bodyParser = require("body-parser");
 
+
 const session = require("express-session");
 const MongoDBSession = require("connect-mongodb-session")(session);
 
@@ -14,6 +15,8 @@ require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 5000;
+
+
 
 app.use(cors());
 app.use(express.json());
@@ -65,7 +68,7 @@ app.use(
         saveUninitialized: false,
         store: store,
         expires: new Date(Date.now() + 864000000),
-        maxAge: new Date(Date.now() + 864000000),
+ 
     })
 );
 
