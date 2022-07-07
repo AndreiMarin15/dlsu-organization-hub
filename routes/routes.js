@@ -76,6 +76,7 @@ app.get("/org-create-event", controller.getCreateEvent);
 app.get("/org-edit-profile", controller.getUpdateOrgProfile);
 app.get("/org-settings", controller.getOrgSettings);
 app.post("/org-edit-profile", controller.updateOrgProfile);
+app.post("/update-org-profile", controller.updateOrgUser);
 
 
 //ORG EDIT

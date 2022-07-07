@@ -102,11 +102,11 @@ const controller = {
     },
 
     getEditOrgPost: (req, res) => {
-        res.render("org_edit_post", {user: orgUser});
+        res.render("org_edit_post", { user: orgUser });
     },
 
     getEditOrgEvent: (req, res) => {
-        res.render("org_edit_event", {user: orgUser});
+        res.render("org_edit_event", { user: orgUser });
     },
 
     getCreateEvent: (req, res) => {
@@ -269,6 +269,7 @@ const controller = {
     },
 
     getOrgProfile: (req, res) => {
+        console.log("Hello " + orgUser);
         res.render("org_profile", { user: orgUser });
     },
 
@@ -359,14 +360,27 @@ const controller = {
                         req.session.email = orguser.email;
                         req.session.userid = orguser._id;
                         req.session.name = orguser.name;
+                        req.session.type = orguser.type;
+                        req.session.affiliation = orguser.affiliation;
+                        req.session.facebook = orguser.facebook;
+                        req.session.twitter = orguser.twitter;
+                        req.session.instagram = orguser.instagram;
+                        req.session.linkedin = orguser.linkedin;
+
                         req.session.usertype = "org";
 
                         req.session.save();
 
-                        let login = {
+                        var login = {
                             email: orguser.email,
                             password: orguser.password,
                             name: orguser.name,
+                            type: orguser.type,
+                            affiliation: orguser.affiliation,
+                            facebook: orguser.facebook,
+                            twitter: orguser.twitter,
+                            instagram: orguser.instagram,
+                            linkedin: orguser.linkedin,
                         };
 
                         orgUser = login;
@@ -442,18 +456,18 @@ const controller = {
                         .save()
                         .then(() => {
                             res.send(
-                                `<script>alert("Account Created"); window.location.href = "/login"; </script>`
+                                `<script>alert("Account Created!"); window.location.href = "/login"; </script>`
                             );
                         })
                         .catch((err) => res.status(400).json("Error: " + err));
                 } else {
                     res.send(
-                        `<script>alert("Invalid Credentials. Double check your email and password."); window.location.href = "/studentSignUp"; </script>`
+                        `<script>alert("Invalid Credentials. Either the email entered is invalid, or the passwords entered do not match."); window.location.href = "/studentSignUp"; </script>`
                     );
                 }
             } else {
                 res.send(
-                    `<script>alert("Email already in use. Account not created"); window.location.href = "/studentSignUp"; </script>`
+                    `<script>alert("Email already in use. Failed to create account."); window.location.href = "/studentSignUp"; </script>`
                 );
             }
         });
@@ -480,6 +494,7 @@ const controller = {
                 user.email = req.body.email;
                 user.firstName = req.body.firstName;
                 user.lastName = req.body.lastName;
+
                 if (req.body.password) {
                     user.password = req.body.password;
                 } else {
@@ -503,7 +518,7 @@ const controller = {
                 user.save()
                     .then(() =>
                         res.send(
-                            `<script>alert("Account Updated"); window.location.href = "/student-settings"; </script>`
+                            `<script>alert("Account Updated!"); window.location.href = "/student-settings"; </script>`
                         )
                     )
                     .catch((err) => res.status(400).json("Error: " + err));
@@ -529,7 +544,7 @@ const controller = {
             }
             user.save().then(() => {
                 res.send(
-                    `<script>alert("Profile Updated"); window.location.href = "/student-edit-profile"; </script>`
+                    `<script>alert("Profile Updated!"); window.location.href = "/student-edit-profile"; </script>`
                 );
             });
         });
@@ -568,7 +583,7 @@ const controller = {
                         .save()
                         .then(() => {
                             res.send(
-                                `<script>alert("Account Created"); window.location.href = "/login"; </script>`
+                                `<script>alert("Account Created!"); window.location.href = "/login"; </script>`
                             );
                         })
                         .catch((err) => res.status(400).json("Error: " + err));
@@ -589,14 +604,30 @@ const controller = {
         // updates the properties of an organization using its id
         OrgUser.findById(req.session.userid)
             .then((user) => {
-                user.email = req.body.email;
-                user.password = req.body.password;
                 user.name = req.body.name;
+                user.email = req.body.email;
 
-                orgUser = req.session;
+                if (req.body.password) {
+                    user.password = req.body.password;
+                } else {
+                    user.password = req.session.password;
+                }
+
+                req.session.name = req.body.name;
+                req.session.email = req.body.email;
+                if (req.body.password) {
+                    req.session.password = req.body.password;
+                }
+
+                req.session.save();
+                orgUser = user;
 
                 user.save()
-                    .then(() => res.json("User Updated"))
+                    .then(() =>
+                        res.send(
+                            `<script>alert("Account Updated"); window.location.href = "/org-settings"; </script>`
+                        )
+                    )
                     .catch((err) => res.status(400).json("Error: " + err));
             })
             .catch((err) => res.status(400).json("Error: " + err));

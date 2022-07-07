@@ -1,96 +1,166 @@
-<!DOCTYPE html>
 <html lang="en">
     <head>
         <script src="https://kit.fontawesome.com/dfcf57d1e4.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
         <link rel="stylesheet" href="../css/styleForOrganizationProfile.css" />
         <title>Organization Profile</title>
     </head>
     <body>
-      
-         <div class="container1">
+
+        <div class="container1">
             <div class="box1">
                 <div class="left">
-                     <div class="b1row1">
-                         <img class="responsive" src="../images/logo_feed.png" alt="" />
-                     </div>
-                    
-                     <div class="b1row2">
-                         <img class="responsive" src="../images/lscs.png" alt="" />
-                     </div>
+                    <div class="b1row1">
+                        <img class="responsive" src="../images/logo_feed.png" alt="" />
+                    </div>
+
+                    <div class="b1row2">
+                        <img class="responsive" src="../images/lscs.png" alt="" />
+                    </div>
                 </div>
                 <div class="right"><div class="b1row3">
-                    <div class="name">
-                        <h1>{{user.name}}</h1>
-                    </div>
-            
-                    <div class="navigation">
-                        <a class="button" id="current" href="/org-profile"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; ABOUT</a><br>
-                    </div></div>
-                    <br>
+                        <div class="name">
+                            <h1>{{user.name}}</h1>
+                        </div>
+
+                        <div class="navigation">
+                            <a class="button" id="current" href="/org-profile"><i
+                                    class="fa-solid fa-user"
+                                ></i>&nbsp; &nbsp; ABOUT</a><br />
+                        </div></div>
+                    <br />
                 </div>
-                
+
             </div>
 
             <div class="box2">
                 <div class="b2row1">
-                    <img class="responsiveImg" src = "../images/header.png">
+                    <img class="responsiveImg" src="../images/header.png" />
                 </div>
                 <div class="profile_type">
                     <nav>
                         <ul class="navLinks">
-                            
-                            <li><a class="notCurrent" href="/org-feed/" id="nav_link"><b>POSTS</b></a> </li>
-                            <li><a class="notCurrent" href="/org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
-                        
+
+                            <li><a class="notCurrent" href="/org-feed/" id="nav_link">
+                                    <i class="fa-solid fa-arrow-left"></i>
+                                    <b> BACK TO FEED</b></a>
+                            </li>
+
                         </ul>
                     </nav>
                 </div>
                 <div class="b2row2">
                     <div class="card">
                         <div class="card-header">
-                            <h2>ORG INFORMATION</h2><br>
+                            <h2>ORG INFORMATION</h2><br />
                         </div>
                         <div class="container">
                             <table class="table">
-                                <tr>
-                                    <td class="right"> ORG TYPE: </td>
-                                    <td><span class="tab"></span>{{user.type}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="right"> AFFILIATION: </td>
-                                    <td><span class="tab"></span>{{user.affiliation}}</td>
-                                </tr>
-                            </table>
-                        </div>
-                      </div>
+                                {{#if user.type}}
+                                    <tr>
+                                        <td class="right"> ORG TYPE: </td>
+                                        <td><span class="tab"></span>{{user.type}}</td>
+                                    </tr>
+                                {{else}}
+                                    <tr>
+                                        <td class="right"> ORG TYPE: </td>
+                                        <td><span class="tab"></span>NOT YET ADDED</td>
+                                    </tr>
 
-                      <div class="card">
+                                {{/if}}
+                                {{#if user.affiliation}}
+                                    <tr>
+                                        <td class="right"> AFFILIATION: </td>
+                                        <td><span class="tab"></span>{{user.affiliation}}</td>
+                                    </tr>
+                                {{else}}
+                                    <tr>
+                                        <td class="right"> AFFILIATION: </td>
+                                        <td><span class="tab"></span>NOT YET ADDED</td>
+                                    </tr>
+                                {{/if}}
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card">
                         <div class="card-header">
-                            <h2>ORGANIZATION'S PAGES AND SOCIALS</h2><br>
+                            <h2>ORGANIZATION'S PAGES AND SOCIALS</h2><br />
                         </div>
                         <div class="container">
                             <table class="table">
-                                <tr>
-                                    <td class="right"> FACEBOOK: </td>
-                                    <td><span class="tab"></span> <a href="https://www.facebook.com/LaSalleComputerSociety" id="nav_link"><b>{{user.name}}</b></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="right"> INSTAGRAM: </td>
-                                    <td><span class="tab"></span> <a href="https://www.instagram.com/dlsu_lscs/?hl=en" id="nav_link"><b>{{user.name}}</b></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="right"> TWITTER: </td>
-                                    <td><span class="tab"></span> <a href="https://twitter.com/dlsu_lscs?lang=en" id="nav_link"><b>{{user.name}}</b></a></td>
-                                </tr>
-                                
-                                <tr>
-                                    <td class="right"> LINKEDIN: </td>
-                                    <td><span class="tab"></span> <a href="https://www.linkedin.com/company/la-salle-computer-society/" id="nav_link"><b>{{user.name}}</b></a></td>
-                                </tr>
+                                {{#if user.facebook}}
+                                    <tr>
+                                        <td class="right"> FACEBOOK: </td>
+                                        <td><span class="tab"></span>
+                                            <a href="{{user.facebook}}" id="nav_link"><b
+                                                >{{user.facebook}}</b></a></td>
+                                    </tr>
+
+                                {{else}}
+
+                                    <tr>
+                                        <td class="right"> FACEBOOK: </td>
+                                        <td><span class="tab"></span>
+                                            NOT YET ADDED</td>
+                                    </tr>
+                                {{/if}}
+
+                                {{#if user.instagram}}
+                                    <tr>
+                                        <td class="right"> INSTAGRAM: </td>
+                                        <td><span class="tab"></span>
+                                            <a href="{{user.instagram}}" id="nav_link"><b
+                                                >{{user.instagram}}</b></a></td>
+                                    </tr>
+                                {{else}}
+                                    <tr>
+                                        <td class="right"> INSTAGRAM: </td>
+                                        <td><span class="tab"></span>
+                                            NOT YET ADDED</td>
+                                    </tr>
+                                {{/if}}
+
+                                {{#if user.twitter}}
+                                    <tr>
+                                        <td class="right"> TWITTER: </td>
+                                        <td><span class="tab"></span>
+                                            <a href="{{user.twitter}}" id="nav_link"><b
+                                                >{{user.twitter}}</b></a></td>
+                                    </tr>
+
+                                {{else}}
+
+                                    <tr>
+                                        <td class="right"> TWITTER: </td>
+                                        <td><span class="tab"></span>
+                                            NOT YET ADDED</td>
+                                    </tr>
+                                {{/if}}
+
+                                {{#if user.linkedin}}
+                                    <tr>
+                                        <td class="right"> LINKEDIN: </td>
+                                        <td><span class="tab"></span>
+                                            <a href="{{user.linkedin}}" id="nav_link"><b
+                                                >{{user.linkedin}}</b></a></td>
+                                    </tr>
+
+                                {{else}}
+
+                                    <tr>
+                                        <td class="right"> LINKEDIN: </td>
+                                        <td><span class="tab"></span>
+                                            NOT YET ADDED</td>
+                                    </tr>
+
+                                {{/if}}
                             </table>
                         </div>
-                      </div>
+                    </div>
                 </div>
             </div>
 
@@ -99,54 +169,73 @@
                     <h1>ACCOUNT</h1>
                 </div>
                 <div class="b3row1">
-                    <a class="button" href="/org-edit-profile"
-                        ><i class="fa-solid fa-user-pen"></i>&nbsp; &nbsp; EDIT PROFILE</a
-                    ><br />
-                    <a class="button" id="current" href="/org-settings"
-                        ><i class="fa-solid fa-gear"></i>&nbsp; &nbsp; PAGE SETTINGS</a
-                    ><br />
-                    <a class="button" href="/logout"
-                        ><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp; &nbsp;
-                        LOG-OUT</a
-                    ><br />
+                    <a class="button" href="/org-edit-profile"><i
+                            class="fa-solid fa-user-pen"
+                        ></i>&nbsp; &nbsp; EDIT PROFILE</a><br />
+                    <a class="button" id="current" href="/org-settings"><i
+                            class="fa-solid fa-gear"
+                        ></i>&nbsp; &nbsp; PAGE SETTINGS</a><br />
+                    <a class="button" href="/logout"><i
+                            class="fa-solid fa-arrow-right-from-bracket"
+                        ></i>&nbsp; &nbsp; LOG-OUT</a><br />
                 </div>
 
                 <div class="calendar_name">
                     <h1>YOUR CALENDAR</h1>
                 </div>
                 <div class="b3row2">
-                    <iframe class="calendar" src="https://calendar.google.com/calendar/embed?src=c_5sjo26tm84vmof5ac5fq1dvu4k%40group.calendar.google.com&ctz=Asia%2FManila" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+                    <iframe
+                        class="calendar"
+                        src="https://calendar.google.com/calendar/embed?src=c_5sjo26tm84vmof5ac5fq1dvu4k%40group.calendar.google.com&ctz=Asia%2FManila"
+                        style="border: 0"
+                        width="800"
+                        height="600"
+                        frameborder="0"
+                        scrolling="no"
+                    ></iframe>
                 </div>
             </div>
         </div>
-    
+
         <div class="container5" id="bottom">
 
             <div class="box5">
-                <img src="../images/logo_footer.png"> &nbsp;
+                <img src="../images/logo_footer.png" />
+                &nbsp;
             </div>
-            
+
             <div class="box6">
-                <p><i class="fa-solid fa-envelope-open"></i> &nbsp;
-                    CONTACT US <br>
-                    <a class="mail" href="mailto:misael_marin@dlsu.edu.ph">misael_marin@dlsu.edu.ph</a><br>
-                    <a class="mail" href="mailto:criscela_racelis@dlsu.edu.ph">criscela_racelis@dlsu.edu.ph</a><br>
-                    <a class="mail" href="mailto:jaira_millicent_santos@dlsu.edu.ph">jaira_millicent_santos@dlsu.edu.ph</a>
+                <p><i class="fa-solid fa-envelope-open"></i>
+                    &nbsp; CONTACT US
+                    <br />
+                    <a
+                        class="mail"
+                        href="mailto:misael_marin@dlsu.edu.ph"
+                    >misael_marin@dlsu.edu.ph</a><br />
+                    <a
+                        class="mail"
+                        href="mailto:criscela_racelis@dlsu.edu.ph"
+                    >criscela_racelis@dlsu.edu.ph</a><br />
+                    <a
+                        class="mail"
+                        href="mailto:jaira_millicent_santos@dlsu.edu.ph"
+                    >jaira_millicent_santos@dlsu.edu.ph</a>
                 </p>
             </div>
-            <br>
+            <br />
             <div class="box7">
-                <p class="title"><i class="fa-solid fa-location-pin"></i> &nbsp;
-                    WHERE TO FIND US <br>
+                <p class="title"><i class="fa-solid fa-location-pin"></i>
+                    &nbsp; WHERE TO FIND US
+                    <br />
                 </p>
-                
+
                 <p class="content">
-                    Gokongwei Bldg., De La Salle University 2401 Taft Avenue, 1004 Manila, Philippines
+                    Gokongwei Bldg., De La Salle University 2401 Taft Avenue, 1004 Manila,
+                    Philippines
                 </p>
             </div>
-    
+
         </div>
 
-    
     </body>
 </html>
