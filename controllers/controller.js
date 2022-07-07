@@ -733,7 +733,7 @@ const controller = {
     },
 
     getOrgFeedEvents: (req, res) => {
-        Event.find()
+        Event.find().sort({createdAt: -1})
             .then((events) => {
                 res.render("org_feed", { user: orgUser, event: events });
             })
