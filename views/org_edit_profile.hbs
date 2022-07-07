@@ -50,12 +50,21 @@
                                 <table class="table">
                                     <tr>
                                         <td><strong>ORG TYPE: </strong></td>
-                                        <td><input type="text" id="id" size="40" name="program" value={{user.type}} /></td>
+                                        <td><input type="text" id="id" size="40" name="type" value={{user.type}} /></td>
                                     </tr>
 
                                     <tr>
                                         <td><strong>AFFILIATION: </strong> </td>
-                                        <td><input type="text" id="id" size="40" name="program" value={{user.affiliation}} /></td>
+                                        <td>
+                                            <select name="affiliation" id="affiliation">
+                                                <option value="N/A">Select Affiliation</option>
+                                                <option value="CSO">CSO</option>
+                                                <option value="USG">USG</option>
+                                                <option value="University">University</option>
+                                                <option value="Independent">Independent</option>
+                                                <option value="Others">Others</option>
+                                            </select>
+                                        </td>
                                     </tr>
 
                                     <tr>
@@ -79,22 +88,22 @@
                                 <table class="table">
                                     <tr>
                                         <td><strong>FACEBOOK: </strong></td>
-                                        <td><input type="text" id="id" size="40" name="program" value={{user.facebook}} /></td>
+                                        <td><input type="text" id="id" size="40" name="facebook" value={{user.facebook}} /></td>
                                     </tr>
 
                                     <tr>
                                         <td><strong>INSTAGRAM: </strong> </td>
-                                        <td><input type="text" id="id" size="40" name="program" value={{user.instagram}} /></td>
+                                        <td><input type="text" id="id" size="40" name="instagram" value={{user.instagram}} /></td>
                                     </tr>
 
                                     <tr>
                                         <td><strong>TWITTER: </strong> </td>
-                                        <td><input type="text" id="id" size="40" name="program" value={{user.twitter}} /></td>
+                                        <td><input type="text" id="id" size="40" name="twitter" value={{user.twitter}} /></td>
                                     </tr>
 
                                     <tr>
                                         <td><strong>LINKEDIN: </strong> </td>
-                                        <td><input type="text" id="id" size="40" name="program" value={{user.linkedin}} /></td>
+                                        <td><input type="text" id="id" size="40" name="linkedin" value={{user.linkedin}} /></td>
                                     </tr>
 
                                     <tr>
