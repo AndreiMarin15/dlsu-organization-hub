@@ -1,12 +1,17 @@
 TODO:
 [] Create handlebars for Posts
 [/] Optimize functions for frontend (models, login)
-[] Handlebars for profiles for org and students
-[] Liking, saving, going page update
+[/] Handlebars for profiles for org and students
+[/] Liking, saving, going page update
+[/] About Org Backend
+[/] Create backend for event schema
 [] Follow, unfollow
 [] File upload system
-[/] About Org Backend
-[] Create backend for event schema
+[] Stuent Following List
+[] Student Saved Posts and Events
+[] Student Going
+[] Student Org View
+
 
 Significant Pages: 
 [/] Index, 
