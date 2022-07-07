@@ -133,8 +133,29 @@ const controller = {
         res.render("student_edit_profile", {user: studentUser});
     },
 
+    /*
+    getOrgFeedStudentView: (req, res) => {
+        res.render("student_org_feed"); 
+    },
+
+    getOrgProfileStudentView: (req, res) => {
+        res.render("student_org_profile");
+    },*/
+
     getOrgFeed: (req, res) => {
-        res.render("org_feed");
+        res.render("org_feed", { user: orgUser });
+    },
+
+    getOrgProfile: (req, res) => {
+        res.render("org_profile", { user: orgUser });
+    },
+
+    getUpdateOrgProfile: (req, res) => {
+        res.render("org_edit_profile", {user: orgUser});
+    },
+
+    getOrgSettings: (req, res) => {
+        res.render("org_settings", { user: orgUser });
     },
 
     logout: (req, res) => {

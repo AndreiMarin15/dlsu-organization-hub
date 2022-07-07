@@ -48,11 +48,20 @@ app.get("/student-edit-profile", controller.getUpdateProfile);
 app.post("/student-edit-profile", controller.updateStudentProfile);
 app.post("/update-student-profile", controller.updateStudentUser);
 
+// ORG PROFILE
+app.get("/org-profile", controller.getOrgProfile);
+
 //ORG SIGN UP
 app.get("/orgSignUp/", controller.getOrgSignUp);
 app.post("/registerOrg", controller.addOrg);
+
 //ORG FEED
-app.get("/org-feed/", controller.getOrgFeed);
+app.get("/org-feed/", controller.getOrgFeedPosts);
+app.get("/org-feed/events", controller.getOrgFeedEvents);
+
+//ORG SETTINGS
+app.get("/org-edit-profile", controller.getUpdateOrgProfile);
+app.get("/org-settings", controller.getOrgSettings);
 
 // STUDENT USERS
 app.get("/studentUsers/", controller.getStudents);

@@ -20,14 +20,11 @@
                 </div>
                 <div class="right"><div class="b1row3">
                     <div class="name">
-                        <h1>La Salle Computer Society</h1>
+                        <h1>{{user.name}}</h1>
                     </div>
                
                     <div class="navigation">
-                        <a class="button" id="current" href="../Pages/lscs_org.html"><i class="fa-solid fa-newspaper"></i>&nbsp; &nbsp; ORG FEED</a><br>
-                        <a class="button" href="../Pages/lscs_org_posts.html"><i class="fa-solid fa-clipboard"></i>&nbsp; &nbsp; POSTS</a><br>
-                        <a class="button" href="../Pages/lscs_org_events.html"><i class="fa-solid fa-calendar-plus"></i>&nbsp; &nbsp; EVENTS</a><br>
-                        <a class="button" href="../Pages/lscs_org_profile.html"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; ABOUT</a><br>
+                        <a class="button" href="/org-profile"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; ABOUT</a><br>
                     </div>
                 </div>
             </div>
@@ -45,207 +42,50 @@
                 <div class="feed_type">
                     <nav>
                         <ul class="navLinks">
-                            <li><a class="current" href="../Pages/lscs.html" id="nav_link"><b>ALL</b></a> </li>
-                            <li><a href="../Pages/lscs_org_posts.html" id="nav_link"><b>POSTS</b></a> </li>
-                            <li><a href="../Pages/lscs_org_events.html" id="nav_link" ><b>EVENTS</b></a></li>
-                            <li><a href="../Pages/lscs_org_profile.html" id="nav_link"><b>ABOUT</b></a> </li>
+                            {{#if post}}
+                                {{#unless event}}
+                                    {{#unless about}}
+                                        <li><a class="current" href="/org-feed/" id="nav_link"><b>POSTS</b></a> </li>
+                                        <li><a class="notCurrent" href="/org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
+                                        <li><a class="notCurrent" href="/org-profile" id="nav_link"><b>ABOUT</b></a> </li>
+                                    {{/unless}}
+                                {{/unless}}
+                            {{/if}}
+
+                            {{#if event}}
+                                {{#unless post}}
+                                    {{#unless about}}
+                                        <li><a class="notCurrent" href="/org-feed/" id="nav_link"><b>POSTS</b></a> </li>
+                                        <li><a class="current" href="/org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
+                                        <li><a class="notCurrent" href="/org-profile" id="nav_link"><b>ABOUT</b></a> </li>
+                                    {{/unless}}
+                                {{/unless}}
+                            {{/if}}
+
+                            {{#if about}}
+                                {{#unless post}}
+                                    {{#unless event}}
+                                        <li><a class="notCurrent" href="/org-feed/" id="nav_link"><b>POSTS</b></a> </li>
+                                        <li><a class="notCurrent" href="/org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
+                                        <li><a class="current" href="/org-profile" id="nav_link"><b>ABOUT</b></a> </li>
+                                    {{/unless}}
+                                {{/unless}}
+                            {{/if}}
                         </ul>
                     </nav>
                 </div>
                 <div class="b2row2">
-                    <!-- LSCS EVENT 1 -->
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="logo">
-                                <img src="../images/lscs.png">
-                            </div>
-                            <div class="header-title">
-                                <a href="../Pages/lscs.html" id="nav_link"><b>LA SALLE COMPUTER SOCIETY</b></a><br>
-                                <p><strong>Posted on: </strong>May 18, 2022</p>
-                                <p><strong>Type: </strong>Event</p>
-                                <p><strong>Date of event: </strong>May 23, 2022</p>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="attachment">
-                                <img src="../images/lscs_post1.png">
-                            </div>
-                            <div class="caption">
-                                <p>1 day left to join our long awaited Mock Interview! 🚀
-                                    Don’t miss out on your chance to engage with tech professionals and boost your interview skills!
-                                    Hurry up, join us by pre-registering at: <a class="post_link" href=https://bit.ly/TechCareersInterviewPreReg>
-                                        https://bit.ly/TechCareersInterviewPreReg</a><br>
-                                    <br><br> Caption by: Hannah Chen
-                                    <br> Pub by: Allen Aboy
-                                </p>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-thumbs-up"></i></i> &nbsp;27 LIKES</button>
-                            </div>
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-bookmark"></i> &nbsp;22 SAVES</button>
-                            </div>
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-person-running"></i> &nbsp;45 GOING</button>
-                            </div>
-                        </div>
-                      </div>
+                    {{#if post}}
+                    {{#each post}}
+                    {{> posts}}
+                    {{/each}}
+                    {{/if}}       
 
-                    <!-- LSCS POST 1 -->
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="logo">
-                                <img src="../images/lscs.png">
-                            </div>
-                            <div class="header-title">
-                                <a href="../Pages/lscs.html" id="nav_link"><b>LA SALLE COMPUTER SOCIETY</b></a><br>
-                                <p><strong>Posted on: </strong>May 18, 2022</p>
-                                <p><strong>Type: </strong>Project Post</p>
-                                <p><strong>Date of event: </strong>May 23, 2022</p>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="attachment">
-                                <img src="../images/lscs_post1.png">
-                            </div>
-                            <div class="caption">
-                                <p>1 day left to join our long awaited Mock Interview! 🚀
-                                    Don’t miss out on your chance to engage with tech professionals and boost your interview skills!
-                                    Hurry up, join us by pre-registering at: <a class="post_link" href=https://bit.ly/TechCareersInterviewPreReg>
-                                        https://bit.ly/TechCareersInterviewPreReg</a><br>
-                                    <br><br> Caption by: Hannah Chen
-                                    <br> Pub by: Allen Aboy
-                                </p>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-thumbs-up"></i></i> &nbsp;27 LIKES</button>
-                            </div>
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-bookmark"></i> &nbsp;22 SAVES</button>
-                            </div>
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-person-running"></i> &nbsp;45 GOING</button>
-                            </div>
-                        </div>
-                      </div>
-
-                    <!-- LSCS EVENT 2 -->
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="logo">
-                                <img src="../images/lscs.png">
-                            </div>
-                            <div class="header-title">
-                                <a href="../Pages/lscs.html" id="nav_link"><b>LA SALLE COMPUTER SOCIETY</b></a><br>
-                                <p><strong>Posted on: </strong>May 18, 2022</p>
-                                <p><strong>Type: </strong>Event</p>
-                                <p><strong>Date of event: </strong>May 23, 2022</p>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="attachment">
-                                <img src="../images/lscs_post1.png">
-                            </div>
-                            <div class="caption">
-                                <p>1 day left to join our long awaited Mock Interview! 🚀
-                                    Don’t miss out on your chance to engage with tech professionals and boost your interview skills!
-                                    Hurry up, join us by pre-registering at: <a class="post_link" href=https://bit.ly/TechCareersInterviewPreReg>
-                                        https://bit.ly/TechCareersInterviewPreReg</a><br>
-                                    <br><br> Caption by: Hannah Chen
-                                    <br> Pub by: Allen Aboy
-                                </p>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-thumbs-up"></i></i> &nbsp;27 LIKES</button>
-                            </div>
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-bookmark"></i> &nbsp;22 SAVES</button>
-                            </div>
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-person-running"></i> &nbsp;45 GOING</button>
-                            </div>
-                        </div>
-                      </div>
-
-                    <!--- LSCS POST 2 -->
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="logo">
-                                <img src="../images/lscs.png">
-                            </div>
-                            <div class="header-title">
-                                <a href="../Pages/lscs.html" id="nav_link"><b>LA SALLE COMPUTER SOCIETY</b></a><br>
-                                <p><strong>Posted on: </strong>May 18, 2022</p>
-                                <p><strong>Type: </strong>Project Post</p>
-                                <p><strong>Date of event: </strong>May 23, 2022</p>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="attachment">
-                                <img src="../images/lscs_post1.png">
-                            </div>
-                            <div class="caption">
-                                <p>1 day left to join our long awaited Mock Interview! 🚀
-                                    Don’t miss out on your chance to engage with tech professionals and boost your interview skills!
-                                    Hurry up, join us by pre-registering at: <a class="post_link" href=https://bit.ly/TechCareersInterviewPreReg>
-                                        https://bit.ly/TechCareersInterviewPreReg</a><br>
-                                    <br><br> Caption by: Hannah Chen
-                                    <br> Pub by: Allen Aboy
-                                </p>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-thumbs-up"></i></i> &nbsp;27 LIKES</button>
-                            </div>
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-bookmark"></i> &nbsp;22 SAVES</button>
-                            </div>
-                        </div>
-                      </div>
-
-                       <!--- LSCS POST 3 -->
-                       <div class="card">
-                        <div class="card-header">
-                            <div class="logo">
-                                <img src="../images/lscs.png">
-                            </div>
-                            <div class="header-title">
-                                <a href="../Pages/lscs.html" id="nav_link"><b>LA SALLE COMPUTER SOCIETY</b></a><br>
-                                <p><strong>Posted on: </strong>May 18, 2022</p>
-                                <p><strong>Type: </strong>Project Post</p>
-                                <p><strong>Date of event: </strong>May 23, 2022</p>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="attachment">
-                                <img src="../images/lscs_post1.png">
-                            </div>
-                            <div class="caption">
-                                <p>1 day left to join our long awaited Mock Interview! 🚀
-                                    Don’t miss out on your chance to engage with tech professionals and boost your interview skills!
-                                    Hurry up, join us by pre-registering at: <a class="post_link" href=https://bit.ly/TechCareersInterviewPreReg>
-                                        https://bit.ly/TechCareersInterviewPreReg</a><br>
-                                    <br><br> Caption by: Hannah Chen
-                                    <br> Pub by: Allen Aboy
-                                </p>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-thumbs-up"></i></i> &nbsp;27 LIKES</button>
-                            </div>
-                            <div class="action-btn">
-                                <button type="submit"><i class="fa-solid fa-bookmark"></i> &nbsp;22 SAVES</button>
-                            </div>
-                        </div>
-                      </div>
+                    {{#if event}}
+                    {{#each event}}
+                    {{> events}}
+                    {{/each}}
+                    {{/if}}
 
                 </div>
             </div>
@@ -255,10 +95,10 @@
                     <h1>ACCOUNT</h1>
                 </div>
                 <div class="b3row1">
-                    <a class="button" href="../Pages/lscs_org_edit.html"
+                    <a class="button" href="/org-edit-profile"
                         ><i class="fa-solid fa-user-pen"></i>&nbsp; &nbsp; EDIT PROFILE</a
                     ><br />
-                    <a class="button" id="current" href="../Pages/lscs_org_settings.html"
+                    <a class="button" id="current" href="/org-settings"
                         ><i class="fa-solid fa-gear"></i>&nbsp; &nbsp; PAGE SETTINGS</a
                     ><br />
                     <a class="button" href="/logout"

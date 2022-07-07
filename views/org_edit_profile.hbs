@@ -1,0 +1,184 @@
+<html lang="en">
+    <head>
+        <script src="https://kit.fontawesome.com/dfcf57d1e4.js" crossorigin="anonymous"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link rel="stylesheet" href="../css/styleForStudentEditProfile.css" />
+        <title>Edit Profile</title>
+    </head>
+    <body>
+        <div class="container1">
+            <div class="box1">
+                <div class="left">
+                    <div class="b1row1">
+                        <img class="responsive" src="../images/logo_feed.png" alt="" />
+                    </div>
+
+                    <div class="b1row2">
+                        <img class="responsive" src="../images/student_user.png" alt="" />
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="b1row3">
+                        <div class="name">
+                            <h1>{{user.firstName}} {{user.lastName}}</h1>
+                        </div>
+
+                        <div class="navigation">
+                            <a class="button" href="/student-feed"><i
+                                    class="fa-solid fa-newspaper"
+                                ></i>&nbsp; &nbsp; FEED</a><br />
+                            <a class="button" href="/student-profile"><i
+                                    class="fa-solid fa-user"
+                                ></i>&nbsp; &nbsp; PROFILE</a><br />
+                            <div class="dropdown">
+                                <a id="dropbtn" href="#"><i class="fa-solid fa-bookmark"></i>&nbsp;
+                                    &nbsp; SAVED</a><br />
+                                <div class="drop-content">
+                                    <a href="/saved-posts"><i class="fa-solid fa-clipboard"></i>
+                                        &nbsp; POSTS</a><br />
+                                    <a href="/saved-events"><i
+                                            class="fa-solid fa-calendar-plus"
+                                        ></i>
+                                        &nbsp; EVENTS</a><br />
+                                </div>
+                            </div>
+                            <a class="button" href="/events-going"><i
+                                    class="fa-solid fa-person-running"
+                                ></i>&nbsp; &nbsp; GOING</a><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box2">
+                <div class="b2row1">
+                    <img class="responsive" src="../images/student_header.png" />
+                </div>
+                <div class="b2row2">
+
+                    <!-- ADDITIONAL INFO -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>BASIC INFORMATION</h2>
+                            <br />
+                        </div>
+                        <div class="container">
+                            <form action="/student-edit-profile" method="post" onSubmit="return true">
+                                <table class="table">
+                                    <tr>
+                                        <td><strong>PROGRAM: </strong></td>
+                                        <td><input type="text" id="id" size="40" name="program" value={{user.program}} /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong>COLLEGE: </strong> </td>
+                                        <td>
+                                            <select name="college" id="college">
+                                                <option value="N/A">Select College</option>
+                                                <option value="College of Computer Studies">College of Computer Studies</option>
+                                                <option value="College of Science">College of Science</option>
+                                                <option value="Gokongwei College of
+                                                    Engineering">Gokongwei College of
+                                                    Engineering</option>
+                                                <option value="College of Business">College of Business</option>
+                                                <option value="College of Education">College of Education</option>
+                                                <option value="College of Liberal Arts">College of Liberal Arts</option>
+                                                <option value="School of Economics">School of Economics</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong>ID NUMBER: </strong> </td>
+                                        <td><input type="text" id="age" size="40" name="idNumber" value={{user.idNumber}} /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan = 2 align = "right">
+                                        <input type = submit value = "SAVE CHANGES" class="submit_button"></td>
+                                    </tr>
+                                    
+
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+
+                   
+
+                </div>
+            </div>
+
+            <div class="box3">
+                <div class="name">
+                    <h1>ACCOUNT</h1>
+                </div>
+                <div class="b3row1">
+                    <a class="button" id="current" href="/student-edit-profile"><i
+                            class="fa-solid fa-user-pen"
+                        ></i>&nbsp; &nbsp; EDIT PROFILE</a><br />
+                    <a class="button" href="/student-settings"><i
+                            class="fa-solid fa-gear"
+                        ></i>&nbsp; &nbsp; ACCT. SETTINGS</a><br />
+                    <a class="button" href="/logout"><i
+                            class="fa-solid fa-arrow-right-from-bracket"
+                        ></i>&nbsp; &nbsp; LOG-OUT</a><br />
+                </div>
+                <div class="calendar_name">
+                    <h1>YOUR CALENDAR</h1>
+                </div>
+                <div class="b3row2">
+                    <iframe
+                        class="calendar"
+                        src="https://calendar.google.com/calendar/embed?src=c_5sjo26tm84vmof5ac5fq1dvu4k%40group.calendar.google.com&ctz=Asia%2FManila"
+                        style="border: 0"
+                        width="800"
+                        height="600"
+                        frameborder="0"
+                        scrolling="no"
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="container5" id="bottom">
+            <div class="box5"><img src="../images/logo_footer.png" /> &nbsp;</div>
+
+            <div class="box6">
+                <p>
+                    <i class="fa-solid fa-envelope-open"></i>
+                    &nbsp; CONTACT US
+                    <br />
+                    <a
+                        class="mail"
+                        href="mailto:misael_marin@dlsu.edu.ph"
+                    >misael_marin@dlsu.edu.ph</a><br />
+                    <a
+                        class="mail"
+                        href="mailto:criscela_racelis@dlsu.edu.ph"
+                    >criscela_racelis@dlsu.edu.ph</a><br />
+                    <a
+                        class="mail"
+                        href="mailto:jaira_millicent_santos@dlsu.edu.ph"
+                    >jaira_millicent_santos@dlsu.edu.ph</a>
+                </p>
+            </div>
+            <br />
+            <div class="box7">
+                <p class="title">
+                    <i class="fa-solid fa-location-pin"></i>
+                    &nbsp; WHERE TO FIND US
+                    <br />
+                </p>
+
+                <p class="content">
+                    Gokongwei Bldg., De La Salle University 2401 Taft Avenue, 1004 Manila,
+                    Philippines
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

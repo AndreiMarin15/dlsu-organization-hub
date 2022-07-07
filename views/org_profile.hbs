@@ -21,17 +21,14 @@
                 </div>
                 <div class="right"><div class="b1row3">
                     <div class="name">
-                        <h1>La Salle Computer Society</h1>
+                        <h1>{{user.name}}</h1>
                     </div>
             
                     <div class="navigation">
-                        <a class="button" href="../Pages/lscs_org.html"><i class="fa-solid fa-newspaper"></i>&nbsp; &nbsp; ORG FEED</a><br>
-                        <a class="button" href="../Pages/lscs_org_posts.html"><i class="fa-solid fa-clipboard"></i>&nbsp; &nbsp; POSTS</a><br>
-                        <a class="button" href="../Pages/lscs_org_events.html"><i class="fa-solid fa-calendar-plus"></i>&nbsp; &nbsp; EVENTS</a><br>
-                        <a class="button" id="current" href="../Pages/lscs_org_profile.html"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; ABOUT</a><br>
-                    </div>
+                        <a class="button" id="current" href="/org-profile"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; ABOUT</a><br>
+                    </div></div>
                     <br>
-                </div></div>
+                </div>
                 
             </div>
 
@@ -42,10 +39,11 @@
                 <div class="profile_type">
                     <nav>
                         <ul class="navLinks">
-                            <li><a href="../Pages/lscs_org.html" id="nav_link"><b>ALL</b></a> </li>
-                            <li><a href="../Pages/lscs_org_posts.html" id="nav_link"><b>POSTS</b></a> </li>
-                            <li><a href="../Pages/lscs_org_events.html" id="nav_link" ><b>EVENTS</b></a></li>
-                            <li><a class="current" href="../Pages/lscs_org_profile.html" id="nav_link"><b>ABOUT</b></a> </li>
+                            
+                            <li><a class="notCurrent" href="/org-feed/" id="nav_link"><b>POSTS</b></a> </li>
+                            <li><a class="notCurrent" href="/org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
+                            <li><a class="current" href="/org-profile" id="nav_link"><b>ABOUT</b></a> </li>
+                        
                         </ul>
                     </nav>
                 </div>
@@ -58,11 +56,11 @@
                             <table class="table">
                                 <tr>
                                     <td class="right"> ORG TYPE: </td>
-                                    <td><span class="tab"></span>Professional Organization</td>
+                                    <td><span class="tab"></span>{{user.type}}</td>
                                 </tr>
                                 <tr>
                                     <td class="right"> AFFILIATION: </td>
-                                    <td><span class="tab"></span>CSO ENGAGE</td>
+                                    <td><span class="tab"></span>{{user.affiliation}}</td>
                                 </tr>
                             </table>
                         </div>
@@ -76,43 +74,24 @@
                             <table class="table">
                                 <tr>
                                     <td class="right"> FACEBOOK: </td>
-                                    <td><span class="tab"></span> <a href="https://www.facebook.com/LaSalleComputerSociety" id="nav_link"><b>La Salle Computer Society</b></a></td>
+                                    <td><span class="tab"></span> <a href="https://www.facebook.com/LaSalleComputerSociety" id="nav_link"><b>{{user.name}}</b></a></td>
                                 </tr>
                                 <tr>
                                     <td class="right"> INSTAGRAM: </td>
-                                    <td><span class="tab"></span> <a href="https://www.instagram.com/dlsu_lscs/?hl=en" id="nav_link"><b>@dlsu_lscs</b></a></td>
+                                    <td><span class="tab"></span> <a href="https://www.instagram.com/dlsu_lscs/?hl=en" id="nav_link"><b>{{user.name}}</b></a></td>
                                 </tr>
                                 <tr>
                                     <td class="right"> TWITTER: </td>
-                                    <td><span class="tab"></span> <a href="https://twitter.com/dlsu_lscs?lang=en" id="nav_link"><b>@dlsu_LSCS</b></a></td>
+                                    <td><span class="tab"></span> <a href="https://twitter.com/dlsu_lscs?lang=en" id="nav_link"><b>{{user.name}}</b></a></td>
                                 </tr>
                                 
                                 <tr>
                                     <td class="right"> LINKEDIN: </td>
-                                    <td><span class="tab"></span> <a href="https://www.linkedin.com/company/la-salle-computer-society/" id="nav_link"><b>La Salle Computer Society</b></a></td>
+                                    <td><span class="tab"></span> <a href="https://www.linkedin.com/company/la-salle-computer-society/" id="nav_link"><b>{{user.name}}</b></a></td>
                                 </tr>
                             </table>
                         </div>
                       </div>
-
-                      <div class="card">
-                        <div class="card-header">
-                            <h2>APPLICATION OR HOW TO JOIN</h2><br>
-                        </div>
-                        <div class="container">
-                            <table class="table">
-                                <tr>
-                                    <td class="right"> SCHEDULE: </td>
-                                    <td><span class="tab"></span>Every CSO ARW (Annual Recruitment Week)</td>
-                                </tr>
-                                <tr>
-                                    <td class="right"> LINK: </td>
-                                    <td><span class="tab"></span>To be announced</td>
-                                </tr>
-                            </table>
-                        </div>
-                      </div>
-            
                 </div>
             </div>
 
@@ -121,10 +100,10 @@
                     <h1>ACCOUNT</h1>
                 </div>
                 <div class="b3row1">
-                    <a class="button" href="../Pages/lscs_org_edit.html"
+                    <a class="button" href="/org-edit-profile"
                         ><i class="fa-solid fa-user-pen"></i>&nbsp; &nbsp; EDIT PROFILE</a
                     ><br />
-                    <a class="button" id="current" href="../Pages/lscs_org_settings.html"
+                    <a class="button" id="current" href="/org-settings"
                         ><i class="fa-solid fa-gear"></i>&nbsp; &nbsp; PAGE SETTINGS</a
                     ><br />
                     <a class="button" href="/logout"
