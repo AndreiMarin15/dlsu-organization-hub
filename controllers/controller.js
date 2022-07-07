@@ -122,49 +122,67 @@ const controller = {
     },
 
     savePost: (req, res) => {
-        StudentUser.findById(req.session.userid)
-            .then(student => {
-                Posts.findById(req.params.id)
-                    .then(post => {
-                        if(post){
-                            if(student.saved.indexOf(post._id) == -1 || student.saved == null){
-                                student.saved.push(post._id);
+        StudentUser.findById(req.session.userid).then((student) => {
+            Posts.findById(req.params.id).then((post) => {
+                if (post) {
+                    if (student.saved.indexOf(post._id) == -1 || student.saved == null) {
+                        student.saved.push(post._id);
 
-                                student.save();
+                        student.save();
 
-                                res.redirect("/student-feed/");
-                            } else {
-                                index = student.saved.indexOf(post._id);
+                        res.redirect("/student-feed/");
+                    } else {
+                        index = student.saved.indexOf(post._id);
 
-                                student.saved.splice(index, 1);
+                        student.saved.splice(index, 1);
 
-                                student.save();
+                        student.save();
 
-                                res.redirect("/student-feed/");
-                            }
+                        res.redirect("/student-feed/");
+                    }
+                } else {
+                    Events.findById(req.params.id).then((event) => {
+                        if (student.saved.indexOf(event._id) == -1 || student.saved == null) {
+                            student.saved.push(event._id);
 
+                            student.save();
+
+                            res.redirect("/student-feed/events");
                         } else {
-                            Events.findById(req.params.id)
-                                .then(event => {
-                                    if(student.saved.indexOf(event._id) == -1 || student.saved == null){
-                                        student.saved.push(event._id);
-        
-                                        student.save();
-        
-                                        res.redirect("/student-feed/events");
-                                    } else {
-                                        index = student.saved.indexOf(event._id);
-        
-                                        student.saved.splice(index, 1);
-        
-                                        student.save();
-        
-                                        res.redirect("/student-feed/events");
-                                    }
-                                })
+                            index = student.saved.indexOf(event._id);
+
+                            student.saved.splice(index, 1);
+
+                            student.save();
+
+                            res.redirect("/student-feed/events");
                         }
-                    })
+                    });
+                }
+            });
+        });
+    },
+
+    going: (req, res) => {
+        StudentUser.findById(req.session.userid).then((student) => {
+            Events.findById(req.params.id).then(event => {
+                if (student.going.indexOf(event._id) == -1 || student.going == null) {
+                    student.going.push(event._id);
+
+                    student.save();
+
+                    res.redirect("/student-feed/events");
+                } else {
+                    index = student.going.indexOf(event._id);
+
+                    student.going.splice(index, 1);
+
+                    student.save();
+
+                    res.redirect("/student-feed/events");
+                }
             })
+        });
     },
 
     getStudentFeed: (req, res) => {
