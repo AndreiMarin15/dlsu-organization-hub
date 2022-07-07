@@ -21,15 +21,16 @@
                 </div>
                 <div class="right"><div class="b1row3">
                     <div class="name">
-                        <h1>La Salle Computer Society</h1>
+                        <h1>{org.name}</h1>
                     </div>
             
                     <div class="navigation">
-                        <a class="button" href="../Pages/lscs_org.html"><i class="fa-solid fa-person-circle-plus"></i>&nbsp; &nbsp; FOLLOW</a><br>
-                        <a class="button" href="../Pages/lscs_org_posts.html"><i class="fa-solid fa-clipboard"></i>&nbsp; &nbsp; POSTS</a><br>
-                        <a class="button" href="../Pages/lscs_org_events.html"><i class="fa-solid fa-calendar-plus"></i>&nbsp; &nbsp; EVENTS</a><br>
-                        <a class="button" id="current" href="../Pages/lscs_org_profile.html"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; ABOUT</a><br>
+                        <form action="/student-view-org-profile/follow" method="post" onSubmit="return true">
+                        <a class="button" href="/student-view-org-profile"><i class="fa-solid fa-person-circle-plus"></i> &nbsp; FOLLOW</a><br>
+                        </form>
+                        <a class="button" href="/student-view-org-profile"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; ABOUT</a><br>
                     </div>
+                </div>
                     <br>
                 </div></div>
                 
@@ -113,23 +114,15 @@
                 </div>
             </div>
 
-            <div class="box3">
+           <div class="box3">
                 <div class="name">
                     <h1>ACCOUNT</h1>
                 </div>
                 <div class="b3row1">
-                    <a class="button" href="../Pages/lscs_org_edit.html"
-                        ><i class="fa-solid fa-user-pen"></i>&nbsp; &nbsp; EDIT PROFILE</a
-                    ><br />
-                    <a class="button" id="current" href="../Pages/lscs_org_settings.html"
-                        ><i class="fa-solid fa-gear"></i>&nbsp; &nbsp; PAGE SETTINGS</a
-                    ><br />
-                    <a class="button" href="/logout"
-                        ><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp; &nbsp;
-                        LOG-OUT</a
-                    ><br />
+                    <a class="button" id="current" href="/student-edit-profile"><i class="fa-solid fa-user-pen"></i>&nbsp; &nbsp; EDIT PROFILE</a><br>
+                    <a class="button" id="current" href="/student-settings"><i class="fa-solid fa-gear"></i>&nbsp; &nbsp; ACCT. SETTINGS</a><br>
+                    <a class="button" id="current" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp; &nbsp; LOG-OUT</a><br>
                 </div>
-
                 <div class="calendar_name">
                     <h1>YOUR CALENDAR</h1>
                 </div>

@@ -20,11 +20,14 @@
                 </div>
                 <div class="right"><div class="b1row3">
                     <div class="name">
-                        <h1>{{user.name}}</h1>
+                        <h1>{{org.name}}</h1>
                     </div>
                
                     <div class="navigation">
-                        <a class="button" href="/student-org-profile"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; ABOUT</a><br>
+                        <form action="/student-view-org-profile/follow" method="post" onSubmit="return true">
+                        <a class="button" href="/student-view-org-profile"><i class="fa-solid fa-person-circle-plus"></i> &nbsp; FOLLOW</a><br>
+                        </form>
+                        <a class="button" href="/student-view-org-profile/"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; ABOUT</a><br>
                     </div>
                     <br>
                     <a class="button" href="/student-feed"><i class="fa-solid fa-arrow-left"></i></i>&nbsp; &nbsp;RETURN TO FEED</a><br>
@@ -44,8 +47,8 @@
                             {{#if post}}
                                 {{#unless event}}
                                     {{#unless about}}
-                                        <li><a class="current" href="/student-org-feed/" id="nav_link"><b>POSTS</b></a> </li>
-                                        <li><a class="notCurrent" href="/student-org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
+                                        <li><a class="current" href="/student-view-org/" id="nav_link"><b>POSTS</b></a> </li>
+                                        <li><a class="notCurrent" href="/student-view-org/" id="nav_link" ><b>EVENTS</b></a></li>
                                     {{/unless}}
                                 {{/unless}}
                             {{/if}}
@@ -53,8 +56,8 @@
                             {{#if event}}
                                 {{#unless post}}
                                     {{#unless about}}
-                                        <li><a class="notCurrent" href="/student-org-feed/" id="nav_link"><b>POSTS</b></a> </li>
-                                        <li><a class="current" href="/student-org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
+                                        <li><a class="notCurrent" href="/student-view-org/" id="nav_link"><b>POSTS</b></a> </li>
+                                        <li><a class="current" href="/student-view-org/" id="nav_link" ><b>EVENTS</b></a></li>
                                     {{/unless}}
                                 {{/unless}}
                             {{/if}}
@@ -83,18 +86,10 @@
                     <h1>ACCOUNT</h1>
                 </div>
                 <div class="b3row1">
-                    <a class="button" href="/student-edit-profile"
-                        ><i class="fa-solid fa-user-pen"></i>&nbsp; &nbsp; EDIT PROFILE</a
-                    ><br />
-                    <a class="button" id="current" href="/student-settings"
-                        ><i class="fa-solid fa-gear"></i>&nbsp; &nbsp; PAGE SETTINGS</a
-                    ><br />
-                    <a class="button" href="/logout"
-                        ><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp; &nbsp;
-                        LOG-OUT</a
-                    ><br />
+                    <a class="button" id="current" href="/student-edit-profile"><i class="fa-solid fa-user-pen"></i>&nbsp; &nbsp; EDIT PROFILE</a><br>
+                    <a class="button" id="current" href="/student-settings"><i class="fa-solid fa-gear"></i>&nbsp; &nbsp; ACCT. SETTINGS</a><br>
+                    <a class="button" id="current" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp; &nbsp; LOG-OUT</a><br>
                 </div>
-
                 <div class="calendar_name">
                     <h1>YOUR CALENDAR</h1>
                 </div>
