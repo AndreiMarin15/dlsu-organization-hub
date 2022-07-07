@@ -41,7 +41,6 @@ const studentUserSchema = new Schema(
         
         following: [],
         saved: [],
-        liked: []
     },
     {
         timestamps: true,
