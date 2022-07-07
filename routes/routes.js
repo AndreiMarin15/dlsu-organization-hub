@@ -15,7 +15,7 @@ const app = express();
 //feed
 app.post("/like/:id", controller.likePost);
 app.post("/save/:id", controller.savePost);
-
+app.post("/going/:id", controller.going);
 //index
 app.get("/", controller.getIndex);
 app.get("/search/", controller.search);

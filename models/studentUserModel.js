@@ -15,14 +15,17 @@ const studentUserSchema = new Schema(
         password: {
             type: String,
             required: false,
+            trim: true,
             minlength: 8,
         },
         firstName: {
             type: String,
+            trim: false,
             required: false,
         },
         lastName: {
             type: String,
+            trim: false,
             required: false,
         },
         program: {
@@ -38,7 +41,10 @@ const studentUserSchema = new Schema(
             required: false,
         },
 
-        following: [],
+        following: {
+            type: [],
+            required: false,
+        },
         saved: {
             type: [],
             required: false,
