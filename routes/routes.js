@@ -13,7 +13,7 @@ const app = express();
 // js functions
 
 //feed
-app.post("/like/:account/:date", controller.likePost);
+app.post("/like/:id", controller.likePost);
 
 //index
 app.get("/", controller.getIndex);

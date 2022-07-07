@@ -83,28 +83,21 @@ const controller = {
     },
 
     likePost: (req, res) => {
-        let account = req.params.account;
-        let date = req.params.date;
+        Posts.findById(req.params.id).then((post) => {
+            if (post.likes.indexOf(req.session.userid) == -1 || post.likes == null) {
+                post.likes.push(req.session.userid);
 
-        account = account.replace("%20", " ");
-        date = date.replace("%20", " ");
+                post.save();
+                console.log(post.likes.length + " " + req.session.userid);
+                res.redirect("/student-feed/");
+            } else {
+                index = post.likes.indexOf(req.session.userid);
 
-        Posts.findOne({ accountName: account, createdAt: date }).then((post) => {
-            StudentUser.findById(req.session.userid).then((user) => {
-                if (post.likes.indexOf(user._id) == -1 || post.likes == null) {
-                    post.likes.push(user._id);
+                post.likes.splice(index, 1);
 
-                    post.save();
-
-                    res.redirect("/student-feed");
-                } else {
-                    let index = post.likes.indexOf(user._id);
-                    post.likes.splice(index, 1);
-
-                    post.save();
-                    res.redirect("/student-feed");
-                }
-            });
+                post.save();
+                res.redirect("/student-feed/");
+            }
         });
     },
 
