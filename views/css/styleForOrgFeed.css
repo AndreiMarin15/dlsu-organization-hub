@@ -384,6 +384,10 @@ li a.navItems {
     padding-top: 10px;
 }
 
+.buttonDisabled {
+    pointer-events: none;
+  }
+
 .actions inactivebtn {
     color: #1C4C3B;
     width: 200px;
