@@ -50,33 +50,6 @@
                     
                     <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> &nbsp; GO!</button>
                 </div>
-                <div class="feed_type">
-                    <nav>
-                        <ul class="navLinks">
-
-                            {{#if post}}
-
-                            {{#unless event}}
-                  
-                            <li><a class="current" href="/student-feed" id="nav_link"><b>POSTS</b></a> </li>
-                            <li><a class="notCurrent" href="/student-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
-                            {{/unless}}
-                            
-                            {{/if}}
-
-                            {{#if event}}
-
-                            {{#unless post}}
-                          
-                            <li><a class="notCurrent" href="/student-feed" id="nav_link"><b>POSTS</b></a> </li>
-                            <li><a class="current" href="/student-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
-                            {{/unless}}                            
-                            {{/if}}
-
-                            
-                        </ul>
-                    </nav>
-                </div>
                 <div class="b2row2">
                     {{#if post}}
                     {{#each post}}
