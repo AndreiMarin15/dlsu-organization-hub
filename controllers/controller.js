@@ -91,7 +91,7 @@ const controller = {
 
         Posts.findOne({ accountName: account, createdAt: date }).then((post) => {
             StudentUser.findById(req.session.userid).then((user) => {
-                if (post.likes.indexOf(user._id) == -1) {
+                if (post.likes.indexOf(user._id) == -1 || post.likes == null) {
                     post.likes.push(user._id);
 
                     post.save();
