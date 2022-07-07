@@ -93,6 +93,8 @@ app.post("/posts/add", controller.addPost);
 app.get("/posts/:id", controller.getPostById);
 app.delete("/posts/:id", controller.deletePost);
 app.post("/posts/update/:id", controller.updatePost);
+app.post("/new-post", controller.addPost);
+app.post("/new-event", controller.addEvent);
 
 // EVENTS
 app.post("/events/add", controller.addEvent);
