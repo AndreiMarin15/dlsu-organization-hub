@@ -38,6 +38,9 @@ app.post("/register", controller.addStudent);
 //STUDENT FEED
 app.get("/student-feed/", controller.getStudentFeedPosts);
 app.get("/student-feed/events", controller.getStudentFeedEvents);
+app.get("/saved-posts", controller.getStudentSavedPosts);
+app.get("/saved-events", controller.getStudentSavedEvents);
+app.get("/events-going", controller.getStudentGoing);
 
 // STUDENT PROFILE
 app.get("/student-profile", controller.getStudentProfile);
