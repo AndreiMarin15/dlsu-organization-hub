@@ -43,6 +43,10 @@ const studentUserSchema = new Schema(
             type: [],
             required: false,
         },
+        going: {
+            type: [],
+            required: false,
+        },
     },
     {
         timestamps: true,
