@@ -24,11 +24,11 @@
                 <div class="right">
                     <div class="b1row3">
                         <div class="name">
-                            <h1>LSCS</h1>
+                            <h1>{{user.name}}</h1>
                         </div>
 
                         <div class="navigation">
-                            <a class="button" id="current" href="../Pages/lscs_org.html"><i class="fa-solid fa-newspaper"></i>&nbsp; &nbsp;RETURN TO PROFILE</a><br>
+                            <a class="button" href="/org-feed"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; RETURN TO PROFILE</a><br>
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
 
             <div class="box2">
                 <div class="b2row1">
-                    <img class="responsive" src="../images/student_header.png" />
+                    <img class="responsive" src="../images/header.png" />
                 </div>
                 <div class="b2row2">
                     <!-- SYSTEM SETTINGS -->
@@ -46,38 +46,26 @@
                             <br />
                         </div>
                         <div class="container">
-                            <form action = "../Pages/student_profile.html" onSubmit = "return true">
+                            <form 
+                                action="/update-org-profile"
+                                onSubmit="return true"
+                                method="post">
                                 <table class="table">
                                     <tr>
+                                        <td><strong>NAME: </strong> </td>
+                                        <td><input type="text" name="name" id="name" size="40"></td>
+                                    </tr>
+                                    
+                                    <tr>
                                         <td><strong>DLSU EMAIL: </strong> </td>
-                                        <td><input type = text id = email size = 40></td>
+                                        <td><input type="text" name="email" id="email" size="40"></td>
                                     </tr>
     
                                     <tr>
                                         <td><strong>PASSWORD: </strong> </td>
-                                        <td><input type = password1 id = password1 size = 40></td>
+                                        <td><input type="text" name="password" id="password" size="40"></td>
                                     </tr>
-    
-                                    <tr>
-                                        <td><strong>CONFIRM PASSWORD: </strong> </td>
-                                        <td><input type = password2 id = password2 size = 40></td>
-                                    </tr>
-    
-                                    <tr>
-                                        <td><strong>USER TYPE: </strong> </td>
-                                        <td> 
-                                            <select name="user" id="user">
-                                                <option value="student">Student</option>
-                                                <option value="org">Organization</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-    
-                                    <tr>
-                                        <td><strong>STUDENT ID NO: </strong> </td>
-                                        <td><input type = number id = id size = 40></td>
-                                    </tr>
-    
+
                                     <tr>
                                         <td colspan = 2 align = "right">
                                         <input type = submit value = "SAVE CHANGES" class="submit_button"></td>
@@ -95,10 +83,10 @@
                     <h1>ACCOUNT</h1>
                 </div>
                 <div class="b3row1">
-                    <a class="button" href="../Pages/lscs_org_edit.html"
+                    <a class="button" href="/org-edit-profile"
                         ><i class="fa-solid fa-user-pen"></i>&nbsp; &nbsp; EDIT PROFILE</a
                     ><br />
-                    <a class="button" id="current" href="../Pages/lscs_org_settings.html"
+                    <a class="button" id="current" href="/org-settings"
                         ><i class="fa-solid fa-gear"></i>&nbsp; &nbsp; PAGE SETTINGS</a
                     ><br />
                     <a class="button" href="/logout"
