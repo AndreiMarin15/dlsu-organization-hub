@@ -14,6 +14,7 @@ const app = express();
 
 //feed
 app.post("/like/:id", controller.likePost);
+app.post("/save/:id", controller.savePost);
 
 //index
 app.get("/", controller.getIndex);
@@ -50,7 +51,7 @@ app.post("/update-student-profile", controller.updateStudentUser);
 
 // ORG PROFILE
 app.get("/org-profile", controller.getOrgProfile);
-
+ 
 //ORG SIGN UP
 app.get("/orgSignUp/", controller.getOrgSignUp);
 app.post("/registerOrg", controller.addOrg);

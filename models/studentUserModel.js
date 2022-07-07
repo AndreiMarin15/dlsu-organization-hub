@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 
 const studentUserSchema = new Schema(
     {
-
         //make first name and last name required
         email: {
             type: String,
@@ -38,9 +37,12 @@ const studentUserSchema = new Schema(
             type: Number,
             required: false,
         },
-        
+
         following: [],
-        saved: [],
+        saved: {
+            type: [],
+            required: false,
+        },
     },
     {
         timestamps: true,
