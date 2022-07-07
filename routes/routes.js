@@ -49,6 +49,10 @@ app.get("/student-edit-profile", controller.getUpdateProfile);
 app.post("/student-edit-profile", controller.updateStudentProfile);
 app.post("/update-student-profile", controller.updateStudentUser);
 
+// STUDENT-VIEW ORG FEED AND PROFILE
+app.get("/student-view-org", controller.getOrgFeedStudentView);
+app.get("/student-view-org-profile", controller.getOrgProfileStudentView);
+
 // ORG PROFILE
 app.get("/org-profile", controller.getOrgProfile);
  
