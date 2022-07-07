@@ -4,6 +4,7 @@ const Posts = require("../models/postModel");
 const Event = require("../models/eventModel");
 const Image = require("../models/imageModel");
 const bcrypt = require("bcrypt");
+const Events = require("../models/eventModel");
 
 /* POSSIBLE CHANGES (once frontend is implemented):
     - Some req.___ might need to be changed depending on front end
@@ -84,19 +85,38 @@ const controller = {
 
     likePost: (req, res) => {
         Posts.findById(req.params.id).then((post) => {
-            if (post.likes.indexOf(req.session.userid) == -1 || post.likes == null) {
-                post.likes.push(req.session.userid);
+            if (post != null) {
+                if (post.likes.indexOf(req.session.userid) == -1 || post.likes == null) {
+                    post.likes.push(req.session.userid);
 
-                post.save();
-                console.log(post.likes.length + " " + req.session.userid);
-                res.redirect("/student-feed/");
+                    post.save();
+
+                    res.redirect("/student-feed/");
+                } else {
+                    index = post.likes.indexOf(req.session.userid);
+
+                    post.likes.splice(index, 1);
+
+                    post.save();
+                    res.redirect("/student-feed/");
+                }
             } else {
-                index = post.likes.indexOf(req.session.userid);
-
-                post.likes.splice(index, 1);
-
-                post.save();
-                res.redirect("/student-feed/");
+                Events.findById(req.params.id).then( event => {
+                    if (event.likes.indexOf(req.session.userid) == -1 || event.likes == null) {
+                        event.likes.push(req.session.userid);
+    
+                        event.save();
+    
+                        res.redirect("/student-feed/events");
+                    } else {
+                        index = event.likes.indexOf(req.session.userid);
+    
+                        event.likes.splice(index, 1);
+    
+                        event.save();
+                        res.redirect("/student-feed/events");
+                    }
+                })
             }
         });
     },
