@@ -4,7 +4,7 @@
         <script src="https://kit.fontawesome.com/dfcf57d1e4.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../css/styleForOrgFeed.css" />
-        <title>LSCS Profile</title>
+        <title>Organization Feed</title>
     </head>
     <body>
         <div class="container1">
@@ -20,51 +20,52 @@
                 </div>
                 <div class="right"><div class="b1row3">
                     <div class="name">
-                        <h1>{{org.name}}</h1>
+                        <h1>{{user.name}}</h1>
                     </div>
-                    <!--- #TODO: CHANGE HREFS, especially kay Follow button --->
+               
                     <div class="navigation">
-                        <a class="button" href="../Pages/lscs_org.html"><i class="fa-solid fa-person-circle-plus"></i>&nbsp; &nbsp; FOLLOW</a><br>
-                        <a class="button" href="../Pages/lscs_org_posts.html"><i class="fa-solid fa-clipboard"></i>&nbsp; &nbsp; POSTS</a><br>
-                        <a class="button" href="../Pages/lscs_org_events.html"><i class="fa-solid fa-calendar-plus"></i>&nbsp; &nbsp; EVENTS</a><br>
-                        <a class="button" href="../Pages/lscs_org_profile.html"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; ABOUT</a><br>
+                        <a class="button" href="/org-profile"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; ABOUT</a><br>
                     </div>
                 </div>
             </div>
                 
             </div>
 
-             <div class="box2">
+            <div class="box2">
                 <div class="b2row1">
                     <input type="text" name="searchbar" id="searchbar" placeholder="   Search posts, events, and pages..." />
-                    
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> &nbsp; GO!</button>
+                    <button type="submit" id="search"><i class="fa-solid fa-magnifying-glass"></i> &nbsp; GO!</button>
                 </div>
                 <div class="feed_type">
                     <nav>
                         <ul class="navLinks">
-
-
                             {{#if post}}
-
-                            {{#unless event}}
-                  
-                            <li><a class="current" href="/student-org-feed" id="nav_link"><b>POSTS</b></a> </li>
-                            <li><a class="notCurrent" href="/student-org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
-                            {{/unless}}
-                            
+                                {{#unless event}}
+                                    {{#unless about}}
+                                        <li><a class="current" href="/org-feed/" id="nav_link"><b>POSTS</b></a> </li>
+                                        <li><a class="notCurrent" href="/org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
+                                    {{/unless}}
+                                {{/unless}}
                             {{/if}}
 
                             {{#if event}}
-
-                            {{#unless post}}
-                          
-                            <li><a class="notCurrent" href="/student-org-feed" id="nav_link"><b>POSTS</b></a> </li>
-                            <li><a class="current" href="/student-org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
-                            {{/unless}}                            
+                                {{#unless post}}
+                                    {{#unless about}}
+                                        <li><a class="notCurrent" href="/org-feed/" id="nav_link"><b>POSTS</b></a> </li>
+                                        <li><a class="current" href="/org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
+                                    {{/unless}}
+                                {{/unless}}
                             {{/if}}
 
-                            
+                            {{#if about}}
+                                {{#unless post}}
+                                    {{#unless event}}
+                                        <li><a class="notCurrent" href="/org-feed/" id="nav_link"><b>POSTS</b></a> </li>
+                                        <li><a class="notCurrent" href="/org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
+                                        <li><a class="current" href="/org-profile" id="nav_link"><b>ABOUT</b></a> </li>
+                                    {{/unless}}
+                                {{/unless}}
+                            {{/if}}
                         </ul>
                     </nav>
                 </div>
@@ -80,6 +81,7 @@
                     {{> events}}
                     {{/each}}
                     {{/if}}
+
                 </div>
             </div>
 
@@ -88,10 +90,10 @@
                     <h1>ACCOUNT</h1>
                 </div>
                 <div class="b3row1">
-                    <a class="button" href="../Pages/lscs_org_edit.html"
+                    <a class="button" href="/org-edit-profile"
                         ><i class="fa-solid fa-user-pen"></i>&nbsp; &nbsp; EDIT PROFILE</a
                     ><br />
-                    <a class="button" id="current" href="../Pages/lscs_org_settings.html"
+                    <a class="button" id="current" href="/org-settings"
                         ><i class="fa-solid fa-gear"></i>&nbsp; &nbsp; PAGE SETTINGS</a
                     ><br />
                     <a class="button" href="/logout"
