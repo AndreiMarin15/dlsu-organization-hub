@@ -457,18 +457,18 @@ const controller = {
                         .save()
                         .then(() => {
                             res.send(
-                                `<script>alert("Account Created"); window.location.href = "/login"; </script>`
+                                `<script>alert("Account Created!"); window.location.href = "/login"; </script>`
                             );
                         })
                         .catch((err) => res.status(400).json("Error: " + err));
                 } else {
                     res.send(
-                        `<script>alert("Invalid Credentials. Double check your email and password."); window.location.href = "/studentSignUp"; </script>`
+                        `<script>alert("Invalid Credentials. Either the email entered is invalid, or the passwords entered do not match."); window.location.href = "/studentSignUp"; </script>`
                     );
                 }
             } else {
                 res.send(
-                    `<script>alert("Email already in use. Account not created"); window.location.href = "/studentSignUp"; </script>`
+                    `<script>alert("Email already in use. Failed to create account."); window.location.href = "/studentSignUp"; </script>`
                 );
             }
         });
@@ -518,7 +518,7 @@ const controller = {
                 user.save()
                     .then(() =>
                         res.send(
-                            `<script>alert("Account Updated"); window.location.href = "/student-settings"; </script>`
+                            `<script>alert("Account Updated!"); window.location.href = "/student-settings"; </script>`
                         )
                     )
                     .catch((err) => res.status(400).json("Error: " + err));
@@ -544,7 +544,7 @@ const controller = {
             }
             user.save().then(() => {
                 res.send(
-                    `<script>alert("Profile Updated"); window.location.href = "/student-edit-profile"; </script>`
+                    `<script>alert("Profile Updated!"); window.location.href = "/student-edit-profile"; </script>`
                 );
             });
         });
@@ -583,7 +583,7 @@ const controller = {
                         .save()
                         .then(() => {
                             res.send(
-                                `<script>alert("Account Created"); window.location.href = "/login"; </script>`
+                                `<script>alert("Account Created!"); window.location.href = "/login"; </script>`
                             );
                         })
                         .catch((err) => res.status(400).json("Error: " + err));
