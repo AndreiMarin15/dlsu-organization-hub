@@ -75,7 +75,7 @@ app.get("/org-settings", controller.getOrgSettings);
 
 //ORG EDIT
 app.get("/org-edit-post", controller.getEditOrgPost);
-//app.get("/org-edit-event", controller.getEditOrgEvent);
+app.get("/org-edit-event", controller.getEditOrgEvent);
 
 // STUDENT USERS
 app.get("/studentUsers/", controller.getStudents);
