@@ -46,15 +46,16 @@
                                 <img src="{{user.image}}">
                             </div>
                             <div class="header-title">
-                                <b>{{user.name}}</b></a><br>
+                                <a href="/org-feed/" id="nav_link"><b>{{user.name}}</b></a><br />
                                 <p><strong>Type: </strong>Project Event</p>
                             </div>
                         </div>
                             <div class="container">
                                 {{!--<form></form>--}}
+                                <form action="/new-event" method="post">
                                 <table class="table">
                                 <tr>
-                                    <td><textarea placeholder="Type caption here..." id="caption" name="caption"></textarea></td>
+                                    <td><textarea placeholder="Type caption here..." id="caption" name="content"></textarea></td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -63,6 +64,7 @@
                                     </td>
                                 </tr>
                                 </table>
+                                </form>
                                 
                             </div>
                     </div>

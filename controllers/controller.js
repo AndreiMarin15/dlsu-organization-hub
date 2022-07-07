@@ -92,11 +92,11 @@ const controller = {
     },
 
     getCreatePost: (req, res) => {
-        res.render("org_create_post");
+        res.render("org_create_post", {user: orgUser});
     },
 
     getCreateEvent: (req, res) => {
-        res.render("org_create_event");
+        res.render("org_create_event", {user: orgUser});
     },
 
     likePost: (req, res) => {
@@ -207,7 +207,7 @@ const controller = {
     },
 
     getStudentFeed: (req, res) => {
-        Posts.find().then((posts) => {
+        Posts.find().sort({createdAt: -1}).then((posts) => {
             Event.find()
                 .then((events) => {
                     res.render("student_feed", { user: studentUser, post: posts, event: events });
@@ -237,10 +237,10 @@ const controller = {
     },
 
     getOrgFeed: (req, res) => {
-        Posts.find().then((posts) => {
+        Posts.find().sort({createdAt: -1}).then((posts) => {
             Event.find()
                 .then((events) => {
-                    res.render("org_feed", { user: orgUser, post: posts});
+                    res.render("org_feed", { user: orgUser, post: posts });
                 })
                 .catch((err) => console.log(err));
         });
@@ -260,7 +260,7 @@ const controller = {
 
     getStudentSavedPosts: (req, res) => {
         StudentUser.findById(req.session.userid).then((student) => {
-            Posts.find({ _id: { $in: student.saved } }).then((posts) => {
+            Posts.find({ _id: { $in: student.saved } }).sort({createdAt: -1}).then((posts) => {
                 res.render("student_saved", { user: studentUser, post: posts });
             });
         });
@@ -268,7 +268,7 @@ const controller = {
 
     getStudentSavedEvents: (req, res) => {
         StudentUser.findById(req.session.userid).then((student) => {
-            Events.find({ _id: { $in: student.saved } }).then((events) => {
+            Events.find({ _id: { $in: student.saved } }).sort({createdAt: -1}).then((events) => {
                 res.render("student_saved", { event: events });
             });
         });
@@ -276,7 +276,7 @@ const controller = {
 
     getStudentGoing: (req, res) => {
         StudentUser.findById(req.session.userid).then((student) => {
-            Events.find({ _id: { $in: student.going } }).then((events) => {
+            Events.find({ _id: { $in: student.going } }).sort({createdAt: -1}).then((events) => {
                 res.render("student_going", { user: studentUser, event: events });
             });
         });
@@ -595,7 +595,7 @@ const controller = {
             _id: req.session.userid,
         });
 
-        Posts.find()
+        Posts.find().sort({createdAt: -1})
             .then((posts) => {
                 res.render("student_feed", { user: user, post: posts });
             })
@@ -604,7 +604,7 @@ const controller = {
 
     getOrgFeedPosts: (req, res) => {
         // gets all posts from the database
-        Posts.find()
+        Posts.find().sort({createdAt: -1})
             .then((posts) => {
                 res.render("org_feed", { post: posts });
             })
@@ -642,7 +642,7 @@ const controller = {
         OrgUser.findById(req.params.id)
             .then((user) => {
                 let userEmail = user.email;
-                Posts.find({ email: userEmail })
+                Posts.find({ email: userEmail }).sort({createdAt: -1})
                     .then((posts) => res.json(posts))
                     .catch((err) => res.status(400).json("Error: " + err));
             })
@@ -653,17 +653,30 @@ const controller = {
         // creates a new post
         const email = req.session.email;
         const content = req.body.content;
-        const image = req.body.image;
 
         OrgUser.findOne({ email: email }).then((user) => {
             const accountName = user.name;
 
-            const newPost = new Posts({ accountName, email, content, image });
+            if (req.body.image) {
+                const image = req.body.image;
+                const newPost = new Posts({ accountName, email, content, image });
 
-            newPost
-                .save()
-                .then(() => res.json("Post added!"))
-                .catch((err) => res.status(400).json("Error: " + err));
+                newPost
+                    .save()
+                    .then(() => {
+                        res.redirect("/org-feed");
+                    })
+                    .catch((err) => res.status(400).json("Error: " + err));
+            } else {
+                const newPost = new Posts({ accountName, email, content });
+
+                newPost
+                    .save()
+                    .then(() => {
+                        res.redirect("/org-feed");
+                    })
+                    .catch((err) => res.status(400).json("Error: " + err));
+            }
         });
     },
 
@@ -712,7 +725,7 @@ const controller = {
             lastName: req.session.lastName,
             _id: req.session.userid,
         });
-        Event.find()
+        Event.find().sort({createdAt: -1})
             .then((events) => {
                 res.render("student_feed", { user: user, event: events });
             })
@@ -722,7 +735,7 @@ const controller = {
     getOrgFeedEvents: (req, res) => {
         Event.find()
             .then((events) => {
-                res.render("org_feed", { event: events });
+                res.render("org_feed", { user: orgUser, event: events });
             })
             .catch((err) => res.json(err));
     },
@@ -769,24 +782,40 @@ const controller = {
         // creates a new post
         const email = req.session.email;
         const content = req.body.content;
-        const image = req.body.image;
-        const eventdate = req.body.date;
 
         OrgUser.findOne({ email: email }).then((user) => {
             const accountName = user.name;
 
-            const newEvent = new Event({
-                accountName,
-                email,
-                content,
-                image,
-                eventdate,
-            });
+            if (req.body.image) {
+                const image = req.body.image;
+                const newEvent = new Event({
+                    accountName,
+                    email,
+                    content,
+                    image,
+                });
 
-            newEvent
-                .save()
-                .then(() => res.json("Event added!"))
-                .catch((err) => res.status(400).json("Error: " + err));
+                newEvent
+                    .save()
+                    .then(() => {
+                        res.redirect("/org-feed/events")
+                    })
+                    .catch((err) => res.status(400).json("Error: " + err));
+            } else {
+                const newEvent = new Event({
+                    accountName,
+                    email,
+                    content,
+           
+                });
+
+                newEvent
+                    .save()
+                    .then(() => {
+                        res.redirect("/org-feed/events")
+                    })
+                    .catch((err) => res.status(400).json("Error: " + err));
+            }
         });
     },
 
