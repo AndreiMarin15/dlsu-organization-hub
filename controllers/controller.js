@@ -515,10 +515,7 @@ const controller = {
                     studentUser.password = req.body.password;
                 }
 
-                // studentUser.email = req.session.email;
-                // studentUser.firstName = req.session.firstName;
-                // studentUser.lastName = req.session.lastName;
-                // studentUser.password = req.session.password;
+                
                 req.session.save();
                 
 
