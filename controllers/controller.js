@@ -350,6 +350,24 @@ const controller = {
         });
     },
 
+    unfollow: (req, res) => {
+        StudentUser.findById(req.session.userid).then((student) => {
+            index = student.following.indexOf(req.params.id);
+
+            if (index != -1) {
+                student.following.splice(index, 1);
+
+                student.password = studentUser.password;
+
+                student.save();
+
+                res.send(
+                    `<script>alert("Org Unfollowed!"); window.location.href = "/student-profile/following"; </script>`
+                );
+            }
+        });
+    },
+
     getOrgFeed: (req, res) => {
         Posts.find({ email: req.session.email })
             .sort({ createdAt: -1 })
