@@ -31,15 +31,41 @@
         <div class="action-btn">
             
             <form action="/like/{{_id}}" method="post">
-                <button type="submit"><i class="fa-solid fa-thumbs-up" background-color=""></i>
+                <button type="submit" id="like"><i class="fa-solid fa-thumbs-up" background-color=""></i>
                     &nbsp;{{likes.length}}
                     LIKES</button></form>
         </div>
+        <script>
+            
+            const btn = document.getElementById('like');
+            btn.onclick = changeColor();   
+
+            function changeColor() {
+                btn.style.backgroundColor = #E4C8B8;;
+                btn.style.color = #1C4C3B;
+                //return false;
+            }
+            
+        </script>
+        
         <div class="action-btn">
             <form action="/save/{{_id}}" method="post">
-            <button type="submit"><i class="fa-solid fa-bookmark"></i>
+            <button type="submit" id="save"><i class="fa-solid fa-bookmark"></i>
                 &nbsp;SAVE</button></form>
         </div>
+
+        <script>
+
+            const btn = document.getElementById('save');
+            btn.onclick = changeColor();   
+
+            function changeColor() {
+                btn.style.backgroundColor = #E4C8B8;;
+                btn.style.color = #1C4C3B;
+                return false;
+            }
+            
+        </script>
         
     </div>
 </div>

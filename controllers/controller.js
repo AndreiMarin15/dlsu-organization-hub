@@ -591,9 +591,19 @@ const controller = {
                             );
                         })
                         .catch((err) => res.status(400).json("Error: " + err));
-                } else {
+                } else if (password != confirm){
                     res.send(
-                        `<script>alert("Invalid Credentials. Either the email entered is invalid, or the passwords entered do not match."); window.location.href = "/studentSignUp"; </script>`
+                        `<script>alert("Invalid Credentials. The passwords you entered do not match."); window.location.href = "/orgSignUp"; </script>`
+                    );
+                }
+                else if (password.length < 8){
+                    res.send(
+                        `<script>alert("Invalid Credentials. Password must have at least 8 characters."); window.location.href = "/orgSignUp"; </script>`
+                    );
+                }
+                else if (!email.includes("dlsu.edu.ph")){
+                    res.send(
+                        `<script>alert("Invalid Credentials. Email entered is not recognized as a DLSU email."); window.location.href = "/orgSignUp"; </script>`
                     );
                 }
             } else {
@@ -766,9 +776,19 @@ const controller = {
                             );
                         })
                         .catch((err) => res.status(400).json("Error: " + err));
-                } else {
+                } else if (password != confirm){
                     res.send(
-                        `<script>alert("Invalid Credentials. Double check your email and password"); window.location.href = "/orgSignUp"; </script>`
+                        `<script>alert("Invalid Credentials. The passwords you entered do not match."); window.location.href = "/orgSignUp"; </script>`
+                    );
+                }
+                else if (password.length < 8){
+                    res.send(
+                        `<script>alert("Invalid Credentials. Password must have at least 8 characters."); window.location.href = "/orgSignUp"; </script>`
+                    );
+                }
+                else if (!email.includes("dlsu.edu.ph")){
+                    res.send(
+                        `<script>alert("Invalid Credentials. Email entered is not recognized as a DLSU email."); window.location.href = "/orgSignUp"; </script>`
                     );
                 }
             } else {
@@ -806,7 +826,7 @@ const controller = {
                 user.save()
                     .then(() =>
                         res.send(
-                            `<script>alert("Account Updated"); window.location.href = "/org-settings"; </script>`
+                            `<script>alert("Account Updated!"); window.location.href = "/org-settings"; </script>`
                         )
                     )
                     .catch((err) => res.status(400).json("Error: " + err));
@@ -841,7 +861,7 @@ const controller = {
 
             user.save().then(() => {
                 res.send(
-                    `<script>alert("Org Updated"); window.location.href = "/org-edit-profile"; </script>`
+                    `<script>alert("Account Updated!"); window.location.href = "/org-edit-profile"; </script>`
                 );
             });
         });

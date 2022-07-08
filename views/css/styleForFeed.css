@@ -386,7 +386,7 @@ div {
     transition: color 0.3s, background-image 0.5s, ease-in-out;
 }
 
-.actions button:hover{
+.actions button:hover, button:active, button:focus{
     color: #1C4C3B;
     cursor: pointer;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
