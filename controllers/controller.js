@@ -182,7 +182,7 @@ const controller = {
 
                         student.save();
 
-                        res.redirect("/student-feed/");
+                        res.redirect('back');
                     } else {
                         index = student.saved.indexOf(post._id);
 
@@ -191,7 +191,7 @@ const controller = {
 
                         student.save();
 
-                        res.redirect("/student-feed/");
+                        res.redirect('back');
                     }
                 } else {
                     Events.findById(req.params.id).then((event) => {
@@ -201,7 +201,7 @@ const controller = {
 
                             student.save();
 
-                            res.redirect("/student-feed/events");
+                            res.redirect('back');
                         } else {
                             index = student.saved.indexOf(event._id);
 
@@ -210,7 +210,7 @@ const controller = {
 
                             student.save();
 
-                            res.redirect("/student-feed/events");
+                            res.redirect('back');
                         }
                     });
                 }
@@ -227,7 +227,7 @@ const controller = {
 
                     student.save();
 
-                    res.redirect("/student-feed/events");
+                    res.redirect('back');
                 } else {
                     index = student.going.indexOf(event._id);
                     student.password = studentUser.password;
@@ -235,7 +235,7 @@ const controller = {
 
                     student.save();
 
-                    res.redirect("/student-feed/events");
+                    res.redirect('back');
                 }
             });
         });
