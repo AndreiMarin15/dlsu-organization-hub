@@ -141,14 +141,14 @@ const controller = {
 
                     post.save();
 
-                    res.redirect('back');
+                    res.redirect("back");
                 } else {
                     index = post.likes.indexOf(req.session.userid);
 
                     post.likes.splice(index, 1);
 
                     post.save();
-                    res.redirect('back');
+                    res.redirect("back");
                 }
             } else {
                 Events.findById(req.params.id).then((event) => {
@@ -157,14 +157,14 @@ const controller = {
 
                         event.save();
 
-                        res.redirect('back');
+                        res.redirect("back");
                     } else {
                         index = event.likes.indexOf(req.session.userid);
 
                         event.likes.splice(index, 1);
 
                         event.save();
-                        res.redirect('back');
+                        res.redirect("back");
                     }
                 });
             }
@@ -181,7 +181,7 @@ const controller = {
 
                         student.save();
 
-                        res.redirect('back');
+                        res.redirect("back");
                     } else {
                         index = student.saved.indexOf(post._id);
 
@@ -190,7 +190,7 @@ const controller = {
 
                         student.save();
 
-                        res.redirect('back');
+                        res.redirect("back");
                     }
                 } else {
                     Events.findById(req.params.id).then((event) => {
@@ -200,7 +200,7 @@ const controller = {
 
                             student.save();
 
-                            res.redirect('back');
+                            res.redirect("back");
                         } else {
                             index = student.saved.indexOf(event._id);
 
@@ -209,7 +209,7 @@ const controller = {
 
                             student.save();
 
-                            res.redirect('back');
+                            res.redirect("back");
                         }
                     });
                 }
@@ -226,7 +226,7 @@ const controller = {
 
                     student.save();
 
-                    res.redirect('back');
+                    res.redirect("back");
                 } else {
                     index = student.going.indexOf(event._id);
                     student.password = studentUser.password;
@@ -234,7 +234,7 @@ const controller = {
 
                     student.save();
 
-                    res.redirect('back');
+                    res.redirect("back");
                 }
             });
         });
@@ -930,19 +930,22 @@ const controller = {
         // gets all posts from the database
 
         StudentUser.findById(req.session.userid).then((student) => {
-                
-            OrgUser.find({ _id: { $in: student.following } }).then((orgs) => {
-                let emails = [];
-                orgs.forEach((org) => {
-                    emails.push(org.email);
-                });
-
-                Posts.find({ email: { $in: emails } })
-                    .sort({ updatedAt: -1 })
-                    .then((posts) => {
-                        res.render("student_feed", { user: studentUser, post: posts });
+            if (student.following != null) {
+                OrgUser.find({ _id: { $in: student.following } }).then((orgs) => {
+                    let emails = [];
+                    orgs.forEach((org) => {
+                        emails.push(org.email);
                     });
-            });
+
+                    Posts.find({ email: { $in: emails } })
+                        .sort({ updatedAt: -1 })
+                        .then((posts) => {
+                            res.render("student_feed", { user: studentUser, post: posts });
+                        });
+                });
+            } else {
+                res.render("student_feed", {user: studentUser});
+            }
         });
     },
 
@@ -1066,7 +1069,7 @@ const controller = {
                         .catch((err) => res.status(400).json("Error: " + err));
                 } else {
                     post.content = req.body.content;
-                    
+
                     post.save()
                         .then(() =>
                             res.send(
