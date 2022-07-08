@@ -7,15 +7,16 @@ TODO:
 [/] Create backend for event schema
 [/] Student Saved Posts and Events
 [/] Student Going
+[/] Edit Post Backend
+[/] Delete Post connect to front end
 [] Follow, unfollow
 [] File upload system
 [] Student Following List
 [] Student Org View
 [] Fix post retrieval
 [] Org avatar in schema
-[] Edit Post Backend
-[] Delete Post connect to front end
 [] Like, saved, marked as going button colors
+[] Search
 
 Significant Pages: 
 [/] Index, 
