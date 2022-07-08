@@ -930,12 +930,20 @@ const controller = {
     getStudentFeedPosts: (req, res) => {
         // gets all posts from the database
 
-        Posts.find()
-            .sort({ updatedAt: -1 })
-            .then((posts) => {
-                res.render("student_feed", { user: studentUser, post: posts });
-            })
-            .catch((err) => res.status(400).json("Error: " + err));
+        StudentUser.findById(req.session.userid).then((student) => {
+            OrgUser.find({ _id: { $in: student.following } }).then((orgs) => {
+                let emails = [];
+                orgs.forEach((org) => {
+                    emails.push(org.email);
+                });
+
+                Posts.find({ email: { $in: emails } })
+                    .sort({ updatedAt: -1 })
+                    .then((posts) => {
+                        res.render("student_feed", { user: studentUser, post: posts });
+                    });
+            });
+        });
     },
 
     getOrgFeedPosts: (req, res) => {
@@ -1046,6 +1054,7 @@ const controller = {
             .then((post) => {
                 if (req.file) {
                     post.image = req.file.originalname;
+
                     post.content = req.body.content;
 
                     post.save()
@@ -1057,7 +1066,7 @@ const controller = {
                         .catch((err) => res.status(400).json("Error: " + err));
                 } else {
                     post.content = req.body.content;
-
+                    
                     post.save()
                         .then(() =>
                             res.send(
@@ -1081,12 +1090,20 @@ const controller = {
     },
 
     getStudentFeedEvents: (req, res) => {
-        Event.find()
-            .sort({ updatedAt: -1 })
-            .then((events) => {
-                res.render("student_feed", { user: studentUser, event: events });
-            })
-            .catch((err) => res.json(err));
+        StudentUser.findById(req.session.userid).then((student) => {
+            OrgUser.find({ _id: { $in: student.following } }).then((orgs) => {
+                let emails = [];
+                orgs.forEach((org) => {
+                    emails.push(org.email);
+                });
+
+                Events.find({ email: { $in: emails } })
+                    .sort({ updatedAt: -1 })
+                    .then((events) => {
+                        res.render("student_feed", { user: studentUser, event: events });
+                    });
+            });
+        });
     },
 
     getOrgFeedEvents: (req, res) => {
@@ -1206,16 +1223,29 @@ const controller = {
         // updates a post using its id
         Event.findById(req.params.id)
             .then((event) => {
-                event.content = req.body.content;
+                if (req.file) {
+                    event.image = req.file.originalname;
+                    event.content = req.body.content;
 
-                event
-                    .save()
-                    .then(() =>
-                        res.send(
-                            `<script>alert("Event Updated!"); window.location.href = "/org-feed/events"; </script>`
+                    event
+                        .save()
+                        .then(() =>
+                            res.send(
+                                `<script>alert("Event Updated!"); window.location.href = "/org-feed/events"; </script>`
+                            )
+                        );
+                } else {
+                    event.content = req.body.content;
+
+                    event
+                        .save()
+                        .then(() =>
+                            res.send(
+                                `<script>alert("Event Updated!"); window.location.href = "/org-feed/events"; </script>`
+                            )
                         )
-                    )
-                    .catch((err) => res.status(400).json("Error: " + err));
+                        .catch((err) => res.status(400).json("Error: " + err));
+                }
             })
             .catch((err) => res.status(400).json("Error: " + err));
     },

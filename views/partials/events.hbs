@@ -3,9 +3,9 @@
     <div class="card-header">
         <div class="logo">
             {{#if profile}}
-            <img src="../images/uploads/{{profile}}" />
+                <img src="../images/uploads/{{profile}}" />
             {{else}}
-            <img src="../images/org_user.png" alt="" />
+                <img src="../images/org_user.png" alt="" />
             {{/if}}
         </div>
         <div class="header-title">
@@ -18,7 +18,7 @@
     <div class="container">
         <div class="attachment">
             {{#if image}}
-                <img src="./images/{{image}}" width="300" />
+                <img src="../images/{{image}}" width="300" />
             {{/if}}
         </div>
         <div class="caption">
@@ -29,21 +29,19 @@
     <div class="actions">
         <div class="action-btn">
             <form action="/like/{{_id}}" method="post">
-                <button type="submit" id="like"><i class="fa-solid fa-thumbs-up" background-color=""></i>
+                <button type="submit" id="like"><i
+                        class="fa-solid fa-thumbs-up"
+                        background-color=""
+                    ></i>
                     &nbsp;{{likes.length}}
                     LIKES</button></form>
         </div>
         <script>
 
-            const btn = document.getElementById('like');
-            btn.onclick = changeColor();   
+            const btn = document.getElementById('like'); btn.onclick = changeColor(); function
+            changeColor() { btn.style.backgroundColor = #E4C8B8;; btn.style.color = #1C4C3B; return
+            false; }
 
-            function changeColor() {
-                btn.style.backgroundColor = #E4C8B8;;
-                btn.style.color = #1C4C3B;
-                return false;
-            }
-            
         </script>
 
         <div class="action-btn">
@@ -53,34 +51,24 @@
         </div>
         <script>
 
-            const btn = document.getElementById('save');
-            btn.onclick = changeColor();   
+            const btn = document.getElementById('save'); btn.onclick = changeColor(); function
+            changeColor() { btn.style.backgroundColor = #E4C8B8;; btn.style.color = #1C4C3B; return
+            false; }
 
-            function changeColor() {
-                btn.style.backgroundColor = #E4C8B8;;
-                btn.style.color = #1C4C3B;
-                return false;
-            }
-            
         </script>
-            
+
         <div class="action-btn">
             <form action="/going/{{_id}}" method="post">
-            <button type="submit" id="going"><i class="fa-solid fa-person-running"></i>
-                &nbsp;MARK AS GOING</button>
+                <button type="submit" id="going"><i class="fa-solid fa-person-running"></i>
+                    &nbsp;MARK AS GOING</button>
             </form>
         </div>
         <script>
 
-            const btn = document.getElementById('going');
-            btn.onclick = changeColor();   
+            const btn = document.getElementById('going'); btn.onclick = changeColor(); function
+            changeColor() { btn.style.backgroundColor = #E4C8B8;; btn.style.color = #1C4C3B; return
+            false; }
 
-            function changeColor() {
-                btn.style.backgroundColor = #E4C8B8;;
-                btn.style.color = #1C4C3B;
-                return false;
-            }
-            
         </script>
     </div>
 

@@ -69,7 +69,11 @@
                             </div>
                         </div>
                         <div class="container">
-                            <form action="/update-post/{{post._id}}" method="post">
+                            <form
+                                action="/update-post/{{post._id}}"
+                                method="post"
+                                enctype="multipart/form-data"
+                            >
                                 <table class="table">
                                     <tr>
                                         <td><textarea
@@ -81,6 +85,7 @@
                                         <td>
                                             <input
                                                 type="file"
+                                                accept="image/png, image/jpg, image/jpeg"
                                                 id="attach"
                                                 name="postImage"
                                                 value="Attach image"

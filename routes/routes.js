@@ -94,8 +94,8 @@ app.post("/update-org-profile", controller.updateOrgUser);
 //ORG EDIT
 app.get("/org-edit-post/:id", controller.getEditOrgPost);
 app.get("/org-edit-event/:id", controller.getEditOrgEvent);
-app.post("/update-post/:id", controller.updatePost);
-app.post("/update-event/:id", controller.updateEvent);
+app.post("/update-post/:id", upload.single("postImage"), controller.updatePost);
+app.post("/update-event/:id", upload.single("eventImage"), controller.updateEvent);
 
 // STUDENT USERS
 app.get("/studentUsers/", controller.getStudents);
@@ -124,7 +124,7 @@ app.get("/posts/user/:id", controller.getPostsByUser);
 app.post("/posts/add", controller.addPost);
 app.get("/posts/:id", controller.getPostById);
 app.delete("/posts/:id", controller.deletePost);
-app.post("/posts/update/:id", controller.updatePost);
+app.post("/posts/update/:id", upload.single("postImage"), controller.updatePost);
 app.post("/new-post", upload.single("postImage"), controller.addPost);
 app.post("/new-event",upload.single("eventImage"), controller.addEvent);
 
