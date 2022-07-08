@@ -1,8 +1,10 @@
-<!DOCTYPE html>
 <html lang="en">
     <head>
         <script src="https://kit.fontawesome.com/dfcf57d1e4.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
         <link rel="stylesheet" href="../css/styleForCreate.css" />
         <title>Create Post</title>
     </head>
@@ -10,11 +12,11 @@
         <div class="container1">
             <div class="box1">
                 <div class="left">
-                     <div class="b1row1">
-                         <img class="responsive" src="../images/logo_feed.png" alt="" />
-                     </div>
-                    
-                     <div class="b1row2">
+                    <div class="b1row1">
+                        <img class="responsive" src="../images/logo_feed.png" alt="" />
+                    </div>
+
+                    <div class="b1row2">
                         {{#if user.image}}
                             <img class="responsive" src="../images/{{user.image}}" alt="" />
 
@@ -22,58 +24,79 @@
                             <img class="responsive" src="../images/org_user.png" alt="" />
 
                         {{/if}}
-
                     </div>
                 </div>
                 <div class="right"><div class="b1row3">
-                    <div class="name">
-                        <h1>{{user.name}}</h1>
-                    </div>
-               
-                    <div class="navigation">
-                        <a class="button" href="/org-profile"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; ABOUT</a><br>
+                        <div class="name">
+                            <h1>{{user.name}}</h1>
+                        </div>
+
+                        <div class="navigation">
+                            <a class="button" href="/org-profile"><i
+                                    class="fa-solid fa-user"
+                                ></i>&nbsp; &nbsp; ABOUT</a><br />
+                        </div>
                     </div>
                 </div>
-            </div>
-                
+
             </div>
 
             <div class="box2">
                 <div class="b2row1">
                     <form action="/org-feed/" method="get">
-                        <button type="submit" id="create"><i class="fa-solid fa-file-plus"></i> &nbsp; BACK TO FEED</button>
+                        <button type="submit" id="create"><i class="fa-solid fa-file-plus"></i>
+                            &nbsp; BACK TO FEED</button>
                     </form>
-                    <button type="submit" disabled="disabled" id="disabled"><i class="fa-solid fa-file-plus"></i> &nbsp; CREATE POST</button>
-                    
+                    <button type="submit" disabled="disabled" id="disabled"><i
+                            class="fa-solid fa-file-plus"
+                        ></i>
+                        &nbsp; CREATE POST</button>
+
                 </div>
                 <div class="b2row2">
-                    <div class ="card">
+                    <div class="card">
                         <div class="card-header">
                             <div class="logo">
-                                <img src="{{user.image}}">
+                                {{#if user.image}}
+                                    <img src="../images/{{user.image}}" />
+                                {{else}}
+                                    <img src="../images/org_user.png" />
+                                {{/if}}
                             </div>
                             <div class="header-title">
                                 <a href="/org-feed/" id="nav_link"><b>{{user.name}}</b></a><br />
                                 <p><strong>Type: </strong>Project Post</p>
                             </div>
                         </div>
-                            <div class="container">
-                                {{!--<form></form>--}}
-                                <form action="/new-post" method="post">
+                        <div class="container">
+                            <form action="/new-post" method="post">
                                 <table class="table">
-                                <tr>
-                                    <td><textarea placeholder="Type caption here..." id="caption" name="content"></textarea></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                    <input type="file" id="attach" value="Attach image">
-                                    <input type="submit" id="submit" value="Submit">
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td><textarea
+                                                placeholder="Type content here..."
+                                                id="caption"
+                                                name="content"
+                                            ></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input
+                                                type="file"
+                                                id="attach"
+                                                name="attachment"
+                                                value="Attach image"
+                                            />
+                                            <input
+                                                type="submit"
+                                                id="submit"
+                                                value="Post"
+                                            />
+                                        </td>
+                                    </tr>
                                 </table>
-                                </form>
-                                
-                            </div>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -83,54 +106,73 @@
                     <h1>ACCOUNT</h1>
                 </div>
                 <div class="b3row1">
-                    <a class="button" href="/org-edit-profile"
-                        ><i class="fa-solid fa-user-pen"></i>&nbsp; &nbsp; EDIT PROFILE</a
-                    ><br />
-                    <a class="button" id="current" href="/org-settings"
-                        ><i class="fa-solid fa-gear"></i>&nbsp; &nbsp; PAGE SETTINGS</a
-                    ><br />
-                    <a class="button" href="/logout"
-                        ><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp; &nbsp;
-                        LOG-OUT</a
-                    ><br />
+                    <a class="button" href="/org-edit-profile"><i
+                            class="fa-solid fa-user-pen"
+                        ></i>&nbsp; &nbsp; EDIT PROFILE</a><br />
+                    <a class="button" id="current" href="/org-settings"><i
+                            class="fa-solid fa-gear"
+                        ></i>&nbsp; &nbsp; PAGE SETTINGS</a><br />
+                    <a class="button" href="/logout"><i
+                            class="fa-solid fa-arrow-right-from-bracket"
+                        ></i>&nbsp; &nbsp; LOG-OUT</a><br />
                 </div>
 
                 <div class="calendar_name">
                     <h1>YOUR CALENDAR</h1>
                 </div>
                 <div class="b3row2">
-                    <iframe class="calendar" src="https://calendar.google.com/calendar/embed?src=c_5sjo26tm84vmof5ac5fq1dvu4k%40group.calendar.google.com&ctz=Asia%2FManila" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+                    <iframe
+                        class="calendar"
+                        src="https://calendar.google.com/calendar/embed?src=c_5sjo26tm84vmof5ac5fq1dvu4k%40group.calendar.google.com&ctz=Asia%2FManila"
+                        style="border: 0"
+                        width="800"
+                        height="600"
+                        frameborder="0"
+                        scrolling="no"
+                    ></iframe>
                 </div>
             </div>
         </div>
-    
+
         <div class="container5" id="bottom">
 
             <div class="box5">
-                <img src="../images/logo_footer.png"> &nbsp;
+                <img src="../images/logo_footer.png" />
+                &nbsp;
             </div>
-            
+
             <div class="box6">
-                <p><i class="fa-solid fa-envelope-open"></i> &nbsp;
-                    CONTACT US <br>
-                    <a class="mail" href="mailto:misael_marin@dlsu.edu.ph">misael_marin@dlsu.edu.ph</a><br>
-                    <a class="mail" href="mailto:criscela_racelis@dlsu.edu.ph">criscela_racelis@dlsu.edu.ph</a><br>
-                    <a class="mail" href="mailto:jaira_millicent_santos@dlsu.edu.ph">jaira_millicent_santos@dlsu.edu.ph</a>
+                <p><i class="fa-solid fa-envelope-open"></i>
+                    &nbsp; CONTACT US
+                    <br />
+                    <a
+                        class="mail"
+                        href="mailto:misael_marin@dlsu.edu.ph"
+                    >misael_marin@dlsu.edu.ph</a><br />
+                    <a
+                        class="mail"
+                        href="mailto:criscela_racelis@dlsu.edu.ph"
+                    >criscela_racelis@dlsu.edu.ph</a><br />
+                    <a
+                        class="mail"
+                        href="mailto:jaira_millicent_santos@dlsu.edu.ph"
+                    >jaira_millicent_santos@dlsu.edu.ph</a>
                 </p>
             </div>
-            <br>
+            <br />
             <div class="box7">
-                <p class="title"><i class="fa-solid fa-location-pin"></i> &nbsp;
-                    WHERE TO FIND US <br>
+                <p class="title"><i class="fa-solid fa-location-pin"></i>
+                    &nbsp; WHERE TO FIND US
+                    <br />
                 </p>
-                
+
                 <p class="content">
-                    Gokongwei Bldg., De La Salle University 2401 Taft Avenue, 1004 Manila, Philippines
+                    Gokongwei Bldg., De La Salle University 2401 Taft Avenue, 1004 Manila,
+                    Philippines
                 </p>
             </div>
-    
+
         </div>
 
-    
     </body>
 </html>
