@@ -103,18 +103,22 @@ const controller = {
     },
 
     getEditOrgPost: (req, res) => {
-        res.render("org_edit_post", { user: orgUser });
+        Posts.findById(req.params.id).then((post) => {
+            console.log(post);
+            res.render("org_edit_post", { user: orgUser, post: post });
+        });
     },
 
     getEditOrgEvent: (req, res) => {
-        res.render("org_edit_event", { user: orgUser });
+        Events.findById(req.params.id).then(event => {
+            res.render("org_edit_event", { user: orgUser, event: event });
+        })
+       
     },
 
     getCreateEvent: (req, res) => {
         res.render("org_create_event", { user: orgUser });
     },
-
-    
 
     likePost: (req, res) => {
         Posts.findById(req.params.id).then((post) => {
@@ -252,11 +256,11 @@ const controller = {
     },
 
     getOrgFeedStudentView: (req, res) => {
-        res.render("student_org_feed",  { user: orgUser });
+        res.render("student_org_feed", { user: orgUser });
     },
 
     getOrgProfileStudentView: (req, res) => {
-        res.render("student_org_profile",  { user: orgUser });
+        res.render("student_org_profile", { user: orgUser });
     },
 
     getOrgFeed: (req, res) => {
@@ -354,8 +358,6 @@ const controller = {
         let email = req.body.email;
         let password = req.body.password;
         req.session.email = email;
-        
-        
 
         OrgUser.findOne({ email: email }).then((orguser) => {
             if (orguser != null) {
@@ -517,9 +519,7 @@ const controller = {
                     studentUser.password = req.body.password;
                 }
 
-                
                 req.session.save();
-                
 
                 user.save()
                     .then(() =>
@@ -629,7 +629,6 @@ const controller = {
                 }
 
                 req.session.save();
-                
 
                 user.save()
                     .then(() =>
@@ -688,7 +687,6 @@ const controller = {
 
     getStudentFeedPosts: (req, res) => {
         // gets all posts from the database
-       
 
         Posts.find()
             .sort({ createdAt: -1 })
@@ -754,7 +752,6 @@ const controller = {
         var date = new Date(Date.now());
 
         date = moment(date).format("MMMM DD, YYYY h:mm A");
-        
 
         OrgUser.findOne({ email: email }).then((user) => {
             const accountName = user.name;
@@ -792,9 +789,11 @@ const controller = {
     deletePost: (req, res) => {
         // deletes a post using its id
         Posts.findByIdAndDelete(req.params.id)
-            .then(() => res.send(
-                `<script>alert("Post Deleted!"); window.location.href = "/org-feed"; </script>`
-            ))
+            .then(() =>
+                res.send(
+                    `<script>alert("Post Deleted!"); window.location.href = "/org-feed"; </script>`
+                )
+            )
             .catch((err) => res.status(400).json("Error: ") + err);
     },
 
@@ -805,7 +804,9 @@ const controller = {
                 post.content = req.body.content;
 
                 post.save()
-                    .then(() => res.json("Post Updated"))
+                    .then(() => res.send(
+                        `<script>alert("Post Updated!"); window.location.href = "/org-feed"; </script>`
+                    ))
                     .catch((err) => res.status(400).json("Error: " + err));
             })
             .catch((err) => res.status(400).json("Error: " + err));
@@ -822,7 +823,6 @@ const controller = {
     },
 
     getStudentFeedEvents: (req, res) => {
-        
         Event.find()
             .sort({ createdAt: -1 })
             .then((events) => {
@@ -883,7 +883,7 @@ const controller = {
         const email = req.session.email;
         const content = req.body.content;
         var date = new Date(Date.now());
-        
+
         date = moment(date).format("MMMM DD, YYYY h:mm A");
 
         OrgUser.findOne({ email: email }).then((user) => {
@@ -933,12 +933,12 @@ const controller = {
     deleteEvent: (req, res) => {
         // deletes a post using its id
         Event.findByIdAndDelete(req.params.id)
-            .then(() => res.send(
-                `<script>alert("Event Deleted!"); window.location.href = "/org-feed/events"; </script>`
-            ))
+            .then(() =>
+                res.send(
+                    `<script>alert("Event Deleted!"); window.location.href = "/org-feed/events"; </script>`
+                )
+            )
             .catch((err) => res.status(400).json("Error: ") + err);
-
-            
     },
 
     updateEvent: (req, res) => {
@@ -949,7 +949,9 @@ const controller = {
 
                 event
                     .save()
-                    .then(() => res.json("Post Updated"))
+                    .then(() => res.send(
+                        `<script>alert("Event Updated!"); window.location.href = "/org-feed/events"; </script>`
+                    ))
                     .catch((err) => res.status(400).json("Error: " + err));
             })
             .catch((err) => res.status(400).json("Error: " + err));

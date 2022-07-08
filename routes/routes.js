@@ -84,8 +84,10 @@ app.post("/update-org-profile", controller.updateOrgUser);
 
 
 //ORG EDIT
-app.get("/org-edit-post", controller.getEditOrgPost);
-app.get("/org-edit-event", controller.getEditOrgEvent);
+app.get("/org-edit-post/:id", controller.getEditOrgPost);
+app.get("/org-edit-event/:id", controller.getEditOrgEvent);
+app.post("/update-post/:id", controller.updatePost);
+app.post("/update-event/:id", controller.updateEvent);
 
 // STUDENT USERS
 app.get("/studentUsers/", controller.getStudents);
