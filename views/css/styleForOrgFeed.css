@@ -6,7 +6,7 @@ div {
     border: 0px #ccc solid;
 }
 
-button {
+button.follow {
     color: #1C4C3B;
     width: 200px;
     height: 40px;
@@ -25,7 +25,7 @@ button {
     background-color: #d5d5cc;
 }
 
-button:hover {
+button.follow:hover {
     color: #1C4C3B;
     width: 200px;
     height: 40px;
