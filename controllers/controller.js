@@ -228,7 +228,7 @@ const controller = {
 
     getStudentFeed: (req, res) => {
         Posts.find()
-            .sort({ createdAt: -1 })
+            .sort({ updatedAt: -1 })
             .then((posts) => {
                 Event.find()
                     .then((events) => {
@@ -270,10 +270,10 @@ const controller = {
 
                 OrgUser.findOne({ email: email }).then((orguser) => {
                     Posts.find({ email: orguser.email })
-                        .sort({ createdAt: -1 })
+                        .sort({ updatedAt: -1 })
                         .then((posts) => {
                             Events.find({ email: orguser.email })
-                                .sort({ createdAt: -1 })
+                                .sort({ updatedAt: -1 })
                                 .then((events) => {
                                     res.render("student_org_feed", {
                                         user: orguser,
@@ -290,10 +290,10 @@ const controller = {
 
                         OrgUser.findOne({ email: email }).then((orguser) => {
                             Events.find({ email: orguser.email })
-                                .sort({ createdAt: -1 })
+                                .sort({ updatedAt: -1 })
                                 .then((events) => {
                                     Posts.find({ email: orguser.email })
-                                        .sort({ createdAt: -1 })
+                                        .sort({ updatedAt: -1 })
                                         .then((posts) => {
                                             res.render("student_org_feed", {
                                                 user: orguser,
@@ -306,10 +306,10 @@ const controller = {
                     } else {
                         OrgUser.findById(req.params.id).then((orguser) => {
                             Posts.find({ email: orguser.email })
-                                .sort({ createdAt: -1 })
+                                .sort({ updatedAt: -1 })
                                 .then((posts) => {
                                     Events.find({ email: orguser.email })
-                                        .sort({ createdAt: -1 })
+                                        .sort({ updatedAt: -1 })
                                         .then((events) => {
                                             res.render("student_org_feed", {
                                                 user: orguser,
@@ -387,7 +387,7 @@ const controller = {
 
     getOrgFeed: (req, res) => {
         Posts.find({ email: req.session.email })
-            .sort({ createdAt: -1 })
+            .sort({ updatedAt: -1 })
             .then((posts) => {
                 Event.find({ email: req.session.email })
                     .then((events) => {
@@ -414,7 +414,7 @@ const controller = {
     getStudentSavedPosts: (req, res) => {
         StudentUser.findById(req.session.userid).then((student) => {
             Posts.find({ _id: { $in: student.saved } })
-                .sort({ createdAt: -1 })
+                .sort({ updatedAt: -1 })
                 .then((posts) => {
                     res.render("student_saved", { user: studentUser, post: posts });
                 });
@@ -424,7 +424,7 @@ const controller = {
     getStudentSavedEvents: (req, res) => {
         StudentUser.findById(req.session.userid).then((student) => {
             Events.find({ _id: { $in: student.saved } })
-                .sort({ createdAt: -1 })
+                .sort({ updatedAt: -1 })
                 .then((events) => {
                     res.render("student_saved", { user: studentUser, event: events });
                 });
@@ -434,7 +434,7 @@ const controller = {
     getStudentGoing: (req, res) => {
         StudentUser.findById(req.session.userid).then((student) => {
             Events.find({ _id: { $in: student.going } })
-                .sort({ createdAt: -1 })
+                .sort({ updatedAt: -1 })
                 .then((events) => {
                     res.render("student_going", { user: studentUser, event: events });
                 });
@@ -862,7 +862,7 @@ const controller = {
         // gets all posts from the database
 
         Posts.find()
-            .sort({ createdAt: -1 })
+            .sort({ updatedAt: -1 })
             .then((posts) => {
                 res.render("student_feed", { user: studentUser, post: posts });
             })
@@ -872,7 +872,7 @@ const controller = {
     getOrgFeedPosts: (req, res) => {
         // gets all posts from the database
         Posts.find()
-            .sort({ createdAt: -1 })
+            .sort({ updatedAt: -1 })
             .then((posts) => {
                 res.render("org_feed", { post: posts });
             })
@@ -894,7 +894,7 @@ const controller = {
                         });
 
                         Posts.find({ email: { $in: orgemails } })
-                            .sort({ createdAt: -1 })
+                            .sort({ updatedAt: -1 })
                             .then((posts) => {
                                 res.json(posts);
                             })
@@ -911,7 +911,7 @@ const controller = {
             .then((user) => {
                 let userEmail = user.email;
                 Posts.find({ email: userEmail })
-                    .sort({ createdAt: -1 })
+                    .sort({ updatedAt: -1 })
                     .then((posts) => res.json(posts))
                     .catch((err) => res.status(400).json("Error: " + err));
             })
@@ -999,7 +999,7 @@ const controller = {
 
     getStudentFeedEvents: (req, res) => {
         Event.find()
-            .sort({ createdAt: -1 })
+            .sort({ updatedAt: -1 })
             .then((events) => {
                 res.render("student_feed", { user: studentUser, event: events });
             })
@@ -1008,7 +1008,7 @@ const controller = {
 
     getOrgFeedEvents: (req, res) => {
         Event.find({ email: req.session.email })
-            .sort({ createdAt: -1 })
+            .sort({ updatedAt: -1 })
             .then((events) => {
                 res.render("org_feed", { user: orgUser, event: events });
             })
@@ -1030,7 +1030,7 @@ const controller = {
                         });
 
                         Event.find({ email: { $in: orgemails } })
-                            .sort({ createdAt: -1 })
+                            .sort({ updatedAt: -1 })
                             .then((events) => {
                                 res.json(events);
                             })
