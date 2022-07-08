@@ -67,7 +67,7 @@
                         <div class="container">
                             <form
                                 action="/update-student-profile"
-                                onSubmit="return true"
+                                onSubmit="return Validate()"
                                 method="post"
                             >
                                 <table class="table">
@@ -107,11 +107,22 @@
                                     <tr>
                                         <td><strong>PASSWORD: </strong> </td>
                                         <td><input
-                                                type="text"
+                                                type="password"
                                                 id="password1"
                                                 size="40"
                                                 name="password"
                                                 placeholder="Input new password"
+                                            /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><strong>CONFIRM PASSWORD: </strong> </td>
+                                        <td><input
+                                                type="password"
+                                                id="password2"
+                                                size="40"
+                                                name="password2"
+                                                placeholder="Confirm new password"
                                             /></td>
                                     </tr>
 
@@ -208,4 +219,25 @@
             </div>
         </div>
     </body>
+    <script type="text/javascript">
+    function Validate() {
+        var email =document.getElementById("email").value;
+        var password = document.getElementById("password1").value;
+        var confirmPassword = document.getElementById("password2").value;
+        
+        if (password.length != 0 && password.length < 8) {
+            alert("Password must have at least 8 characters.");
+            return false;
+        }
+        else if (password.length != 0 && password != confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        else if (!email.includes("@dlsu.edu.ph")) {
+            alert("Kindly use your registered DLSU email address.");
+            return false;
+        }
+        return true;
+    }
+    </script>
 </html>

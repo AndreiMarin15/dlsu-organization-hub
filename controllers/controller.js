@@ -636,15 +636,15 @@ const controller = {
                         .catch((err) => res.status(400).json("Error: " + err));
                 } else if (password != confirm) {
                     res.send(
-                        `<script>alert("Invalid Credentials. The passwords you entered do not match."); window.location.href = "/orgSignUp"; </script>`
+                        `<script>alert("Invalid Credentials. The passwords you entered do not match."); window.location.href = "/studentSignUp"; </script>`
                     );
                 } else if (password.length < 8) {
                     res.send(
-                        `<script>alert("Invalid Credentials. Password must have at least 8 characters."); window.location.href = "/orgSignUp"; </script>`
+                        `<script>alert("Invalid Credentials. Password must have at least 8 characters."); window.location.href = "/studentSignUp"; </script>`
                     );
                 } else if (!email.includes("dlsu.edu.ph")) {
                     res.send(
-                        `<script>alert("Invalid Credentials. Email entered is not recognized as a DLSU email."); window.location.href = "/orgSignUp"; </script>`
+                        `<script>alert("Invalid Credentials. Email entered is not recognized as a DLSU email."); window.location.href = "/studentSignUp"; </script>`
                     );
                 }
             } else {

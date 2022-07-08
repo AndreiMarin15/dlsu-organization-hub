@@ -312,7 +312,7 @@ a.button:active,
     background-color: #a6513e;
     box-shadow: 0 2px 2px #888888;
     transition: color 0.3s, background-image 0.5s, ease-in-out;
-    margin-top: 104px;
+    margin-top: 130px;
 }
 
 .delete_button_org {
@@ -328,7 +328,7 @@ a.button:active,
     background-color: #a6513e;
     box-shadow: 0 2px 2px #888888;
     transition: color 0.3s, background-image 0.5s, ease-in-out;
-    margin-top: 80px;
+    margin-top: 105px;
 }
 
 .submit_button:hover,
