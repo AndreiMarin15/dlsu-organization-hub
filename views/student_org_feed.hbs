@@ -26,7 +26,7 @@
                 </div>
                 <div class="right"><div class="b1row3">
                     <div class="name">
-                        <h1>{{org.name}}</h1>
+                        <h1>{{user.name}}</h1>
                     </div>
                
                     <div class="navigation">
@@ -52,19 +52,19 @@
                         <ul class="navLinks">
                             {{#if post}}
                                 {{#unless event}}
-                                    {{#unless about}}
+                                    
                                         <li><a class="current" href="/student-view-org/" id="nav_link"><b>POSTS</b></a> </li>
                                         <li><a class="notCurrent" href="/student-view-org/" id="nav_link" ><b>EVENTS</b></a></li>
-                                    {{/unless}}
+                                   
                                 {{/unless}}
                             {{/if}}
 
                             {{#if event}}
                                 {{#unless post}}
-                                    {{#unless about}}
+                                    
                                         <li><a class="notCurrent" href="/student-view-org/" id="nav_link"><b>POSTS</b></a> </li>
                                         <li><a class="current" href="/student-view-org/" id="nav_link" ><b>EVENTS</b></a></li>
-                                    {{/unless}}
+                                 
                                 {{/unless}}
                             {{/if}}
 
