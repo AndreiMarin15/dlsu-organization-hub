@@ -493,10 +493,16 @@ const controller = {
     searchOrg: (req, res) => {
         // searches for an org user through the org name, if the inital find method returns a blank array, it searches for posts matching its content
 
-        Posts.find({ content: { $regex: ".*" + req.body.search + ".*", $options: "i" }, email: req.session.email })
+        Posts.find({
+            content: { $regex: ".*" + req.body.search + ".*", $options: "i" },
+            email: req.session.email,
+        })
             .sort({ updatedAt: -1 })
             .then((posts) => {
-                Event.find({ content: { $regex: ".*" + req.body.search + ".*", $options: "i" }, email: req.session.email })
+                Event.find({
+                    content: { $regex: ".*" + req.body.search + ".*", $options: "i" },
+                    email: req.session.email,
+                })
                     .sort({ updatedAt: -1 })
                     .then((events) => {
                         var searched = req.body.search;
@@ -625,17 +631,15 @@ const controller = {
                             );
                         })
                         .catch((err) => res.status(400).json("Error: " + err));
-                } else if (password != confirm){
+                } else if (password != confirm) {
                     res.send(
                         `<script>alert("Invalid Credentials. The passwords you entered do not match."); window.location.href = "/orgSignUp"; </script>`
                     );
-                }
-                else if (password.length < 8){
+                } else if (password.length < 8) {
                     res.send(
                         `<script>alert("Invalid Credentials. Password must have at least 8 characters."); window.location.href = "/orgSignUp"; </script>`
                     );
-                }
-                else if (!email.includes("dlsu.edu.ph")){
+                } else if (!email.includes("dlsu.edu.ph")) {
                     res.send(
                         `<script>alert("Invalid Credentials. Email entered is not recognized as a DLSU email."); window.location.href = "/orgSignUp"; </script>`
                     );
@@ -810,17 +814,15 @@ const controller = {
                             );
                         })
                         .catch((err) => res.status(400).json("Error: " + err));
-                } else if (password != confirm){
+                } else if (password != confirm) {
                     res.send(
                         `<script>alert("Invalid Credentials. The passwords you entered do not match."); window.location.href = "/orgSignUp"; </script>`
                     );
-                }
-                else if (password.length < 8){
+                } else if (password.length < 8) {
                     res.send(
                         `<script>alert("Invalid Credentials. Password must have at least 8 characters."); window.location.href = "/orgSignUp"; </script>`
                     );
-                }
-                else if (!email.includes("dlsu.edu.ph")){
+                } else if (!email.includes("dlsu.edu.ph")) {
                     res.send(
                         `<script>alert("Invalid Credentials. Email entered is not recognized as a DLSU email."); window.location.href = "/orgSignUp"; </script>`
                     );
@@ -985,8 +987,8 @@ const controller = {
         OrgUser.findOne({ email: email }).then((user) => {
             const accountName = user.name;
 
-            if (req.body.image) {
-                const image = req.body.image;
+            if (req.file.originalname) {
+                const image = req.file.originalname;
                 const newPost = new Posts({ accountName, email, content, image, date });
 
                 newPost
@@ -1030,15 +1032,28 @@ const controller = {
         // updates a post using its id
         Posts.findById(req.params.id)
             .then((post) => {
-                post.content = req.body.content;
+                if (req.file.originalname) {
+                    post.image = req.file.originalname;
+                    post.content = req.body.content;
 
-                post.save()
-                    .then(() =>
-                        res.send(
-                            `<script>alert("Post Updated!"); window.location.href = "/org-feed"; </script>`
+                    post.save()
+                        .then(() =>
+                            res.send(
+                                `<script>alert("Post Updated!"); window.location.href = "/org-feed"; </script>`
+                            )
                         )
-                    )
-                    .catch((err) => res.status(400).json("Error: " + err));
+                        .catch((err) => res.status(400).json("Error: " + err));
+                } else {
+                    post.content = req.body.content;
+
+                    post.save()
+                        .then(() =>
+                            res.send(
+                                `<script>alert("Post Updated!"); window.location.href = "/org-feed"; </script>`
+                            )
+                        )
+                        .catch((err) => res.status(400).json("Error: " + err));
+                }
             })
             .catch((err) => res.status(400).json("Error: " + err));
     },
@@ -1120,8 +1135,8 @@ const controller = {
         OrgUser.findOne({ email: email }).then((user) => {
             const accountName = user.name;
 
-            if (req.body.image) {
-                const image = req.body.image;
+            if (req.file.originalname) {
+                const image = req.file.originalname;
                 const newEvent = new Event({
                     accountName,
                     email,

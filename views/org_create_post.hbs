@@ -57,11 +57,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="logo">
-                                {{#if user.image}}
-                                    <img src="../images/{{user.image}}" />
-                                {{else}}
-                                    <img src="../images/org_user.png" />
-                                {{/if}}
+                                <img src="{{user.image}}" />
                             </div>
                             <div class="header-title">
                                 <a href="/org-feed/" id="nav_link"><b>{{user.name}}</b></a><br />
@@ -69,28 +65,20 @@
                             </div>
                         </div>
                         <div class="container">
-                            <form action="/new-post" method="post">
+                            {{!<form></form>}}
+                            <form action="/new-post" method="post" enctype="multipart/form-data">
                                 <table class="table">
                                     <tr>
                                         <td><textarea
-                                                placeholder="Type content here..."
+                                                placeholder="Type caption here..."
                                                 id="caption"
                                                 name="content"
                                             ></textarea></td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input
-                                                type="file"
-                                                id="attach"
-                                                name="attachment"
-                                                value="Attach image"
-                                            />
-                                            <input
-                                                type="submit"
-                                                id="submit"
-                                                value="Post"
-                                            />
+                                            <input type="file" accept="image/png, image/jpg, image/jpeg" name="postImage" id="attach" value="Attach image" />
+                                            <input type="submit" id="submit" value="Submit" />
                                         </td>
                                     </tr>
                                 </table>

@@ -69,7 +69,8 @@
                             </div>
                         </div>
                         <div class="container">
-                            <form action="/new-event" method="post">
+                            {{!<form></form>}}
+                            <form action="/new-event" method="post" enctype="multipart/form-data">
                                 <table class="table">
                                     <tr>
                                         <td><textarea
@@ -82,15 +83,12 @@
                                         <td>
                                             <input
                                                 type="file"
+                                                accept="image/png, image/jpg, image/jpeg"
+                                                name="eventImage"
                                                 id="attach"
-                                                name="attachment"
                                                 value="Attach image"
                                             />
-                                            <input
-                                                type="submit"
-                                                id="submit"
-                                                value="Post"
-                                            />
+                                            <input type="submit" id="submit" value="Submit" />
                                         </td>
                                     </tr>
                                 </table>

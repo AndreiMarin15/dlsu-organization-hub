@@ -4,11 +4,18 @@ const controller = require("../controllers/controller");
 const multer = require("multer");
 const app = express();
 
+const Storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "./views/images/uploads");
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    },
+});
 
-
+const upload = multer({ storage: Storage });
 
 // test routes - to be deleted, DO NOT USE IN FRONTEND
-
 
 // js functions
 
@@ -51,7 +58,6 @@ app.get("/events-going", controller.getStudentGoing);
 app.get("/student-profile", controller.getStudentProfile);
 app.get("/student-profile/following", controller.getStudentFollowing);
 
-
 // STUDENT SETTINGS
 app.get("/student-settings", controller.getStudentSettings);
 app.get("/student-edit-profile", controller.getUpdateProfile);
@@ -68,7 +74,7 @@ app.post("/unfollow/:id", controller.unfollow);
 
 // ORG PROFILE
 app.get("/org-profile", controller.getOrgProfile);
- 
+
 //ORG SIGN UP
 app.get("/orgSignUp/", controller.getOrgSignUp);
 app.post("/registerOrg", controller.addOrg);
@@ -84,7 +90,6 @@ app.get("/org-edit-profile", controller.getUpdateOrgProfile);
 app.get("/org-settings", controller.getOrgSettings);
 app.post("/org-edit-profile", controller.updateOrgProfile);
 app.post("/update-org-profile", controller.updateOrgUser);
-
 
 //ORG EDIT
 app.get("/org-edit-post/:id", controller.getEditOrgPost);
@@ -120,11 +125,10 @@ app.post("/posts/add", controller.addPost);
 app.get("/posts/:id", controller.getPostById);
 app.delete("/posts/:id", controller.deletePost);
 app.post("/posts/update/:id", controller.updatePost);
-app.post("/new-post", controller.addPost);
-app.post("/new-event", controller.addEvent);
+app.post("/new-post", upload.single("postImage"), controller.addPost);
+app.post("/new-event",upload.single("eventImage"), controller.addEvent);
 
 // EVENTS
 app.post("/events/add", controller.addEvent);
-
 
 module.exports = app;
