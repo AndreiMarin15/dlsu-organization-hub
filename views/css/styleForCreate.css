@@ -365,6 +365,10 @@ li a.navItems {
     border-radius: 5px;
 }
 
+.textarea {
+    text-align: center;
+}
+
 .card-header {
     display: flex;
     flex-direction: row;
