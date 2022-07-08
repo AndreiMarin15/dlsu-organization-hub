@@ -11,11 +11,11 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const MongoDBSession = require("connect-mongodb-session")(session);
 
-const { envPort, sessionKey } = require('../config.js');
+const envPort = 3000
+const dbURL = "mongodb+srv://admin:00000000@dlsu-organization-hub.lrjh1.mongodb.net/dlsu-org-hub?retryWrites=true&w=majority"
+const sessionKey = "database"
 const app = express();
 const port = envPort || 9090;
-
-const dbURL = require('../config.js');
 
 mongoose.connect(dbURL, options);
 
