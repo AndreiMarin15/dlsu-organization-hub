@@ -883,7 +883,7 @@ const controller = {
                 user.linkedin = req.body.linkedin;
                 //user.image = req.body.image;
 
-                if (req.file.originalname) {
+                if (req.file) {
                     user.image = req.file.originalname;
                 }
 
@@ -899,7 +899,7 @@ const controller = {
                 user.linkedin = req.body.linkedin;
                 //user.image = req.body.image;
 
-                if (req.file.originalname) {
+                if (req.file) {
                     user.image = req.file.originalname;
                 }
 
@@ -999,7 +999,7 @@ const controller = {
             const accountName = user.name;
             const profile = user.image;
 
-            if (req.file.originalname != null) {
+            if (req.file) {
                 const image = req.file.originalname;
                 const newPost = new Posts({ accountName, email, content, image, date, profile });
 
@@ -1044,7 +1044,7 @@ const controller = {
         // updates a post using its id
         Posts.findById(req.params.id)
             .then((post) => {
-                if (req.file.originalname) {
+                if (req.file) {
                     post.image = req.file.originalname;
                     post.content = req.body.content;
 
@@ -1148,7 +1148,7 @@ const controller = {
             const accountName = user.name;
             const profile = user.image;
 
-            if (req.file.originalname) {
+            if (req.file) {
                 const image = req.file.originalname;
                 const newEvent = new Event({
                     accountName,
