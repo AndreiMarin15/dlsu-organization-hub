@@ -113,24 +113,24 @@ const controller = {
     },
 
     getCreatePost: (req, res) => {
-        res.render("org_create_post", { user: orgUser });
+        res.render("org_create_post", { user: req.session });
     },
 
     getEditOrgPost: (req, res) => {
         Posts.findById(req.params.id).then((post) => {
             console.log(post);
-            res.render("org_edit_post", { user: orgUser, post: post });
+            res.render("org_edit_post", { user: req.session, post: post });
         });
     },
 
     getEditOrgEvent: (req, res) => {
         Events.findById(req.params.id).then((event) => {
-            res.render("org_edit_event", { user: orgUser, event: event });
+            res.render("org_edit_event", { user: req.session, event: event });
         });
     },
 
     getCreateEvent: (req, res) => {
-        res.render("org_create_event", { user: orgUser });
+        res.render("org_create_event", { user: req.session });
     },
 
     likePost: (req, res) => {
@@ -247,7 +247,7 @@ const controller = {
                 Event.find()
                     .then((events) => {
                         res.render("student_feed", {
-                            user: studentUser,
+                            user: req.session,
                             post: posts,
                             event: events,
                         });
@@ -257,7 +257,7 @@ const controller = {
     },
 
     getStudentProfile: (req, res) => {
-        res.render("student_profile", { user: studentUser });
+        res.render("student_profile", { user: req.session });
     },
 
     getStudentFollowing: (req, res) => {
@@ -270,11 +270,11 @@ const controller = {
 
     getStudentSettings: (req, res) => {
         userid = req.session.id;
-        res.render("student_settings", { user: studentUser, userid: userid });
+        res.render("student_settings", { user: req.session, userid: userid });
     },
 
     getUpdateProfile: (req, res) => {
-        res.render("student_edit_profile", { user: studentUser });
+        res.render("student_edit_profile", { user: req.session });
     },
 
     getOrgFeedStudentView: (req, res) => {
@@ -405,7 +405,7 @@ const controller = {
             .then((posts) => {
                 Event.find({ email: req.session.email })
                     .then((events) => {
-                        res.render("org_feed", { user: orgUser, post: posts });
+                        res.render("org_feed", { user: req.session, post: posts });
                     })
                     .catch((err) => console.log(err));
             });
@@ -413,16 +413,16 @@ const controller = {
 
     getOrgProfile: (req, res) => {
         console.log("Hello " + orgUser);
-        res.render("org_profile", { user: orgUser });
+        res.render("org_profile", { user: req.session });
     },
 
     getUpdateOrgProfile: (req, res) => {
-        res.render("org_edit_profile", { user: orgUser });
+        res.render("org_edit_profile", { user: req.session });
     },
 
     getOrgSettings: (req, res) => {
         userid = req.session.userid;
-        res.render("org_settings", { user: orgUser, userid: userid });
+        res.render("org_settings", { user: req.session, userid: userid });
     },
 
     getStudentSavedPosts: (req, res) => {
@@ -430,7 +430,7 @@ const controller = {
             Posts.find({ _id: { $in: student.saved } })
                 .sort({ updatedAt: -1 })
                 .then((posts) => {
-                    res.render("student_saved", { user: studentUser, post: posts });
+                    res.render("student_saved", { user: req.session, post: posts });
                 });
         });
     },
@@ -440,7 +440,7 @@ const controller = {
             Events.find({ _id: { $in: student.saved } })
                 .sort({ updatedAt: -1 })
                 .then((events) => {
-                    res.render("student_saved", { user: studentUser, event: events });
+                    res.render("student_saved", { user: req.session, event: events });
                 });
         });
     },
@@ -450,7 +450,7 @@ const controller = {
             Events.find({ _id: { $in: student.going } })
                 .sort({ updatedAt: -1 })
                 .then((events) => {
-                    res.render("student_going", { user: studentUser, event: events });
+                    res.render("student_going", { user: req.session, event: events });
                 });
         });
     },
@@ -478,7 +478,7 @@ const controller = {
                                 var searched = req.body.search;
 
                                 res.render("student_search", {
-                                    user: studentUser,
+                                    user: req.session,
                                     orguser: orguser,
                                     post: posts,
                                     event: events,
@@ -508,7 +508,7 @@ const controller = {
                         var searched = req.body.search;
 
                         res.render("org_search", {
-                            user: orgUser,
+                            user: req.session,
                             post: posts,
                             event: events,
                             searched: searched,
@@ -884,7 +884,9 @@ const controller = {
 
                 if (req.file) {
                     user.image = req.file.originalname;
+                    req.session.image = user.image;
                 }
+                req.session.save();
 
                 user.password = orgUser.password;
 
@@ -900,8 +902,9 @@ const controller = {
 
                 if (req.file) {
                     user.image = req.file.originalname;
+                    req.session.image = user.image;
                 }
-
+                req.session.save();
                 user.password = orgUser.password;
 
                 orgUser = user;
@@ -940,11 +943,11 @@ const controller = {
                     Posts.find({ email: { $in: emails } })
                         .sort({ updatedAt: -1 })
                         .then((posts) => {
-                            res.render("student_feed", { user: studentUser, post: posts });
+                            res.render("student_feed", { user: req.session, post: posts });
                         });
                 });
             } else {
-                res.render("student_feed", {user: studentUser});
+                res.render("student_feed", {user: req.session});
             }
         });
     },
@@ -1103,7 +1106,7 @@ const controller = {
                 Events.find({ email: { $in: emails } })
                     .sort({ updatedAt: -1 })
                     .then((events) => {
-                        res.render("student_feed", { user: studentUser, event: events });
+                        res.render("student_feed", { user: req.session, event: events });
                     });
             });
         });
@@ -1113,7 +1116,7 @@ const controller = {
         Event.find({ email: req.session.email })
             .sort({ updatedAt: -1 })
             .then((events) => {
-                res.render("org_feed", { user: orgUser, event: events });
+                res.render("org_feed", { user: req.session, event: events });
             })
             .catch((err) => res.json(err));
     },
