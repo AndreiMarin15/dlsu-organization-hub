@@ -931,6 +931,7 @@ const controller = {
         // gets all posts from the database
 
         StudentUser.findById(req.session.userid).then((student) => {
+                
             OrgUser.find({ _id: { $in: student.following } }).then((orgs) => {
                 let emails = [];
                 orgs.forEach((org) => {
