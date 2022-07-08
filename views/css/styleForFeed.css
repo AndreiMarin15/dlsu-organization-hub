@@ -6,6 +6,37 @@ div {
     border: 0px #ccc solid;
 }
 
+.button.follow {
+    color: #F7F5EE;
+    width: 200px;
+    height: 40px;
+    text-decoration: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    line-height: 40px;
+    margin-left: 35px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+    position: relative;
+    border-radius: 10px;
+    background-color: #1C4C3B;
+    box-shadow: 0 2px 2px #888888;
+    transition: color 0.3s, background-image 0.5s, ease-in-out;
+}
+
+.button.follow:hover {
+    color: #1C4C3B;
+    width: 200px;
+    height: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    background-color: #E4C8B8;
+    box-shadow: 0 2px 2px #888888;
+}
+
 .container1 {
     display: flex;
     background-color: none;
