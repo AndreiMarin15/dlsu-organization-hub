@@ -636,6 +636,36 @@ const controller = {
         });
     },
 
+    deleteStudentAccount: (req, res) => {
+        // deletes a student acct using its id
+        StudentUser.findByIdAndDelete(req.session.user.id)
+            .then(() =>
+                res.send(
+                    `<script>
+                        let isExecuted = confirm("Are you sure you want to delete your account?"); 
+                        if (isExecuted)
+                            window.location.href = "/"; 
+                    </script>`
+                )
+            )
+            .catch((err) => res.status(400).json("Error: ") + err);
+    },
+
+    deleteOrgAccount: (req, res) => {
+        // deletes a org acct using its id
+        OrgtUser.findByIdAndDelete(req.session.user.id)
+            .then(() =>
+                res.send(
+                    `<script>
+                        let isExecuted = confirm("Are you sure you want to delete your account?"); 
+                        if (isExecuted)
+                            window.location.href = "/"; 
+                    </script>`
+                )
+            )
+            .catch((err) => res.status(400).json("Error: ") + err);
+    },
+
     // orgUserModel
 
     getOrgs: (req, res) => {
