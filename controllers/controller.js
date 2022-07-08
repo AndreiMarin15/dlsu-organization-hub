@@ -142,14 +142,14 @@ const controller = {
 
                     post.save();
 
-                    res.redirect("/student-feed/");
+                    res.redirect('back');
                 } else {
                     index = post.likes.indexOf(req.session.userid);
 
                     post.likes.splice(index, 1);
 
                     post.save();
-                    res.redirect("/student-feed/");
+                    res.redirect('back');
                 }
             } else {
                 Events.findById(req.params.id).then((event) => {
@@ -158,14 +158,14 @@ const controller = {
 
                         event.save();
 
-                        res.redirect("/student-feed/events");
+                        res.redirect('back');
                     } else {
                         index = event.likes.indexOf(req.session.userid);
 
                         event.likes.splice(index, 1);
 
                         event.save();
-                        res.redirect("/student-feed/events");
+                        res.redirect('back');
                     }
                 });
             }
