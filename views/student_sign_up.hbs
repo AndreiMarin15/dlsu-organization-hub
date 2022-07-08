@@ -39,7 +39,9 @@
             <br> <br> <br> <br> <br> <br> <br> <br>
 			<h1 class="log_in"> Sign - Up </h1>
 			<p class="intro"> 
-				Kindly use your registered <b>DLSU email</b> upon signing up.<br><br>
+                <i class="fa-solid fa-check"></i> Passwords entered <b>must match.</b><br>
+                <i class="fa-solid fa-check"></i> Password must have <b>at least 8</b> characters.<br>
+				<i class="fa-solid fa-check"></i> Registered <b>DLSU email</b> must be used upon signing up.<br><br>
 			</p>
 
             <form id="dForm" name="rForm" method="post" action = "/register" ">
@@ -99,32 +101,7 @@
         </div>
 
     </div>
-    <!--
-	<script>
-        
-        $("#confirmPassword").keyup(function() {
-            var password = document.getElementById("password").value;
-            var confirmPassword = document.getElementById("confirmPassword").value;
-            var email = document.getElementById("email").value;
-
-                if(password == confirmPassword && password.length >= 8 && email.includes("@dlsu.edu.ph")){
-                    alert("Welcome, "+firstName+" "+lastName+"!" +" Your account has been created.");
-                    valid = true;
-                }
-                else if(password.length < 8){
-                    alert("Kindly enter a longer password.");
-                }
-                else if (!email.includes("@dlsu.edu.ph")) {
-                    alert("Kindly use your registered DLSU email.");
-                }
-                else {
-                    document.getElementById("password").style.backgroundColor = "red";
-                    document.getElementById("password").style.backgroundColor = "red";
-                    alert("Passwords entered do not match! Please try again.");
-                }
-        })
-    </script>
-    -->
+    
 </body>
 
 </html>

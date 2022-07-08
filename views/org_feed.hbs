@@ -39,9 +39,11 @@
 
             <div class="box2">
                 <div class="b2row1">
-                    <input type="text" name="searchbar" id="searchbar" placeholder="   Search posts, events, and pages..." />
+                    <form action="/search-org" method="post">
+                    <input type="text" name="search" id="searchbar" placeholder="   Search posts and events..." />
                     
                     <button type="submit" id="search"><i class="fa-solid fa-magnifying-glass"></i> &nbsp; GO!</button>
+                    </form>
                     <form action="/org-create-post" method="get">
                         <button type="submit" action="/org-create-post" id="create"><i class="fa-solid fa-file-plus"></i> &nbsp; CREATE POST</button>
                     </form>

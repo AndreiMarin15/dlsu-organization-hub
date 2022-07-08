@@ -51,11 +51,24 @@
                             <h2>ORG INFORMATION</h2>
                             <br />
                         </div>
-                        <div class="container">
-                            <form action="/org-edit-profile" method="post" onSubmit="return true">
-                                <table class="table">
+                        <br><br>
+                        <!-- moved form here to include the image upload in saving changes-->
+                        <form action="/org-edit-profile" method="post" onSubmit="return true">
 
-                                   
+                            {{#if user.image}}
+                                <img class="responsive" src="../images/{{user.image}}" alt="" />
+
+                            {{else}}
+                                <img class="responsive" src="../images/org_user.png" alt="" />
+
+                            {{/if}}<br><br><br>
+
+                            <input type="file" id="attach" value="Attach image" />
+
+                        <div class="container">
+
+                            
+                                <table class="table">
                                     <tr>
                                         <td><strong>ORG TYPE: </strong></td>
                                         <td><input type="text" id="id" size="40" name="type" value={{user.type}} /></td>
