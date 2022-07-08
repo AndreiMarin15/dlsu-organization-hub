@@ -493,15 +493,15 @@ const controller = {
     searchOrg: (req, res) => {
         // searches for an org user through the org name, if the inital find method returns a blank array, it searches for posts matching its content
 
-        Posts.find({ content: { $regex: ".*" + req.body.search + ".*", $options: "i" } })
+        Posts.find({ content: { $regex: ".*" + req.body.search + ".*", $options: "i" }, email: req.session.email })
             .sort({ updatedAt: -1 })
             .then((posts) => {
-                Event.find({ content: { $regex: ".*" + req.body.search + ".*", $options: "i" } })
+                Event.find({ content: { $regex: ".*" + req.body.search + ".*", $options: "i" }, email: req.session.email })
                     .sort({ updatedAt: -1 })
                     .then((events) => {
                         var searched = req.body.search;
 
-                        res.render("student_search", {
+                        res.render("org_search", {
                             user: orgUser,
                             post: posts,
                             event: events,

@@ -19,6 +19,7 @@ app.post("/going/:id", controller.going);
 //index
 app.get("/", controller.getIndex);
 app.post("/search/", controller.search);
+app.post("/search-org/", controller.searchOrg);
 
 //delete
 app.post("/delete-post/:id", controller.deletePost);

@@ -39,9 +39,11 @@
 
             <div class="box2">
                 <div class="b2row1">
-                    <input type="text" name="searchbar" id="searchbar" placeholder="   Search posts, events, and pages..." />
+                    <form action="/search-org" method="post">
+                    <input type="text" name="search" id="searchbar" placeholder="   Search posts and events..." />
                     
                     <button type="submit" id="search"><i class="fa-solid fa-magnifying-glass"></i> &nbsp; GO!</button>
+                    </form>
                     <form action="/org-create-post" method="get">
                         <button type="submit" action="/org-create-post" id="create"><i class="fa-solid fa-file-plus"></i> &nbsp; CREATE POST</button>
                     </form>
@@ -52,35 +54,7 @@
                 </div>
                 <div class="feed_type">
                     <nav>
-                        <ul class="navLinks">
-                            {{#if post}}
-                                {{#unless event}}
-                                    {{#unless about}}
-                                        <li><a class="current" href="/org-feed/" id="nav_link"><b>POSTS</b></a> </li>
-                                        <li><a class="notCurrent" href="/org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
-                                    {{/unless}}
-                                {{/unless}}
-                            {{/if}}
-
-                            {{#if event}}
-                                {{#unless post}}
-                                    {{#unless about}}
-                                        <li><a class="notCurrent" href="/org-feed/" id="nav_link"><b>POSTS</b></a> </li>
-                                        <li><a class="current" href="/org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
-                                    {{/unless}}
-                                {{/unless}}
-                            {{/if}}
-
-                            {{#if about}}
-                                {{#unless post}}
-                                    {{#unless event}}
-                                        <li><a class="notCurrent" href="/org-feed/" id="nav_link"><b>POSTS</b></a> </li>
-                                        <li><a class="notCurrent" href="/org-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
-                                        <li><a class="current" href="/org-profile" id="nav_link"><b>ABOUT</b></a> </li>
-                                    {{/unless}}
-                                {{/unless}}
-                            {{/if}}
-                        </ul>
+                        
                     </nav>
                 </div>
                 <div class="b2row2">
