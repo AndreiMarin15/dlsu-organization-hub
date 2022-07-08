@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 
 const orgUserSchema = new Schema(
-    {    
+    {
         //remove personal details (first name, last name, personal email) from index.html
         email: {
             type: String,
@@ -24,7 +24,7 @@ const orgUserSchema = new Schema(
         type: {
             type: String,
             required: false,
-        },    
+        },
         affiliation: {
             type: String,
             required: false,
@@ -45,11 +45,10 @@ const orgUserSchema = new Schema(
             type: String,
             required: false,
         },
-        
-        /*image: {
+        image: {
             type: String,
             required: false,
-        },*/
+        },
     },
     {
         timestamps: true,
@@ -68,8 +67,6 @@ orgUserSchema.pre("save", async function (next) {
         next(err);
     }
 });
-
-
 
 const OrgUser = mongoose.model("OrgUser", orgUserSchema);
 

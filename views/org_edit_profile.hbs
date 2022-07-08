@@ -53,10 +53,10 @@
                         </div>
                         <br><br>
                         <!-- moved form here to include the image upload in saving changes-->
-                        <form action="/org-edit-profile" method="post" onSubmit="return true">
+                        <form action="/org-edit-profile" method="post" onSubmit="return true" enctype="multipart/form-data">
 
                             {{#if user.image}}
-                                <img class="responsive" src="../images/{{user.image}}" alt="" />
+                                <img class="responsive" src="../images/uploads/{{user.image}}" alt="" />
 
                             {{else}}
                                 <img class="responsive" src="../images/org_user.png" alt="" />

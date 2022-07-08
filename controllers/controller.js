@@ -34,6 +34,7 @@ var orgUser = {
     instagram: "",
     twitter: "",
     linkedin: "",
+    image: "",
 };
 
 const controller = {
@@ -536,6 +537,7 @@ const controller = {
                         req.session.twitter = orguser.twitter;
                         req.session.instagram = orguser.instagram;
                         req.session.linkedin = orguser.linkedin;
+                        req.session.image = orguser.image;
 
                         req.session.usertype = "org";
 
@@ -551,6 +553,7 @@ const controller = {
                             twitter: orguser.twitter,
                             instagram: orguser.instagram,
                             linkedin: orguser.linkedin,
+                            image: orguser.image,
                         };
 
                         orgUser = login;
@@ -880,6 +883,10 @@ const controller = {
                 user.linkedin = req.body.linkedin;
                 //user.image = req.body.image;
 
+                if (req.file.originalname) {
+                    user.image = req.file.originalname;
+                }
+
                 user.password = orgUser.password;
 
                 orgUser = user;
@@ -891,7 +898,11 @@ const controller = {
                 user.twitter = req.body.twitter;
                 user.linkedin = req.body.linkedin;
                 //user.image = req.body.image;
-                
+
+                if (req.file.originalname) {
+                    user.image = req.file.originalname;
+                }
+
                 user.password = orgUser.password;
 
                 orgUser = user;
@@ -986,10 +997,11 @@ const controller = {
 
         OrgUser.findOne({ email: email }).then((user) => {
             const accountName = user.name;
+            const profile = user.image;
 
-            if (req.file.originalname) {
+            if (req.file.originalname != null) {
                 const image = req.file.originalname;
-                const newPost = new Posts({ accountName, email, content, image, date });
+                const newPost = new Posts({ accountName, email, content, image, date, profile });
 
                 newPost
                     .save()
@@ -998,7 +1010,7 @@ const controller = {
                     })
                     .catch((err) => res.status(400).json("Error: " + err));
             } else {
-                const newPost = new Posts({ accountName, email, content, date });
+                const newPost = new Posts({ accountName, email, content, date, profile });
 
                 newPost
                     .save()
@@ -1134,6 +1146,7 @@ const controller = {
 
         OrgUser.findOne({ email: email }).then((user) => {
             const accountName = user.name;
+            const profile = user.image;
 
             if (req.file.originalname) {
                 const image = req.file.originalname;
@@ -1143,6 +1156,7 @@ const controller = {
                     content,
                     image,
                     date,
+                    profile,
                 });
 
                 newEvent
@@ -1157,6 +1171,7 @@ const controller = {
                     email,
                     content,
                     date,
+                    profile,
                 });
 
                 newEvent
