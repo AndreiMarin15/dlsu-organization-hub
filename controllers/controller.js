@@ -114,6 +114,8 @@ const controller = {
         res.render("org_create_event", { user: orgUser });
     },
 
+    
+
     likePost: (req, res) => {
         Posts.findById(req.params.id).then((post) => {
             if (post != null) {
@@ -790,7 +792,9 @@ const controller = {
     deletePost: (req, res) => {
         // deletes a post using its id
         Posts.findByIdAndDelete(req.params.id)
-            .then(() => res.json("Post Deleted"))
+            .then(() => res.send(
+                `<script>alert("Post Deleted!"); window.location.href = "/org-feed"; </script>`
+            ))
             .catch((err) => res.status(400).json("Error: ") + err);
     },
 
@@ -929,8 +933,12 @@ const controller = {
     deleteEvent: (req, res) => {
         // deletes a post using its id
         Event.findByIdAndDelete(req.params.id)
-            .then(() => res.json("Event Deleted"))
+            .then(() => res.send(
+                `<script>alert("Event Deleted!"); window.location.href = "/org-feed/events"; </script>`
+            ))
             .catch((err) => res.status(400).json("Error: ") + err);
+
+            
     },
 
     updateEvent: (req, res) => {

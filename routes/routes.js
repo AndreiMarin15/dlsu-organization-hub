@@ -20,6 +20,10 @@ app.post("/going/:id", controller.going);
 app.get("/", controller.getIndex);
 app.get("/search/", controller.search);
 
+//delete
+app.post("/delete-post/:id", controller.deletePost);
+app.post("/delete-event/:id", controller.deleteEvent);
+
 //LOG IN
 app.get("/logIn", controller.getLogIn);
 app.post("/loginForm", controller.logIn);
