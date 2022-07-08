@@ -257,6 +257,17 @@ a.button:active,
     display: flex;
 }
 
+.card img {
+    width: 140px;
+    height: 140px;
+    border: 0px;
+}
+
+.card #attach {
+    align-items: center;
+    border-top: 100px;
+}
+
 .table {
     border: none;
     padding-left: 60px;
@@ -548,6 +559,12 @@ a.button:active,
 
     .container {
         flex-wrap: wrap;
+    }
+
+    .container img {
+        width: 140px;
+        height: 140px;
+        border: 0px;
     }
 
     .card {
