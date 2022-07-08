@@ -393,6 +393,7 @@ li a.navItems {
     text-align:justify;
     padding-left: 10px;
     padding-right: 10px;
+    word-break: break-all;
 }
 
 .container .post_link{
@@ -1096,6 +1097,7 @@ div {
     text-align:justify;
     padding-left: 10px;
     padding-right: 10px;
+    word-break: break-all;
 }
 
 .container .post_link{

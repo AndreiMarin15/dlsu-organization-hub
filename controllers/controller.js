@@ -876,6 +876,7 @@ const controller = {
                 user.instagram = req.body.instagram;
                 user.twitter = req.body.twitter;
                 user.linkedin = req.body.linkedin;
+                //user.image = req.body.image;
 
                 user.password = orgUser.password;
 
@@ -887,7 +888,8 @@ const controller = {
                 user.instagram = req.body.instagram;
                 user.twitter = req.body.twitter;
                 user.linkedin = req.body.linkedin;
-
+                //user.image = req.body.image;
+                
                 user.password = orgUser.password;
 
                 orgUser = user;

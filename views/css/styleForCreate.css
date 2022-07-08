@@ -385,7 +385,7 @@ li a.navItems {
     padding-bottom: 0px;
 }
 
-.card-header .header-title #org_name{
+.card-header .header-title #nav_link{
     font-family:'Gill Sans Light', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size:14px;
     padding:5px 10px;
@@ -397,7 +397,7 @@ li a.navItems {
     
 }
 
-.card-header .header-title #org_name:active, #org_name:hover{
+.card-header .header-title #nav_link:active, #nav_link:hover{
     border-bottom: 0px;
     color:#74511c;
 }
