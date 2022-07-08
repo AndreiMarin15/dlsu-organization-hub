@@ -70,6 +70,20 @@ const controller = {
             .catch((err) => res.json(err));
     },
 
+    isLiked: (req, res) => {
+        postid = req.query.id;
+
+        Posts.findById(postid).then((post) => {
+            index = post.likes.indexOf(req.session.userid);
+
+            if (index != -1) {
+                res.send(false);
+            } else {
+                res.send(true);
+            }
+        });
+    },
+
     getIndex: (req, res) => {
         res.render("index");
     },
@@ -450,30 +464,17 @@ const controller = {
 
     search: (req, res) => {
         // searches for an org user through the org name, if the inital find method returns a blank array, it searches for posts matching its content
-        OrgUser.find({ name: { $regex: ".*" + req.body.search + ".*" } }, (err, user) => {
-            if (err) {
-                res.status(400).json("Error: " + err);
-            }
 
-            if (!user.length) {
-                Posts.find({ content: { $regex: ".*" + req.body.search + ".*" } }, (err, post) => {
-                    if (err) {
-                        res.status(400).json("Error: " + err);
-                    }
+    
 
-                    if (!post.length) {
-                        Event.find({ content: { $regex: ".*" + req.body.search + ".*" } })
-                            .then((event) => {
-                                res.json(event);
-                            })
-                            .catch((err) => res.status(400).json("Error: ") + err);
-                    } else {
-                        res.json(post);
+        OrgUser.find({ name: { $regex: ".*" + req.body.search + ".*", $options: "i" } }).then((orguser) => {
+            Posts.find({ content: { $regex: ".*" + req.body.search + ".*", $options: "i" } }).sort({ updatedAt: -1 }).then((posts) => {
+                Event.find({ content: { $regex: ".*" + req.body.search + ".*", $options: "i" } }).sort({ updatedAt: -1 }).then(
+                    (events) => {
+                        res.render("student_search", {user:studentUser, orguser: orguser, post: posts, event: events });
                     }
-                });
-            } else {
-                res.json(user);
-            }
+                );
+            });
         });
     },
 
