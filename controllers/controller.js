@@ -247,7 +247,8 @@ const controller = {
     },
 
     getStudentSettings: (req, res) => {
-        res.render("student_settings", { user: studentUser });
+        userid = req.session.id;
+        res.render("student_settings", { user: studentUser, userid: userid });
     },
 
     getUpdateProfile: (req, res) => {
@@ -330,14 +331,12 @@ const controller = {
                     student.password = studentUser.password;
 
                     student.save();
-                    
                 } else {
                     index = student.following.indexOf(orguser._id);
 
                     student.following.splice(index, 1);
                     student.password = studentUser.password;
                     student.save();
-                    
                 }
             });
         });
@@ -365,7 +364,8 @@ const controller = {
     },
 
     getOrgSettings: (req, res) => {
-        res.render("org_settings", { user: orgUser });
+        userid = req.session.userid;
+        res.render("org_settings", { user: orgUser, userid: userid });
     },
 
     getStudentSavedPosts: (req, res) => {
@@ -636,33 +636,54 @@ const controller = {
         });
     },
 
+    deleteStudent: (req, res) => {
+        StudentUser.findByIdAndDelete(req.session.userid).then(() => {
+            res.send(`
+            <script> window.location.href = "/logout"; </script>
+            `)
+        })
+    },
+
     deleteStudentAccount: (req, res) => {
         // deletes a student acct using its id
-        StudentUser.findByIdAndDelete(req.session.user.id)
-            .then(() =>
+        StudentUser.findById(req.session.userid)
+            .then(() => {
                 res.send(
                     `<script>
                         let isExecuted = confirm("Are you sure you want to delete your account?"); 
                         if (isExecuted)
-                            window.location.href = "/"; 
+                            window.location.href = "/deleteStudent"; 
+                        else 
+                        window.location.href = "/student-settings";
                     </script>`
-                )
-            )
+                );
+            })
             .catch((err) => res.status(400).json("Error: ") + err);
+    },
+
+    deleteOrg: (req, res) => {
+        OrgUser.findByIdAndDelete(req.session.userid).then(() => {
+            res.send(`
+            <script> window.location.href = "/logout"; </script>
+            `)
+        })
     },
 
     deleteOrgAccount: (req, res) => {
         // deletes a org acct using its id
-        OrgtUser.findByIdAndDelete(req.session.user.id)
-            .then(() =>
+        OrgUser.findById(req.session.userid)
+            .then(() => {
+                
                 res.send(
                     `<script>
                         let isExecuted = confirm("Are you sure you want to delete your account?"); 
                         if (isExecuted)
-                            window.location.href = "/"; 
+                            window.location.href = "/deleteOrg"; 
+                            else 
+                            window.location.href = "/org-settings";
                     </script>`
-                )
-            )
+                );
+            })
             .catch((err) => res.status(400).json("Error: ") + err);
     },
 

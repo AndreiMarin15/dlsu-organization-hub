@@ -96,9 +96,11 @@ app.post("/studentUsers/:id/follow", controller.addAffiliation);
 
 //DELETE STUDENT ACCT.
 app.post("/delete-student-profile/:id", controller.deleteStudentAccount);
+app.get("/deleteStudent", controller.deleteStudent);
 
 //DELETE ORG ACCT.
 app.post("/delete-org-profile/:id", controller.deleteOrgAccount);
+app.get("/deleteOrg", controller.deleteOrg);
 
 // ORG USERS
 app.get("/orgUsers/", controller.getOrgs);

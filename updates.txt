@@ -9,10 +9,10 @@ TODO:
 [/] Student Going
 [/] Edit Post Backend
 [/] Delete Post connect to front end
-[] Follow, unfollow
+[/] Follow, unfollow
+[/] Student Org View
 [] File upload system
 [] Student Following List
-[] Student Org View
 [] Fix post retrieval
 [] Org avatar in schema
 [] Like, saved, marked as going button colors
