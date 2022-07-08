@@ -46,9 +46,11 @@
 
             <div class="box2">
                 <div class="b2row1">
-                    <input type="text" name="searchbar" id="searchbar" placeholder="   Search posts, events, and pages..." />
+                    <form action="/search" method="post">
+                    <input type="text" name="search" id="searchbar" placeholder="   Search posts, events, and pages..." />
                     
                     <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> &nbsp; GO!</button>
+                    </form>
                 </div>
                 <div class="feed_type">
                     <nav>

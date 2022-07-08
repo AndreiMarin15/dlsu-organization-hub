@@ -46,39 +46,28 @@
 
             <div class="box2">
                 <div class="b2row1">
-                    <input type="text" name="searchbar" id="searchbar" placeholder="   Search posts, events, and pages..." />
+                    <form action="/search" method="post">
+                    <input type="text" name="search" id="searchbar" placeholder="   Search posts, events, and pages..." />
                     <p>{{search}}</p>
-                    
                     <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> &nbsp; GO!</button>
+                    </form>
                 </div>
                 <div class="feed_type">
                     <nav>
                         <ul class="navLinks">
 
-                            {{#if post}}
-
-                            {{#unless event}}
-                  
-                            <li><a class="current" href="/student-feed" id="nav_link"><b>POSTS</b></a> </li>
-                            <li><a class="notCurrent" href="/student-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
-                            {{/unless}}
-                            
-                            {{/if}}
-
-                            {{#if event}}
-
-                            {{#unless post}}
-                          
-                            <li><a class="notCurrent" href="/student-feed" id="nav_link"><b>POSTS</b></a> </li>
-                            <li><a class="current" href="/student-feed/events" id="nav_link" ><b>EVENTS</b></a></li>
-                            {{/unless}}                            
-                            {{/if}}
 
                             
                         </ul>
                     </nav>
                 </div>
                 <div class="b2row2">
+                    {{#if orguser}}
+                    {{#each orguser}}
+                    {{> orgs}}
+                    {{/each}}
+                    {{/if}}
+
                     {{#if post}}
                     {{#each post}}
                     {{> posts}}
