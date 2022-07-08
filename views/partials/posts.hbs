@@ -9,7 +9,7 @@
             {{/if}}
         </div>
         <div class="header-title">
-            <a href="/student-view-org" id="org_name"><b>{{accountName}}</b></a><br />
+            <a href="/student-view-org/{{_id}}" id="org_name"><b>{{accountName}}</b></a><br />
             <p class="details"> <strong> Posted on: </strong>{{date}} </p>
             <p class="details"><strong> Type: </strong> Post</p>
 
@@ -29,6 +29,7 @@
 
     <div class="actions">
         <div class="action-btn">
+            
             <form action="/like/{{_id}}" method="post">
                 <button type="submit"><i class="fa-solid fa-thumbs-up" background-color=""></i>
                     &nbsp;{{likes.length}}

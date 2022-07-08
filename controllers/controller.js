@@ -110,10 +110,9 @@ const controller = {
     },
 
     getEditOrgEvent: (req, res) => {
-        Events.findById(req.params.id).then(event => {
+        Events.findById(req.params.id).then((event) => {
             res.render("org_edit_event", { user: orgUser, event: event });
-        })
-       
+        });
     },
 
     getCreateEvent: (req, res) => {
@@ -256,18 +255,99 @@ const controller = {
     },
 
     getOrgFeedStudentView: (req, res) => {
-        res.render("student_org_feed", { user: orgUser });
+        Posts.findById(req.params.id).then((result) => {
+            if (result) {
+                email = result.email;
+
+                OrgUser.findOne({ email: email }).then((orguser) => {
+                    Posts.find({ email: orguser.email })
+                        .sort({ createdAt: -1 })
+                        .then((posts) => {
+                            Events.find({ email: orguser.email })
+                                .sort({ createdAt: -1 })
+                                .then((events) => {
+                                    res.render("student_org_feed", {
+                                        user: orguser,
+                                        post: posts,
+                                        event: events,
+                                    });
+                                });
+                        });
+                });
+            } else {
+                Events.findById(req.params.id).then((result2) => {
+                    if (result2) {
+                        email = result2.email;
+
+                        OrgUser.findOne({ email: email }).then((orguser) => {
+                            Events.find({ email: orguser.email })
+                                .sort({ createdAt: -1 })
+                                .then((events) => {
+                                    Posts.find({ email: orguser.email })
+                                        .sort({ createdAt: -1 })
+                                        .then((posts) => {
+                                            res.render("student_org_feed", {
+                                                user: orguser,
+                                                post: posts,
+                                                event: events,
+                                            });
+                                        });
+                                });
+                        });
+                    } else {
+                        OrgUser.findById(req.params.id).then((orguser) => {
+                            Posts.find({ email: orguser.email })
+                                .sort({ createdAt: -1 })
+                                .then((posts) => {
+                                    Events.find({ email: orguser.email })
+                                        .sort({ createdAt: -1 })
+                                        .then((events) => {
+                                            res.render("student_org_feed", {
+                                                user: orguser,
+                                                post: posts,
+                                                event: events,
+                                            });
+                                        });
+                                });
+                        });
+                    }
+                });
+            }
+        });
     },
 
     getOrgProfileStudentView: (req, res) => {
-        res.render("student_org_profile", { user: orgUser });
+        OrgUser.findById(req.params.id).then((orguser) => {
+            res.render("student_org_profile", { user: orguser });
+        });
+    },
+
+    followOrg: (req, res) => {
+        OrgUser.findById(req.params.id).then((orguser) => {
+            StudentUser.findById(req.session.userid).then((student) => {
+                if (student.following.indexOf(orguser._id) == -1 || student.following == null) {
+                    student.following.push(orguser._id);
+                    student.password = studentUser.password;
+
+                    student.save();
+                    
+                } else {
+                    index = student.following.indexOf(orguser._id);
+
+                    student.following.splice(index, 1);
+                    student.password = studentUser.password;
+                    student.save();
+                    
+                }
+            });
+        });
     },
 
     getOrgFeed: (req, res) => {
-        Posts.find()
+        Posts.find({ email: req.session.email })
             .sort({ createdAt: -1 })
             .then((posts) => {
-                Event.find()
+                Event.find({ email: req.session.email })
                     .then((events) => {
                         res.render("org_feed", { user: orgUser, post: posts });
                     })
@@ -834,9 +914,11 @@ const controller = {
                 post.content = req.body.content;
 
                 post.save()
-                    .then(() => res.send(
-                        `<script>alert("Post Updated!"); window.location.href = "/org-feed"; </script>`
-                    ))
+                    .then(() =>
+                        res.send(
+                            `<script>alert("Post Updated!"); window.location.href = "/org-feed"; </script>`
+                        )
+                    )
                     .catch((err) => res.status(400).json("Error: " + err));
             })
             .catch((err) => res.status(400).json("Error: " + err));
@@ -862,7 +944,7 @@ const controller = {
     },
 
     getOrgFeedEvents: (req, res) => {
-        Event.find()
+        Event.find({ email: req.session.email })
             .sort({ createdAt: -1 })
             .then((events) => {
                 res.render("org_feed", { user: orgUser, event: events });
@@ -979,9 +1061,11 @@ const controller = {
 
                 event
                     .save()
-                    .then(() => res.send(
-                        `<script>alert("Event Updated!"); window.location.href = "/org-feed/events"; </script>`
-                    ))
+                    .then(() =>
+                        res.send(
+                            `<script>alert("Event Updated!"); window.location.href = "/org-feed/events"; </script>`
+                        )
+                    )
                     .catch((err) => res.status(400).json("Error: " + err));
             })
             .catch((err) => res.status(400).json("Error: " + err));
