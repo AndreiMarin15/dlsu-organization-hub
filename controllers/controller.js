@@ -276,23 +276,41 @@ const controller = {
                 });
             } else {
                 Events.findById(req.params.id).then((result2) => {
-                    email = result2.email;
+                    if (result2) {
+                        email = result2.email;
 
-                    OrgUser.findOne({ email: email }).then((orguser) => {
-                        Events.find({ email: orguser.email })
-                            .sort({ createdAt: -1 })
-                            .then((events) => {
-                                Posts.find({ email: orguser.email })
-                                    .sort({ createdAt: -1 })
-                                    .then((posts) => {
-                                        res.render("student_org_feed", {
-                                            user: orguser,
-                                            post: posts,
-                                            event: events,
+                        OrgUser.findOne({ email: email }).then((orguser) => {
+                            Events.find({ email: orguser.email })
+                                .sort({ createdAt: -1 })
+                                .then((events) => {
+                                    Posts.find({ email: orguser.email })
+                                        .sort({ createdAt: -1 })
+                                        .then((posts) => {
+                                            res.render("student_org_feed", {
+                                                user: orguser,
+                                                post: posts,
+                                                event: events,
+                                            });
                                         });
-                                    });
-                            });
-                    });
+                                });
+                        });
+                    } else {
+                        OrgUser.findById(req.params.id).then((orguser) => {
+                            Posts.find({ email: orguser.email })
+                                .sort({ createdAt: -1 })
+                                .then((posts) => {
+                                    Events.find({ email: orguser.email })
+                                        .sort({ createdAt: -1 })
+                                        .then((events) => {
+                                            res.render("student_org_feed", {
+                                                user: orguser,
+                                                post: posts,
+                                                event: events,
+                                            });
+                                        });
+                                });
+                        });
+                    }
                 });
             }
         });
@@ -301,6 +319,27 @@ const controller = {
     getOrgProfileStudentView: (req, res) => {
         OrgUser.findById(req.params.id).then((orguser) => {
             res.render("student_org_profile", { user: orguser });
+        });
+    },
+
+    followOrg: (req, res) => {
+        OrgUser.findById(req.params.id).then((orguser) => {
+            StudentUser.findById(req.session.userid).then((student) => {
+                if (student.following.indexOf(orguser._id) == -1 || student.following == null) {
+                    student.following.push(orguser._id);
+                    student.password = studentUser.password;
+
+                    student.save();
+                    
+                } else {
+                    index = student.following.indexOf(orguser._id);
+
+                    student.following.splice(index, 1);
+                    student.password = studentUser.password;
+                    student.save();
+                    
+                }
+            });
         });
     },
 
