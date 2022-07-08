@@ -499,10 +499,13 @@ const controller = {
                 Event.find({ content: { $regex: ".*" + req.body.search + ".*", $options: "i" } })
                     .sort({ updatedAt: -1 })
                     .then((events) => {
+                        var searched = req.body.search;
+
                         res.render("student_search", {
-                            user: studentUser,
+                            user: orgUser,
                             post: posts,
                             event: events,
+                            searched: searched,
                         });
                     });
             });
