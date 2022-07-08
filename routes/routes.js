@@ -48,6 +48,7 @@ app.get("/events-going", controller.getStudentGoing);
 
 // STUDENT PROFILE
 app.get("/student-profile", controller.getStudentProfile);
+app.get("/student-profile/following", controller.getStudentFollowing);
 
 
 // STUDENT SETTINGS

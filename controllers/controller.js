@@ -246,6 +246,14 @@ const controller = {
         res.render("student_profile", { user: studentUser });
     },
 
+    getStudentFollowing: (req, res) => {
+        StudentUser.findById(req.session.userid).then((studentuser) => {
+            OrgUser.find({ _id: { $in: studentuser.following } }).then((org) => {
+                res.render("student_following", { user: studentuser, org: org });
+            });
+        });
+    },
+
     getStudentSettings: (req, res) => {
         userid = req.session.id;
         res.render("student_settings", { user: studentUser, userid: userid });
@@ -640,8 +648,8 @@ const controller = {
         StudentUser.findByIdAndDelete(req.session.userid).then(() => {
             res.send(`
             <script> window.location.href = "/logout"; </script>
-            `)
-        })
+            `);
+        });
     },
 
     deleteStudentAccount: (req, res) => {
@@ -665,15 +673,14 @@ const controller = {
         OrgUser.findByIdAndDelete(req.session.userid).then(() => {
             res.send(`
             <script> window.location.href = "/logout"; </script>
-            `)
-        })
+            `);
+        });
     },
 
     deleteOrgAccount: (req, res) => {
         // deletes a org acct using its id
         OrgUser.findById(req.session.userid)
             .then(() => {
-                
                 res.send(
                     `<script>
                         let isExecuted = confirm("Are you sure you want to delete your account?"); 

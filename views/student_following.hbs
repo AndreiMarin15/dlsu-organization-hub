@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <script src="https://kit.fontawesome.com/dfcf57d1e4.js" crossorigin="anonymous"></script>
@@ -52,13 +53,13 @@
                         <ul class="navLinks">
                             <li>
                                 <a
-                                    class="current"
+                                    
                                     href="/student-profile"
                                     id="nav_link"
                                 ><b>PROFILE INFORMATION</b></a>
                             </li>
                             <li>
-                                <a href="/student-profile/following" id="nav_link"><b>FOLLOWING
+                                <a class ="current" href="/student-profile/following" id="nav_link"><b>FOLLOWING
                                         LIST</b></a>
                             </li>
                         </ul>
@@ -66,85 +67,15 @@
                 </div>
                 <div class="b2row2">
                     <!-- BASIC INFORMATION -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h2>BASIC INFORMATION</h2>
-                            <br />
-                        </div>
-                        <div class="container">
-                            <table class="table">
-                                <tr>
-                                    <td><strong>NAME: </strong> </td>
-                                    <td>{{user.firstName}} {{user.lastName}}</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>DLSU EMAIL: </strong> </td>
-                                    <td> {{user.email}} </td>
-                                </tr>
-
-                                
-                            </table>
-                        </div>
-                    </div>
-                    <!-- ADDITIONAL INFO -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h2>ADDITIONAL INFORMATION</h2>
-                            <br />
-                        </div>
-                        <div class="container">
-                            <table class="table">
-                                {{#if user.program}}
-                                <tr>
-                                    <td><strong>PROGRAM: </strong></td>
-                                    <td> {{user.program}}</td>
-                                </tr>
-
-                                {{else}}
-                                <tr>
-                                    <td><strong>PROGRAM: </strong></td>
-                                    <td>Not yet added</td>
-                                </tr>
-
-                                {{/if}}
-                                {{#if user.college}}
-                                <tr>
-                                    <td><strong>COLLEGE: </strong> </td>
-                                    <td> {{user.college}}</td>
-                                </tr>
-
-                                {{else}}
-                                <tr>
-                                    <td><strong>COLLEGE: </strong></td>
-                                    <td>Not yet added</td>
-                                </tr>
-                                {{/if}}
-
-                                {{#if user.idNumber}}
-                                <tr>
-                                    <td><strong>ID NUMBER: </strong> </td>
-                                    <td> {{user.idNumber}} </td>
-                                </tr>
-
-                                {{else}}
-                                <tr>
-                                    <td><strong>ID NUMBER: </strong></td>
-                                    <td>Not yet added</td>
-                                </tr>
-                                {{/if}}
-
-                                
-
-                            </table>
-                        </div>
-                    </div>
-
                     
+                    {{#each org}}
+                        {{> following}}
+                    {{/each}}
 
                 </div>
             </div>
 
-            <div class="box3">
+             <div class="box3">
                 <div class="name">
                     <h1>ACCOUNT</h1>
                 </div>

@@ -1,0 +1,35 @@
+<div class="card">
+    <div class="card-header">
+        <div class="logo">
+            {{#if image}}
+                <img src="../images/{{image}}" />
+            {{else}}
+                <img src="../images/org_user.png" />
+            {{/if}}
+        </div>
+        <div class="header-title">
+
+            <a href="/student-view-org/{{_id}}" id="nav_link"><b>{{name}}</b></a><br />
+
+        </div>
+        <div class="actions">
+
+            <div class="action-btn">
+                <form action="/unfollow/{{_id}}" method="post">
+                    <button type="submit">
+                        <span class="noHover">
+                            <i class="fa-solid fa-check"></i>
+                            &nbsp; FOLLOWING
+                        </span>
+
+                        <span class="hover">
+                            <i class="fa-solid fa-x"></i>
+                            &nbsp; UNFOLLOW
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
