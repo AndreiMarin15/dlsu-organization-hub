@@ -8,118 +8,157 @@
     </head>
     <body>
       
-         <div class="container1">
+          <div class="container1">
             <div class="box1">
                 <div class="left">
-                     <div class="b1row1">
-                         <img class="responsive" src="../images/logo_feed.png" alt="" />
-                     </div>
-                    
-                     <div class="b1row2">
-                         {{#if user.image}}
+                    <div class="b1row1">
+                        <img class="responsive" src="../images/logo_feed.png" alt="" />
+                    </div>
+
+                    <div class="b1row2">
+                        {{#if user.image}}
                             <img class="responsive" src="../images/{{user.image}}" alt="" />
 
                         {{else}}
                             <img class="responsive" src="../images/org_user.png" alt="" />
 
                         {{/if}}
-                     </div>
+                    </div>
                 </div>
                 <div class="right"><div class="b1row3">
-                    <div class="name">
-                        <h1>{org.name}</h1>
-                    </div>
-            
-                    <div class="navigation">
+                        <div class="name">
+                            <h1>{{user.name}}</h1>
+                        </div>
+
+                        <div class="navigation">
                         <form action="/student-view-org-profile/follow" method="post" onSubmit="return true">
                         <a class="button" href="/student-view-org-profile"><i class="fa-solid fa-person-circle-plus"></i> &nbsp; FOLLOW</a><br>
                         </form>
                         <a class="button" href="/student-view-org-profile"><i class="fa-solid fa-user"></i>&nbsp; &nbsp; ABOUT</a><br>
                     </div>
-                </div>
                     <br>
-                </div></div>
-                
+                    <a class="button" href="/student-feed"><i class="fa-solid fa-arrow-left"></i></i>&nbsp; &nbsp;RETURN TO FEED</a><br>
+                        </div>
+                    <br />
+                </div>
+
             </div>
 
             <div class="box2">
                 <div class="b2row1">
-                    <img class="responsiveImg" src = "../images/lscs_header.png">
-                </div>
-                <div class="profile_type">
-                    <nav>
-                        <ul class="navLinks">
-                            <li><a class="current" href="../Pages/lscs_org_profile.html" id="nav_link"><b>ABOUT</b></a> </li>
-                        </ul>
-                    </nav>
+                    <img class="responsiveImg" src="../images/header.png" />
                 </div>
                 <div class="b2row2">
                     <div class="card">
                         <div class="card-header">
-                            <h2>ORG INFORMATION</h2><br>
+                            <h2>ORG INFORMATION</h2><br />
                         </div>
                         <div class="container">
                             <table class="table">
-                                <tr>
-                                    <td class="right"> ORG TYPE: </td>
-                                    <td><span class="tab"></span>{{org.type}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="right"> AFFILIATION: </td>
-                                    <td><span class="tab"></span>{{org.affiliation}}</td>
-                                </tr>
-                            </table>
-                        </div>
-                      </div>
+                                {{#if user.type}}
+                                    <tr>
+                                        <td class="right"> ORG TYPE: </td>
+                                        <td><span class="tab"></span>{{user.type}}</td>
+                                    </tr>
+                                {{else}}
+                                    <tr>
+                                        <td class="right"> ORG TYPE: </td>
+                                        <td><span class="tab"></span>Not yet added</td>
+                                    </tr>
 
-                      <div class="card">
-                        <div class="card-header">
-                            <h2>ORGANIZATION'S PAGES AND SOCIALS</h2><br>
-                        </div>
-                        <div class="container">
-                            <table class="table">
-                                <tr>
-                                    <td class="right"> FACEBOOK: </td>
-                                    <td><span class="tab"></span><b>{{org.facebook}}</b></td>
-                                </tr>
-                                <tr>
-                                    <td class="right"> INSTAGRAM: </td>
-                                    <td><span class="tab"></span><b>{{org.instagram}}</b></td>
-                                </tr>
-                                <tr>
-                                    <td class="right"> TWITTER: </td>
-                                    <td><span class="tab"></span><b>{{org.twitter}}</b></td>
-                                </tr>
-                                
-                                <tr>
-                                    <td class="right"> LINKEDIN: </td>
-                                    <td><span class="tab"></span><b>{{org.linkedin}}</b></td>
-                                </tr>
+                                {{/if}}
+                                {{#if user.affiliation}}
+                                    <tr>
+                                        <td class="right"> AFFILIATION: </td>
+                                        <td><span class="tab"></span>{{user.affiliation}}</td>
+                                    </tr>
+                                {{else}}
+                                    <tr>
+                                        <td class="right"> AFFILIATION: </td>
+                                        <td><span class="tab"></span>Not yet added</td>
+                                    </tr>
+                                {{/if}}
                             </table>
                         </div>
-                      </div>
+                    </div>
 
-                      <div class="card">
+                    <div class="card">
                         <div class="card-header">
-                            <h2>APPLICATION OR HOW TO JOIN</h2><br>
+                            <h2>ORGANIZATION'S PAGES AND SOCIALS</h2><br />
                         </div>
                         <div class="container">
                             <table class="table">
-                                <tr>
-                                    <td class="right"> SCHEDULE: </td>
-                                    <td><span class="tab"></span>{{org.schedule}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="right"> LINK: </td>
-                                    <td><span class="tab"></span>{{org.appLink}}</td>
-                                </tr>
+                                {{#if user.facebook}}
+                                    <tr>
+                                        <td class="right"> FACEBOOK: </td>
+                                        <td><span class="tab"></span>
+                                            <a href="http://{{user.facebook}}" id="nav_link"><b
+                                                >{{user.facebook}}</b></a></td>
+                                    </tr>
+
+                                {{else}}
+
+                                    <tr>
+                                        <td class="right"> FACEBOOK: </td>
+                                        <td><span class="tab"></span>
+                                            Not yet added</td>
+                                    </tr>
+                                {{/if}}
+
+                                {{#if user.instagram}}
+                                    <tr>
+                                        <td class="right"> INSTAGRAM: </td>
+                                        <td><span class="tab"></span>
+                                            <a href="http://{{user.instagram}}" id="nav_link"><b
+                                                >{{user.instagram}}</b></a></td>
+                                    </tr>
+                                {{else}}
+                                    <tr>
+                                        <td class="right"> INSTAGRAM: </td>
+                                        <td><span class="tab"></span>
+                                            Not yet added</td>
+                                    </tr>
+                                {{/if}}
+
+                                {{#if user.twitter}}
+                                    <tr>
+                                        <td class="right"> TWITTER: </td>
+                                        <td><span class="tab"></span>
+                                            <a href="http://{{user.twitter}}" id="nav_link"><b
+                                                >{{user.twitter}}</b></a></td>
+                                    </tr>
+
+                                {{else}}
+
+                                    <tr>
+                                        <td class="right"> TWITTER: </td>
+                                        <td><span class="tab"></span>
+                                            Not yet added</td>
+                                    </tr>
+                                {{/if}}
+
+                                {{#if user.linkedin}}
+                                    <tr>
+                                        <td class="right"> LINKEDIN: </td>
+                                        <td><span class="tab"></span>
+                                            <a href="http://{{user.linkedin}}" id="nav_link"><b
+                                                >{{user.linkedin}}</b></a></td>
+                                    </tr>
+
+                                {{else}}
+
+                                    <tr>
+                                        <td class="right"> LINKEDIN: </td>
+                                        <td><span class="tab"></span>
+                                            Not yet added</td>
+                                    </tr>
+
+                                {{/if}}
                             </table>
                         </div>
-                      </div>
-            
+                    </div>
                 </div>
             </div>
-
            <div class="box3">
                 <div class="name">
                     <h1>ACCOUNT</h1>
