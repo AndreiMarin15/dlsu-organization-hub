@@ -2,7 +2,6 @@ const StudentUser = require("../models/studentUserModel");
 const OrgUser = require("../models/orgUserModel");
 const Posts = require("../models/postModel");
 const Event = require("../models/eventModel");
-const Image = require("../models/imageModel");
 const bcrypt = require("bcrypt");
 const Events = require("../models/eventModel");
 const moment = require("moment");
