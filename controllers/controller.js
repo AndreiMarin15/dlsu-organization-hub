@@ -339,12 +339,29 @@ const controller = {
                     student.password = studentUser.password;
 
                     student.save();
+
+                    let alert = "Org Unfollowed!";
+                    let window = `/student-view-org/${orguser._id}`;
+
+                    // res.send(
+                    //     `<script>alert(${alert}); window.location.href = ${window}; </script>`
+                    // );
+                    res.redirect(window);
                 } else {
                     index = student.following.indexOf(orguser._id);
 
                     student.following.splice(index, 1);
                     student.password = studentUser.password;
                     student.save();
+
+                    let alert = "Org Unfollowed!";
+                    let window = `/student-view-org/${orguser._id}`;
+
+                    res.redirect(window);
+
+                    // res.send(
+                    //     `<script>alert(${alert}); window.location.href = ${window}; </script>`
+                    // );
                 }
             });
         });
