@@ -465,17 +465,47 @@ const controller = {
     search: (req, res) => {
         // searches for an org user through the org name, if the inital find method returns a blank array, it searches for posts matching its content
 
-    
+        OrgUser.find({ name: { $regex: ".*" + req.body.search + ".*", $options: "i" } }).then(
+            (orguser) => {
+                Posts.find({ content: { $regex: ".*" + req.body.search + ".*", $options: "i" } })
+                    .sort({ updatedAt: -1 })
+                    .then((posts) => {
+                        Event.find({
+                            content: { $regex: ".*" + req.body.search + ".*", $options: "i" },
+                        })
+                            .sort({ updatedAt: -1 })
+                            .then((events) => {
+                                var searched = req.body.search;
 
-        OrgUser.find({ name: { $regex: ".*" + req.body.search + ".*", $options: "i" } }).then((orguser) => {
-            Posts.find({ content: { $regex: ".*" + req.body.search + ".*", $options: "i" } }).sort({ updatedAt: -1 }).then((posts) => {
-                Event.find({ content: { $regex: ".*" + req.body.search + ".*", $options: "i" } }).sort({ updatedAt: -1 }).then(
-                    (events) => {
-                        res.render("student_search", {user:studentUser, orguser: orguser, post: posts, event: events });
-                    }
-                );
+                                res.render("student_search", {
+                                    user: studentUser,
+                                    orguser: orguser,
+                                    post: posts,
+                                    event: events,
+                                    searched: searched,
+                                });
+                            });
+                    });
+            }
+        );
+    },
+
+    searchOrg: (req, res) => {
+        // searches for an org user through the org name, if the inital find method returns a blank array, it searches for posts matching its content
+
+        Posts.find({ content: { $regex: ".*" + req.body.search + ".*", $options: "i" } })
+            .sort({ updatedAt: -1 })
+            .then((posts) => {
+                Event.find({ content: { $regex: ".*" + req.body.search + ".*", $options: "i" } })
+                    .sort({ updatedAt: -1 })
+                    .then((events) => {
+                        res.render("student_search", {
+                            user: studentUser,
+                            post: posts,
+                            event: events,
+                        });
+                    });
             });
-        });
     },
 
     logIn: (req, res) => {
