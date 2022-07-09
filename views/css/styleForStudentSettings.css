@@ -294,7 +294,7 @@ a.button:active,
     display: inline-block;
     position: relative;
     border-radius: 10px;
-    background-color:  #1c4c3b;
+    background-color: #1c4c3b;
     box-shadow: 0 2px 2px #888888;
     transition: color 0.3s, background-image 0.5s, ease-in-out;
 }
@@ -312,7 +312,7 @@ a.button:active,
     background-color: #a6513e;
     box-shadow: 0 2px 2px #888888;
     transition: color 0.3s, background-image 0.5s, ease-in-out;
-    margin-top: 130px;
+    margin-top: 146px;
 }
 
 .delete_button_org {
@@ -328,7 +328,7 @@ a.button:active,
     background-color: #a6513e;
     box-shadow: 0 2px 2px #888888;
     transition: color 0.3s, background-image 0.5s, ease-in-out;
-    margin-top: 105px;
+    margin-top: 123px;
 }
 
 .submit_button:hover,
@@ -344,8 +344,10 @@ a.button:active,
     cursor: pointer;
 }
 
-.delete_button:hover, .delete_button_org:hover,
-.delete_button_org:active, .delete_button:active {
+.delete_button:hover,
+.delete_button_org:hover,
+.delete_button_org:active,
+.delete_button:active {
     color: #f7f5ee;
     width: 150px;
     height: 40px;
