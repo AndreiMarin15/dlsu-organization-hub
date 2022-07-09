@@ -524,7 +524,9 @@ const controller = {
 
         OrgUser.findOne({ email: email }).then((orguser) => {
             if (orguser != null) {
+
                 orgUser.password = password;
+
                 bcrypt.compare(password, orguser.password).then((isVerify) => {
                     if (isVerify) {
                         req.session.email = orguser.email;
@@ -884,10 +886,15 @@ const controller = {
         OrgUser.findById(req.session.userid).then((user) => {
             if (req.body.affiliation == "N/A") {
                 user.type = req.body.type;
+                req.session.type = user.type;
                 user.facebook = req.body.facebook;
+                req.session.facebook = user.facebook;
                 user.instagram = req.body.instagram;
+                req.session.instagram = user.instagram;
                 user.twitter = req.body.twitter;
+                req.session.twitter = user.twitter;
                 user.linkedin = req.body.linkedin;
+                req.session.linkedin = user.linkedin;
                 //user.image = req.body.image;
 
                 if (req.file) {
@@ -900,13 +907,20 @@ const controller = {
 
                 orgUser = user;
             } else {
+                
+
                 user.type = req.body.type;
+                req.session.type = user.type;
                 user.affiliation = req.body.affiliation;
+                req.session.affiliation = req.body.affiliation;
                 user.facebook = req.body.facebook;
+                req.session.facebook = user.facebook;
                 user.instagram = req.body.instagram;
+                req.session.instagram = user.instagram;
                 user.twitter = req.body.twitter;
+                req.session.twitter = user.twitter;
                 user.linkedin = req.body.linkedin;
-                //user.image = req.body.image;
+                req.session.linkedin = user.linkedin;
 
                 if (req.file) {
                     user.image = req.file.originalname;
