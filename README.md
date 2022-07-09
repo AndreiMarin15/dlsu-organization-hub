@@ -45,3 +45,6 @@ The app can be used by simply going to https://dlsu-orghub.herokuapp.com. Upon y
  2. Our best friend Stack Overflow
  3. Iced coffee and milk tea
  4. Kind soul CMP who tutored us on the things we couldn't understand :>
+ 
+ ## Others
+ 1. The updated Phase 0 Document for this project can be found at https://drive.google.com/file/d/11nMaEJRRANA9i_wkOkA5HjOhXCzoWgkj/view?usp=sharing
