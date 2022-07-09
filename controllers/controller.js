@@ -906,6 +906,11 @@ const controller = {
                 req.session.type = user.type;
             }
 
+            if (req.body.affiliation != "N/A" && req.body.affiliation) {
+                user.affiliation = req.body.affiliation;
+                req.session.affiliation = user.affiliation;
+            }
+
             if (req.body.facebook != "/" && req.body.facebook) {
                 user.facebook = req.body.facebook;
                 req.session.facebook = req.body.facebook;
