@@ -712,12 +712,20 @@ const controller = {
                 user.idNumber = req.body.idNumber;
                 user.password = studentUser.password;
 
+                req.session.program = user.program;
+                req.session.idNumber = user.idNumber;
+                
+
                 studentUser = user;
             } else {
                 user.program = req.body.program;
                 user.college = req.body.college;
                 user.idNumber = req.body.idNumber;
                 user.password = studentUser.password;
+
+                req.session.program = user.program;
+                req.session.college = user.college;
+                req.session.idNumber = user.idNumber;
 
                 studentUser = user;
             }
