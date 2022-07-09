@@ -177,7 +177,6 @@ const controller = {
                 if (post) {
                     if (student.saved.indexOf(post._id) == -1 || student.saved == null) {
                         student.saved.push(post._id);
-                        student.password = studentUser.password;
 
                         student.save();
 
@@ -186,7 +185,6 @@ const controller = {
                         index = student.saved.indexOf(post._id);
 
                         student.saved.splice(index, 1);
-                        student.password = studentUser.password;
 
                         student.save();
 
@@ -196,7 +194,6 @@ const controller = {
                     Events.findById(req.params.id).then((event) => {
                         if (student.saved.indexOf(event._id) == -1 || student.saved == null) {
                             student.saved.push(event._id);
-                            student.password = studentUser.password;
 
                             student.save();
 
@@ -205,7 +202,6 @@ const controller = {
                             index = student.saved.indexOf(event._id);
 
                             student.saved.splice(index, 1);
-                            student.password = studentUser.password;
 
                             student.save();
 
@@ -222,14 +218,13 @@ const controller = {
             Events.findById(req.params.id).then((event) => {
                 if (student.going.indexOf(event._id) == -1 || student.going == null) {
                     student.going.push(event._id);
-                    student.password = studentUser.password;
 
                     student.save();
 
                     res.redirect("back");
                 } else {
                     index = student.going.indexOf(event._id);
-                    student.password = studentUser.password;
+
                     student.going.splice(index, 1);
 
                     student.save();
@@ -350,7 +345,6 @@ const controller = {
             StudentUser.findById(req.session.userid).then((student) => {
                 if (student.following.indexOf(orguser._id) == -1 || student.following == null) {
                     student.following.push(orguser._id);
-                    student.password = studentUser.password;
 
                     student.save();
 
@@ -365,7 +359,7 @@ const controller = {
                     index = student.following.indexOf(orguser._id);
 
                     student.following.splice(index, 1);
-                    student.password = studentUser.password;
+
                     student.save();
 
                     let alert = "Org Unfollowed!";
@@ -387,8 +381,6 @@ const controller = {
 
             if (index != -1) {
                 student.following.splice(index, 1);
-
-                student.password = studentUser.password;
 
                 student.save();
 
@@ -524,7 +516,6 @@ const controller = {
 
         OrgUser.findOne({ email: email }).then((orguser) => {
             if (orguser != null) {
-
                 orgUser.password = password;
 
                 bcrypt.compare(password, orguser.password).then((isVerify) => {
@@ -617,42 +608,48 @@ const controller = {
         const lastName = req.body.lastName;
         const confirm = req.body.confirmPassword;
 
-        StudentUser.findOne({ email: email }).then((studentuser) => {
-            if (studentuser == null) {
-                if (password === confirm && password.length >= 8 && email.includes("dlsu.edu.ph")) {
-                    const newStudentUser = new StudentUser({
-                        firstName,
-                        lastName,
-                        email,
-                        password,
-                    });
+        bcrypt.hash(password, 10, function (err, hash) {
+            StudentUser.findOne({ email: email }).then((studentuser) => {
+                if (studentuser == null) {
+                    if (
+                        password === confirm &&
+                        password.length >= 8 &&
+                        email.includes("dlsu.edu.ph")
+                    ) {
+                        const newStudentUser = new StudentUser({
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email,
+                            password: hash,
+                        });
 
-                    newStudentUser
-                        .save()
-                        .then(() => {
-                            res.send(
-                                `<script>alert("Account Created!"); window.location.href = "/login"; </script>`
-                            );
-                        })
-                        .catch((err) => res.status(400).json("Error: " + err));
-                } else if (password != confirm) {
+                        newStudentUser
+                            .save()
+                            .then(() => {
+                                res.send(
+                                    `<script>alert("Account Created!"); window.location.href = "/login"; </script>`
+                                );
+                            })
+                            .catch((err) => res.status(400).json("Error: " + err));
+                    } else if (password != confirm) {
+                        res.send(
+                            `<script>alert("Invalid Credentials. The passwords you entered do not match."); window.location.href = "/studentSignUp"; </script>`
+                        );
+                    } else if (password.length < 8) {
+                        res.send(
+                            `<script>alert("Invalid Credentials. Password must have at least 8 characters."); window.location.href = "/studentSignUp"; </script>`
+                        );
+                    } else if (!email.includes("dlsu.edu.ph")) {
+                        res.send(
+                            `<script>alert("Invalid Credentials. Email entered is not recognized as a DLSU email."); window.location.href = "/studentSignUp"; </script>`
+                        );
+                    }
+                } else {
                     res.send(
-                        `<script>alert("Invalid Credentials. The passwords you entered do not match."); window.location.href = "/studentSignUp"; </script>`
-                    );
-                } else if (password.length < 8) {
-                    res.send(
-                        `<script>alert("Invalid Credentials. Password must have at least 8 characters."); window.location.href = "/studentSignUp"; </script>`
-                    );
-                } else if (!email.includes("dlsu.edu.ph")) {
-                    res.send(
-                        `<script>alert("Invalid Credentials. Email entered is not recognized as a DLSU email."); window.location.href = "/studentSignUp"; </script>`
+                        `<script>alert("Email already in use. Failed to create account."); window.location.href = "/studentSignUp"; </script>`
                     );
                 }
-            } else {
-                res.send(
-                    `<script>alert("Email already in use. Failed to create account."); window.location.href = "/studentSignUp"; </script>`
-                );
-            }
+            });
         });
     },
 
@@ -672,29 +669,38 @@ const controller = {
 
     updateStudentUser: (req, res) => {
         // updates the properties of an organization using its id
-        StudentUser.findById(req.session.userid)
-            .then((user) => {
+        StudentUser.findById(req.session.userid).then((user) => {
+            if (req.body.email) {
                 user.email = req.body.email;
-                user.firstName = req.body.firstName;
-                user.lastName = req.body.lastName;
-
-                if (req.body.password) {
-                    user.password = req.body.password;
-                    studentUser = user;
-                } else {
-                    user.password = studentUser.password;
-                    studentUser = user;
-                }
-
                 req.session.email = req.body.email;
-                req.session.firstName = req.body.firstName;
-                req.session.lastName = req.body.lastName;
-                if (req.body.password) {
-                    studentUser = user;
-                    studentUser.password = req.body.password;
-                }
+            }
 
-                req.session.save();
+            if (req.body.firstName) {
+                user.firstName = req.body.firstName;
+                req.session.firstName = req.body.firstName;
+            }
+
+            if (req.body.lastName) {
+                user.lastName = req.body.lastName;
+                req.session.lastName = req.body.lastName;
+            }
+
+            if (req.body.password) {
+                bcrypt.hash(req.body.password, 10, function (err, hash) {
+                    user.password = hash;
+
+                    studentUser = user;
+
+                    user.save()
+                        .then(() =>
+                            res.send(
+                                `<script>alert("Account Updated!"); window.location.href = "/student-settings"; </script>`
+                            )
+                        )
+                        .catch((err) => res.status(400).json("Error: " + err));
+                });
+            } else {
+                studentUser = user;
 
                 user.save()
                     .then(() =>
@@ -703,34 +709,29 @@ const controller = {
                         )
                     )
                     .catch((err) => res.status(400).json("Error: " + err));
-            })
-            .catch((err) => res.status(400).json("Error: " + err));
+            }
+        });
     },
 
     updateStudentProfile: (req, res) => {
         StudentUser.findById(req.session.userid).then((user) => {
-            if (req.body.college == "N/A") {
+            if (req.body.program != "/" && req.body.program) {
                 user.program = req.body.program;
-                user.idNumber = req.body.idNumber;
-                user.password = studentUser.password;
-
                 req.session.program = user.program;
-                req.session.idNumber = user.idNumber;
-                
-
-                studentUser = user;
-            } else {
-                user.program = req.body.program;
-                user.college = req.body.college;
-                user.idNumber = req.body.idNumber;
-                user.password = studentUser.password;
-
-                req.session.program = user.program;
-                req.session.college = user.college;
-                req.session.idNumber = user.idNumber;
-
-                studentUser = user;
             }
+
+            if (req.body.college != "N/A") {
+                user.college = req.body.college;
+                req.session.college = req.body.college;
+            }
+
+            if (req.body.idNumber != "/" && req.body.idNumber) {
+                user.idNumber = req.body.idNumber;
+                req.session.idNumber = user.idNumber;
+            }
+
+            studentUser = user;
+
             user.save().then(() => {
                 res.send(
                     `<script>alert("Profile Updated!"); window.location.href = "/student-edit-profile"; </script>`
@@ -813,63 +814,79 @@ const controller = {
         const name = req.body.name;
         const confirm = req.body.confirmPassword;
 
-        OrgUser.findOne({ email: email }).then((orguser) => {
-            if (orguser == null) {
-                if (password === confirm && password.length >= 8 && email.includes("dlsu.edu.ph")) {
-                    const newOrgUser = new OrgUser({ email, password, name });
+        bcrypt.hash(password, 10, function (err, hash) {
+            OrgUser.findOne({ email: email }).then((orguser) => {
+                if (orguser == null) {
+                    if (
+                        password === confirm &&
+                        password.length >= 8 &&
+                        email.includes("dlsu.edu.ph")
+                    ) {
+                        const newOrgUser = new OrgUser({
+                            email: email,
+                            password: hash,
+                            name: name,
+                        });
 
-                    newOrgUser
-                        .save()
-                        .then(() => {
-                            res.send(
-                                `<script>alert("Account Created!"); window.location.href = "/login"; </script>`
-                            );
-                        })
-                        .catch((err) => res.status(400).json("Error: " + err));
-                } else if (password != confirm) {
+                        newOrgUser
+                            .save()
+                            .then(() => {
+                                res.send(
+                                    `<script>alert("Account Created!"); window.location.href = "/login"; </script>`
+                                );
+                            })
+                            .catch((err) => res.status(400).json("Error: " + err));
+                    } else if (password != confirm) {
+                        res.send(
+                            `<script>alert("Invalid Credentials. The passwords you entered do not match."); window.location.href = "/orgSignUp"; </script>`
+                        );
+                    } else if (password.length < 8) {
+                        res.send(
+                            `<script>alert("Invalid Credentials. Password must have at least 8 characters."); window.location.href = "/orgSignUp"; </script>`
+                        );
+                    } else if (!email.includes("dlsu.edu.ph")) {
+                        res.send(
+                            `<script>alert("Invalid Credentials. Email entered is not recognized as a DLSU email."); window.location.href = "/orgSignUp"; </script>`
+                        );
+                    }
+                } else {
                     res.send(
-                        `<script>alert("Invalid Credentials. The passwords you entered do not match."); window.location.href = "/orgSignUp"; </script>`
-                    );
-                } else if (password.length < 8) {
-                    res.send(
-                        `<script>alert("Invalid Credentials. Password must have at least 8 characters."); window.location.href = "/orgSignUp"; </script>`
-                    );
-                } else if (!email.includes("dlsu.edu.ph")) {
-                    res.send(
-                        `<script>alert("Invalid Credentials. Email entered is not recognized as a DLSU email."); window.location.href = "/orgSignUp"; </script>`
+                        `<script>alert("Email already in use. Account not created."); window.location.href = "/orgSignUp"; </script>`
                     );
                 }
-            } else {
-                res.send(
-                    `<script>alert("Email already in use. Account not created."); window.location.href = "/orgSignUp"; </script>`
-                );
-            }
+            });
         });
     },
 
     updateOrgUser: (req, res) => {
         // updates the properties of an organization using its id
-        OrgUser.findById(req.session.userid)
-            .then((user) => {
-                user.name = req.body.name;
+        OrgUser.findById(req.session.userid).then((user) => {
+            if (req.body.email) {
                 user.email = req.body.email;
-
-                if (req.body.password) {
-                    user.password = req.body.password;
-                    orgUser = user;
-                } else {
-                    user.password = orgUser.password;
-                    orgUser = user;
-                }
-
-                req.session.name = req.body.name;
                 req.session.email = req.body.email;
-                if (req.body.password) {
-                    orgUser = user;
-                    orgUser.password = req.body.password;
-                }
+            }
 
-                req.session.save();
+            if (req.body.name) {
+                user.name = req.body.name;
+                req.session.name = req.body.name;
+            }
+
+            if (req.body.password) {
+                bcrypt.hash(req.body.password, 10, function (err, hash) {
+                    user.password = hash;
+
+                    orgUser = user;
+
+                    user.save()
+                        .then(() =>
+                            res.send(
+                                `<script>alert("Account Updated!"); window.location.href = "/org-settings"; </script>`
+                            )
+                        )
+                        .catch((err) => res.status(400).json("Error: " + err));
+                });
+            } else {
+                orgUser = user;
 
                 user.save()
                     .then(() =>
@@ -878,63 +895,47 @@ const controller = {
                         )
                     )
                     .catch((err) => res.status(400).json("Error: " + err));
-            })
-            .catch((err) => res.status(400).json("Error: " + err));
+            }
+        });
     },
 
     updateOrgProfile: (req, res) => {
         OrgUser.findById(req.session.userid).then((user) => {
-            if (req.body.affiliation == "N/A") {
+            if (req.body.type != "/" && req.body.type) {
                 user.type = req.body.type;
                 req.session.type = user.type;
-                user.facebook = req.body.facebook;
-                req.session.facebook = user.facebook;
-                user.instagram = req.body.instagram;
-                req.session.instagram = user.instagram;
-                user.twitter = req.body.twitter;
-                req.session.twitter = user.twitter;
-                user.linkedin = req.body.linkedin;
-                req.session.linkedin = user.linkedin;
-                //user.image = req.body.image;
-
-                if (req.file) {
-                    user.image = req.file.originalname;
-                    req.session.image = user.image;
-                }
-                req.session.save();
-
-                user.password = orgUser.password;
-
-                orgUser = user;
-            } else {
-                
-
-                user.type = req.body.type;
-                req.session.type = user.type;
-                user.affiliation = req.body.affiliation;
-                req.session.affiliation = req.body.affiliation;
-                user.facebook = req.body.facebook;
-                req.session.facebook = user.facebook;
-                user.instagram = req.body.instagram;
-                req.session.instagram = user.instagram;
-                user.twitter = req.body.twitter;
-                req.session.twitter = user.twitter;
-                user.linkedin = req.body.linkedin;
-                req.session.linkedin = user.linkedin;
-
-                if (req.file) {
-                    user.image = req.file.originalname;
-                    req.session.image = user.image;
-                }
-                req.session.save();
-                user.password = orgUser.password;
-
-                orgUser = user;
             }
+
+            if (req.body.facebook != "/" && req.body.facebook) {
+                user.facebook = req.body.facebook;
+                req.session.facebook = req.body.facebook;
+            }
+
+            if (req.body.instagram != "/" && req.body.instagram) {
+                user.instagram = req.body.instagram;
+                req.session.instagram = user.instagram;
+            }
+
+            if (req.body.twitter != "/" && req.body.twitter) {
+                user.twitter = req.body.twitter;
+                req.session.twitter = user.twitter;
+            }
+
+            if (req.body.linkedin != "/" && req.body.linkedin) {
+                user.linkedin = req.body.linkedin;
+                req.session.linkedin = user.linkedin;
+            }
+
+            if (req.file) {
+                user.image = req.file.originalname;
+                req.session.image = req.file.originalname;
+            }
+
+            orgUser = user;
 
             user.save().then(() => {
                 res.send(
-                    `<script>alert("Account Updated!"); window.location.href = "/org-edit-profile"; </script>`
+                    `<script>alert("Profile Updated!"); window.location.href = "/org-edit-profile"; </script>`
                 );
             });
         });
@@ -969,7 +970,7 @@ const controller = {
                         });
                 });
             } else {
-                res.render("student_feed", {user: req.session});
+                res.render("student_feed", { user: req.session });
             }
         });
     },
