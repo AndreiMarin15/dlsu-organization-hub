@@ -98,9 +98,6 @@ app.post("/update-post/:id", upload.single("postImage"), controller.updatePost);
 app.post("/update-event/:id", upload.single("eventImage"), controller.updateEvent);
 
 // STUDENT USERS
-app.get("/studentUsers/", controller.getStudents);
-app.post("/studentUsers/add", controller.addStudent);
-app.post("/studentUsers/:id/follow", controller.addAffiliation);
 
 //DELETE STUDENT ACCT.
 app.post("/delete-student-profile/:id", controller.deleteStudentAccount);
@@ -111,24 +108,12 @@ app.post("/delete-org-profile/:id", controller.deleteOrgAccount);
 app.get("/deleteOrg", controller.deleteOrg);
 
 // ORG USERS
-app.get("/orgUsers/", controller.getOrgs);
-app.get("/orgUsers/:id", controller.getOrgs);
-app.post("/orgUsers/add", controller.addOrg);
-app.post("/orgUsers/update/:id", controller.updateOrgUser);
 
 // POSTS
-
-app.get("/posts/", controller.getPosts);
-app.get("/posts/home/following", controller.getPostsByAffiliations);
-app.get("/posts/user/:id", controller.getPostsByUser);
-app.post("/posts/add", controller.addPost);
-app.get("/posts/:id", controller.getPostById);
-app.delete("/posts/:id", controller.deletePost);
 app.post("/posts/update/:id", upload.single("postImage"), controller.updatePost);
 app.post("/new-post", upload.single("postImage"), controller.addPost);
-app.post("/new-event",upload.single("eventImage"), controller.addEvent);
+app.post("/new-event", upload.single("eventImage"), controller.addEvent);
 
 // EVENTS
-app.post("/events/add", controller.addEvent);
 
 module.exports = app;

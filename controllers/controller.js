@@ -70,20 +70,6 @@ const controller = {
             .catch((err) => res.json(err));
     },
 
-    isLiked: (req, res) => {
-        postid = req.query.id;
-
-        Posts.findById(postid).then((post) => {
-            index = post.likes.indexOf(req.session.userid);
-
-            if (index != -1) {
-                res.send(false);
-            } else {
-                res.send(true);
-            }
-        });
-    },
-
     getIndex: (req, res) => {
         res.render("index");
     },
@@ -593,12 +579,6 @@ const controller = {
     },
 
     // studentUserModel
-    getStudents: (req, res) => {
-        // gets the details of all student users
-        StudentUser.find()
-            .then((studentusers) => res.json(studentusers))
-            .catch((err) => res.status(400).json("Error: " + err));
-    },
 
     addStudent: (req, res) => {
         // adds a new student to the database
@@ -651,20 +631,6 @@ const controller = {
                 }
             });
         });
-    },
-
-    addAffiliation: (req, res) => {
-        // used when a student follows an organization
-        StudentUser.findById(req.session.userid)
-            .then((student) => {
-                const org = req.body.org;
-
-                student.affiliations.push(org);
-                res.json(student);
-
-                student.save();
-            })
-            .catch((err) => res.status(400).json("Error: " + err));
     },
 
     updateStudentUser: (req, res) => {
@@ -791,21 +757,6 @@ const controller = {
     },
 
     // orgUserModel
-
-    getOrgs: (req, res) => {
-        // organization search
-        if (req.params.id) {
-            // if there is an id in the url, the specific organization will be returned
-            OrgUser.findById(req.params.id)
-                .then((orgusers) => res.json(orgusers))
-                .catch((err) => res.status(400).json("Error: " + err));
-        } else {
-            // if there is no specific id, all organizations will be returned
-            OrgUser.find()
-                .then((orgusers) => res.json(orgusers))
-                .catch((err) => res.status(400).json("Error: " + err));
-        }
-    },
 
     addOrg: (req, res) => {
         // adds a new organization
@@ -948,15 +899,6 @@ const controller = {
 
     // postModel
 
-    getPosts: (req, res) => {
-        // gets all posts from the database
-        Posts.find()
-            .then((posts) => {
-                res.json(posts);
-            })
-            .catch((err) => res.status(400).json("Error: " + err));
-    },
-
     getStudentFeedPosts: (req, res) => {
         // gets all posts from the database
 
@@ -986,45 +928,6 @@ const controller = {
             .sort({ updatedAt: -1 })
             .then((posts) => {
                 res.render("org_feed", { post: posts });
-            })
-            .catch((err) => res.status(400).json("Error: " + err));
-    },
-
-    getPostsByAffiliations: (req, res) => {
-        // returns all posts by the followed organizations of a student through the student's id
-        StudentUser.findById(req.session.userid)
-            .then((user) => {
-                let affiliations = user.affiliations;
-
-                OrgUser.find({ _id: { $in: affiliations } })
-                    .then((orguser) => {
-                        let orgemails = [];
-
-                        orguser.forEach((element) => {
-                            orgemails.push(element.email);
-                        });
-
-                        Posts.find({ email: { $in: orgemails } })
-                            .sort({ updatedAt: -1 })
-                            .then((posts) => {
-                                res.json(posts);
-                            })
-                            .catch((err) => res.status(400).json("Error: " + err));
-                    })
-                    .catch((err) => res.status(400).json("Error: " + err));
-            })
-            .catch((err) => res.status(400).json("Error: " + err));
-    },
-
-    getPostsByUser: (req, res) => {
-        // gets the posts of a specific organization using the orgnization id
-        OrgUser.findById(req.params.id)
-            .then((user) => {
-                let userEmail = user.email;
-                Posts.find({ email: userEmail })
-                    .sort({ updatedAt: -1 })
-                    .then((posts) => res.json(posts))
-                    .catch((err) => res.status(400).json("Error: " + err));
             })
             .catch((err) => res.status(400).json("Error: " + err));
     },
@@ -1062,13 +965,6 @@ const controller = {
                     .catch((err) => res.status(400).json("Error: " + err));
             }
         });
-    },
-
-    getPostById: (req, res) => {
-        // gets a post using its id
-        Posts.findById(req.params.id)
-            .then((posts) => res.json(posts))
-            .catch((err) => res.status(400).json("Error: " + err));
     },
 
     deletePost: (req, res) => {
@@ -1115,14 +1011,6 @@ const controller = {
 
     // eventModel
 
-    getEvents: (req, res) => {
-        Event.find()
-            .then((events) => {
-                res.json(events);
-            })
-            .catch((err) => res.json(err));
-    },
-
     getStudentFeedEvents: (req, res) => {
         StudentUser.findById(req.session.userid).then((student) => {
             OrgUser.find({ _id: { $in: student.following } }).then((orgs) => {
@@ -1147,44 +1035,6 @@ const controller = {
                 res.render("org_feed", { user: req.session, event: events });
             })
             .catch((err) => res.json(err));
-    },
-
-    getEventsByAffiliations: (req, res) => {
-        // returns all posts by the followed organizations of a student through the student's id
-        StudentUser.findById(req.params.id)
-            .then((user) => {
-                let affiliations = user.affiliations;
-
-                OrgUser.find({ _id: { $in: affiliations } })
-                    .then((orguser) => {
-                        let orgemails = [];
-
-                        orguser.forEach((element) => {
-                            orgemails.push(element.email);
-                        });
-
-                        Event.find({ email: { $in: orgemails } })
-                            .sort({ updatedAt: -1 })
-                            .then((events) => {
-                                res.json(events);
-                            })
-                            .catch((err) => res.status(400).json("Error: " + err));
-                    })
-                    .catch((err) => res.status(400).json("Error: " + err));
-            })
-            .catch((err) => res.status(400).json("Error: " + err));
-    },
-
-    getEventsByUser: (req, res) => {
-        // gets the posts of a specific organization using the orgnization id
-        OrgUser.findById(req.params.id)
-            .then((user) => {
-                let userEmail = user.email;
-                Event.find({ email: userEmail })
-                    .then((events) => res.json(events))
-                    .catch((err) => res.status(400).json("Error: " + err));
-            })
-            .catch((err) => res.status(400).json("Error: " + err));
     },
 
     addEvent: (req, res) => {
@@ -1233,13 +1083,6 @@ const controller = {
                     .catch((err) => res.status(400).json("Error: " + err));
             }
         });
-    },
-
-    getEventById: (req, res) => {
-        // gets a post using its id
-        Event.findById(req.params.id)
-            .then((events) => res.json(events))
-            .catch((err) => res.status(400).json("Error: " + err));
     },
 
     deleteEvent: (req, res) => {
