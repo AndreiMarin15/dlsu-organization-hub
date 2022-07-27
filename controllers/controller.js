@@ -732,7 +732,14 @@ const controller = {
     },
 
     deleteOrg: (req, res) => {
-        OrgUser.findByIdAndDelete(req.session.userid).then(() => {
+        Posts.deleteMany({ email: req.session.email }).then((deleted) => {
+            console.log(deleted);
+        });
+        Events.deleteMany({ email: req.session.email }).then((deleted) => {
+            console.log(deleted);
+        });
+
+        OrgUser.findByIdAndDelete(req.session.userid).then((orguser) => {
             res.send(`
             <script> window.location.href = "/logout"; </script>
             `);
