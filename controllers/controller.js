@@ -165,7 +165,7 @@ const controller = {
                         student.saved.push(post._id);
 
                         student.save();
-
+                        console.log(student);
                         res.redirect("back");
                     } else {
                         index = student.saved.indexOf(post._id);
