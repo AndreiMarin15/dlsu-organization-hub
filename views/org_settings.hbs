@@ -53,7 +53,11 @@
                             <br />
                         </div>
                         <div class="container">
-                            <form action="/update-org-profile" onSubmit="return Validate()" method="post">
+                            <form
+                                action="/update-org-profile"
+                                onSubmit="return Validate()"
+                                method="post"
+                            >
                                 <table class="table">
                                     <tr>
                                         <td><strong>NAME: </strong> </td>
@@ -109,14 +113,14 @@
                                     </tr>
                                 </table>
                             </form>
-                            <br>
-                            <br>
+                            <br />
+                            <br />
                             <form action="/delete-org-profile/{{userid}}" method="post">
                                 <input
                                     type="submit"
                                     value="DELETE ACCT."
-                                    class="delete_button_org" 
-                                    />
+                                    class="delete_button_org"
+                                />
                             </form>
                         </div>
                     </div>
@@ -194,24 +198,12 @@
         </div>
     </body>
     <script type="text/javascript">
-    function Validate() {
-        var email =document.getElementById("email").value;
-        var password = document.getElementById("password1").value;
-        var confirmPassword = document.getElementById("password2").value;
-        
-        if (password.length != 0 && password.length < 8) {
-            alert("Password must have at least 8 characters.");
-            return false;
-        }
-        else if (password.length != 0 && password != confirmPassword) {
-            alert("Passwords do not match.");
-            return false;
-        }
-        else if (!email.includes("@dlsu.edu.ph")) {
-            alert("Kindly use your registered DLSU email address.");
-            return false;
-        }
-        return true;
-    }
+        function Validate() { var email =document.getElementById("email").value; var password =
+        document.getElementById("password1").value; var confirmPassword =
+        document.getElementById("password2").value; if (password.length != 0 && password.length < 8)
+        { alert("Password must have at least 8 characters."); return false; } else if
+        (password.length != 0 && password != confirmPassword) { alert("Passwords do not match.");
+        return false; } else if (!email.includes("@dlsu.edu.ph")) { alert("Kindly use your
+        registered DLSU email address."); return false; } return true; }
     </script>
 </html>

@@ -66,11 +66,21 @@
                             <br />
                         </div>
                         <div class="container">
-                            <form action="/student-edit-profile" method="post" onSubmit="return true">
+                            <form
+                                action="/student-edit-profile"
+                                method="post"
+                                onSubmit="return true"
+                            >
                                 <table class="table">
                                     <tr>
                                         <td><strong>PROGRAM: </strong></td>
-                                        <td><input type="text" id="id" size="40" name="program" placeholder="{{user.program}}" /></td>
+                                        <td><input
+                                                type="text"
+                                                id="id"
+                                                size="40"
+                                                name="program"
+                                                placeholder="{{user.program}}"
+                                            /></td>
                                     </tr>
 
                                     <tr>
@@ -78,36 +88,50 @@
                                         <td>
                                             <select name="college" id="college">
                                                 <option value="N/A">Select College</option>
-                                                <option value="College of Computer Studies">College of Computer Studies</option>
-                                                <option value="College of Science">College of Science</option>
-                                                <option value="Gokongwei College of
-                                                    Engineering">Gokongwei College of
-                                                    Engineering</option>
-                                                <option value="College of Business">College of Business</option>
-                                                <option value="College of Education">College of Education</option>
-                                                <option value="College of Liberal Arts">College of Liberal Arts</option>
-                                                <option value="School of Economics">School of Economics</option>
+                                                <option value="College of Computer Studies">College
+                                                    of Computer Studies</option>
+                                                <option value="College of Science">College of
+                                                    Science</option>
+                                                <option
+                                                    value="Gokongwei College of
+                                                    Engineering"
+                                                >Gokongwei College of Engineering</option>
+                                                <option value="College of Business">College of
+                                                    Business</option>
+                                                <option value="College of Education">College of
+                                                    Education</option>
+                                                <option value="College of Liberal Arts">College of
+                                                    Liberal Arts</option>
+                                                <option value="School of Economics">School of
+                                                    Economics</option>
                                             </select>
                                         </td>
                                     </tr>
 
                                     <tr>
                                         <td><strong>ID NUMBER: </strong> </td>
-                                        <td><input type="text" id="age" size="40" name="idNumber" placeholder={{user.idNumber}} /></td>
+                                        <td><input
+                                                type="text"
+                                                id="age"
+                                                size="40"
+                                                name="idNumber"
+                                                placeholder={{user.idNumber}}
+                                            /></td>
                                     </tr>
 
                                     <tr>
-                                        <td colspan = 2 align = "right">
-                                        <input type = submit value = "SAVE CHANGES" class="submit_button"></td>
+                                        <td colspan="2" align="right">
+                                            <input
+                                                type="submit"
+                                                value="SAVE CHANGES"
+                                                class="submit_button"
+                                            /></td>
                                     </tr>
-                                    
 
                                 </table>
                             </form>
                         </div>
                     </div>
-
-                   
 
                 </div>
             </div>
