@@ -11,6 +11,7 @@ const studentUserSchema = new Schema(
             unique: true,
             trim: true,
             minlength: 5,
+            
         },
         password: {
             type: String,
